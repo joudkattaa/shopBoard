@@ -1,4 +1,6 @@
-# ShopBoard
+# Lumière Cosmetics
+
+A white and blush-pink cosmetics storefront with category browsing, product search, product details, a browser-persisted demo bag, GLOW20 discounts, and demo forms. Product imagery is in public/lumiere/. No live payments, email delivery, or account service is connected.
 
 ## Stack
 Vite (Vanilla JavaScript), HTML5, CSS3
