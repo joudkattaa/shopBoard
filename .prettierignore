@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.local-backup/
+.agents/
+.husky/_/
+public/
+package-lock.json
+skills-lock.json

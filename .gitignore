@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+!.vscode/settings.json
+
+# Local archives and assistant-specific files
+.local-backup/
+.agents/
+skills-lock.json

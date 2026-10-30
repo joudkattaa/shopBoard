@@ -1,50 +1,558 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#cd7580"><meta name="description" content="Discover Lumière Cosmetics: a considered collection of skincare, makeup, fragrance and everyday beauty essentials."><link rel="icon" type="image/svg+xml" href="/lumiere-mark.svg"><title>Lumière Cosmetics — Reveal Your Natural Beauty</title></head>
-<body id="top">
-<svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
-<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
-<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2Z"/></symbol>
-<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/></symbol>
-<symbol id="i-leaf" viewBox="0 0 32 32"><path d="M16 29V15M16 22C4 24 2 15 3 10c9-1 13 4 13 12ZM16 17C15 6 24 3 29 3c1 9-5 15-13 14Z"/><path d="m8 16 8 6 8-13"/></symbol>
-<symbol id="i-rabbit" viewBox="0 0 32 32"><path d="M12 15C5 1 12 0 15 13c2-15 9-13 5 1 8 2 8 13 0 15H10c-6-2-6-8-2-11M9 22l-3-1M19 19h.01M17 25h4"/><circle cx="27" cy="25" r="3"/></symbol>
-<symbol id="i-flask" viewBox="0 0 32 32"><path d="M12 3h8M14 3v9L5 28h22l-9-16V3M10 20h12M13 23h.01M19 25h.01"/></symbol>
-<symbol id="i-drop" viewBox="0 0 32 32"><path d="M16 2C14 9 5 16 5 21a11 11 0 0 0 22 0C27 16 18 9 16 2Z"/><path d="M10 21c0 4 3 6 6 6"/></symbol>
-<symbol id="i-diamond" viewBox="0 0 32 32"><path d="m2 11 6-7h16l6 7-14 19L2 11ZM2 11h28M8 4l8 26 8-26M11 11l5-7 5 7"/></symbol>
-<symbol id="i-gift" viewBox="0 0 32 32"><path d="M4 13h24v6H4zM6 19v11h20V19M16 13v17"/><path d="M16 13C0 11 6-1 12 5l4 8c14-1 13-13 6-8l-6 8Z"/></symbol>
-<symbol id="i-flower" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4"/><path d="M12 11c-9-9 8-15 8 0 9-9 15 8 0 9 9 9-8 15-8 0-9 9-15-8 0-9Z"/></symbol>
-<symbol id="i-recycle" viewBox="0 0 32 32"><path d="m12 7 4-5 7 11M22 7l1 6-6-1M26 16l4 8-5 5H14M18 24l-4 5 4 3M9 27H3L1 21 9 8M3 10l6-2 2 6"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-5-5 5 5-5 5"/></symbol>
-<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></symbol>
-<symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 9c0 5-7 12-7 12S5 14 5 9a7 7 0 0 1 14 0Z"/><circle cx="12" cy="9" r="2"/></symbol>
-<symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
-<symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
-</defs></svg>
-<a class="skip-link" href="#main">Skip to content</a>
-<div class="announcement">FREE SHIPPING ON ORDERS OVER $50 <span aria-hidden="true">|</span> USE CODE: <button id="copy-code" aria-label="Copy discount code GLOW20">GLOW20</button></div>
-<header class="site-header"><div class="header-inner container">
-<a class="logo" href="#top" aria-label="Lumière Cosmetics home"><svg class="brand-flower" aria-hidden="true"><use href="#i-flower"/></svg><span>LUMIÈRE<small>COSMETICS</small></span></a>
-<button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
-<nav id="main-nav" class="main-nav" aria-label="Main navigation"><a class="active" href="#top">HOME</a><a href="#products" data-category="All">SHOP</a><a href="#products" data-category="Skin Care">SKIN CARE</a><a href="#products" data-category="Makeup">MAKEUP</a><a href="#products" data-category="Hair Care">HAIR CARE</a><a href="#about">ABOUT US</a><button data-info="journal">BLOG</button><button data-info="contact">CONTACT US</button></nav>
-<div class="header-actions"><button id="search-toggle" class="icon-button" aria-label="Search products" aria-expanded="false" aria-controls="search-panel"><svg aria-hidden="true"><use href="#i-search"/></svg></button><button id="account-button" class="icon-button" aria-label="Open your beauty space"><svg aria-hidden="true"><use href="#i-user"/></svg></button><button id="cart-button" class="icon-button cart-button" aria-label="Open shopping bag, 0 items" aria-haspopup="dialog"><svg aria-hidden="true"><use href="#i-bag"/></svg><span id="cart-count">0</span></button></div></div>
-<div id="search-panel" class="search-panel container" hidden><form id="search-form" role="search"><label for="product-search">Find your everyday beauty essential</label><div class="search-row"><input id="product-search" type="search" placeholder="Search serum, skincare, fragrance…" autocomplete="off"><button class="button" type="submit">SEARCH <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button></div></form></div></header>
-<main id="main">
-<section class="hero" aria-labelledby="hero-title"><img class="hero-image" src="/lumiere/hero.png" alt="Lumi?re rose gold skincare collection on a stone tray with delicate blossoms" fetchpriority="high" width="2048" height="1024"><div class="hero-inner container"><div class="hero-copy"><h1 id="hero-title">Reveal Your<br>Natural Beauty</h1><p>Thoughtfully crafted beauty essentials<br>for your everyday moment of glow.</p><a class="button" href="#products" data-category="All">SHOP NOW</a><div class="hero-badges"><div><svg aria-hidden="true"><use href="#i-leaf"/></svg><span>BOTANICAL<br>INSPIRATION</span></div><div><svg aria-hidden="true"><use href="#i-rabbit"/></svg><span>THOUGHTFUL<br>BEAUTY</span></div><div><svg aria-hidden="true"><use href="#i-flask"/></svg><span>CONSIDERED<br>FORMULAS</span></div></div></div></div></section>
-<section class="benefits" aria-label="The Lumière philosophy"><div class="benefits-inner container"><article><svg aria-hidden="true"><use href="#i-leaf"/></svg><div><h2>Inspired by Nature</h2><p>A little botanical beauty<br>in your daily ritual.</p></div></article><article><svg aria-hidden="true"><use href="#i-drop"/></svg><div><h2>Everyday Essentials</h2><p>A considered collection<br>for moments of self-care.</p></div></article><article><svg aria-hidden="true"><use href="#i-diamond"/></svg><div><h2>A Touch of Luxury</h2><p>Beautiful textures and<br>details to fall in love with.</p></div></article><article><svg aria-hidden="true"><use href="#i-gift"/></svg><div><h2>Made for Gifting</h2><p>Little luxuries to share<br>with someone special.</p></div></article></div></section>
-<section id="categories" class="categories container" aria-labelledby="categories-title"><p class="eyebrow">SHOP BY CATEGORY</p><h2 id="categories-title">Explore Our Bestsellers</h2><div class="category-grid">
-<a href="#products" class="category-card" data-category="Skin Care"><img src="/lumiere/serum.png" alt="Rose gold skincare serum" loading="lazy" width="600" height="600"><h3>Skin Care</h3><span>Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-<a href="#products" class="category-card" data-category="Makeup"><img src="/lumiere/makeup.png" alt="Warm neutral eyeshadow palette and makeup essentials" loading="lazy" width="600" height="600"><h3>Makeup</h3><span>Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-<a href="#products" class="category-card" data-category="Hair Care"><img src="/lumiere/hair.png" alt="Amber bottles of shampoo and hair oil" loading="lazy" width="600" height="600"><h3>Hair Care</h3><span>Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-<a href="#products" class="category-card" data-category="Fragrance"><img src="/lumiere/perfume.png" alt="Rose Bloom perfume in a glass bottle" loading="lazy" width="600" height="600"><h3>Fragrance</h3><span>Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-<a href="#products" class="category-card" data-category="Face Masks"><img src="/lumiere/masks.png" alt="Botanical face mask sachets" loading="lazy" width="600" height="600"><h3>Face Masks</h3><span>Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-<a href="#products" class="category-card" data-category="Gift Sets"><img src="/lumiere/gifts.png" alt="Blush pink skincare gift box" loading="lazy" width="600" height="600"><h3>Gift Sets</h3><span>Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-</div></section>
-<section id="about" class="about" aria-labelledby="about-title"><div class="about-inner container"><div class="about-copy"><p class="eyebrow">ABOUT LUMIÈRE</p><h2 id="about-title">Beauty Inspired by<br>Nature, Perfected<br>with Intention</h2><p>We believe beauty begins with a moment for yourself. Discover an everyday ritual that brings together simple pleasures, thoughtful details, and a little natural inspiration.</p><button class="button" id="about-more" aria-expanded="false" aria-controls="about-story">LEARN MORE</button></div><div class="about-visual"><img src="/lumiere/gifts.png" alt="Lumi?re blush pink gift box with face cream, serum and cleanser" loading="lazy" width="1254" height="1254"></div><div class="about-values"><article><svg aria-hidden="true"><use href="#i-rabbit"/></svg><div><h3>A Softer Ritual</h3><p>Take a little time for yourself.</p></div></article><article><svg aria-hidden="true"><use href="#i-leaf"/></svg><div><h3>Nature as Our Muse</h3><p>Beauty in the simplest details.</p></div></article><article><svg aria-hidden="true"><use href="#i-flower"/></svg><div><h3>Your Kind of Glow</h3><p>Discover what feels like you.</p></div></article></div></div><div id="about-story" class="about-story container" hidden><p>Lumière is an illustrative beauty boutique created around soft colors, tactile textures, and the pleasure of a personal ritual. Explore skincare, makeup, fragrance, and gifts in one thoughtful collection. Product images and descriptions are concepts for this demonstration store.</p></div></section>
-<section id="products" class="products container" aria-labelledby="products-title"><div class="section-heading"><div><p class="eyebrow" id="products-eyebrow">BEST SELLERS</p><h2 id="products-title">Our Most Loved Products</h2></div><button class="text-button" id="view-all">VIEW ALL PRODUCTS <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div><div id="active-filters" class="active-filters" hidden><p id="filter-description"></p><button id="clear-filters" class="text-button">Clear filters ×</button></div><p id="filter-status" class="sr-only" role="status"></p><div id="product-grid" class="product-grid"></div><div id="empty-state" class="empty-state" hidden><h3>A little change of search?</h3><p>We couldn’t find a match. Try “serum”, “rose”, or explore the full collection.</p><button id="empty-reset" class="button">EXPLORE ALL PRODUCTS</button></div></section>
-<section class="promise" aria-labelledby="promise-title"><div class="container"><h2 id="promise-title">OUR BEAUTY PHILOSOPHY</h2><div class="promise-grid"><span><svg aria-hidden="true"><use href="#i-rabbit"/></svg>Thoughtful Beauty</span><span><svg aria-hidden="true"><use href="#i-leaf"/></svg>Nature Inspired</span><span><svg aria-hidden="true"><use href="#i-flower"/></svg>Everyday Rituals</span><span><svg aria-hidden="true"><use href="#i-gift"/></svg>Little Luxuries</span><span><svg aria-hidden="true"><use href="#i-recycle"/></svg>Less Is More</span></div></div></section>
-</main>
-<footer id="contact" class="site-footer"><div class="footer-grid container"><div class="footer-brand"><a class="logo" href="#top"><svg class="brand-flower" aria-hidden="true"><use href="#i-flower"/></svg><span>LUMIÈRE<small>COSMETICS</small></span></a><p>Your everyday moment of beauty.<br>Thoughtfully inspired by nature.</p><a class="footer-social" href="#newsletter">A little inspiration, in your inbox <span>↗</span></a></div><div><h2>QUICK LINKS</h2><a href="#top">Home</a><a href="#products" data-category="All">Shop</a><a href="#about">About Us</a><button data-info="journal">Beauty Journal</button><button data-info="contact">Contact Us</button></div><div><h2>CUSTOMER CARE</h2><button data-info="shipping">Shipping Policy</button><button data-info="returns">Return Policy</button><button data-info="terms">Terms & Conditions</button><button data-info="privacy">Privacy Policy</button><button data-info="faq">FAQs</button></div><div class="footer-connect"><h2>LET'S CONNECT</h2><button data-info="contact"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Write to Lumière</button><p><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Beauty, wherever you are.</p><p class="demo-note">Concept store · Demo shopping.<br>No real payments or deliveries.</p></div><form id="newsletter" class="newsletter"><h2>NEWSLETTER</h2><p>Subscribe for a little inspiration,<br>new collections, and beauty notes.</p><label class="sr-only" for="newsletter-email">Email address</label><input id="newsletter-email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required maxlength="254"><button class="button" type="submit">SUBSCRIBE</button><p id="newsletter-status" role="status"></p></form></div><div class="footer-bottom container"><span>© 2026 Lumière Cosmetics. Concept design.</span><span>A little glow, every day.</span></div></footer>
-<p id="toast" class="toast" role="status"></p>
-<dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title"><div class="dialog-header"><div><p class="eyebrow">YOUR LITTLE LUXURIES</p><h2 id="cart-title">Shopping Bag <span id="cart-heading-count"></span></h2></div><button class="icon-button" data-close-dialog aria-label="Close shopping bag"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><div id="cart-content"></div></dialog>
-<dialog id="content-dialog" class="content-dialog" aria-labelledby="content-title"><div class="dialog-header"><h2 id="content-title"></h2><button class="icon-button" data-close-dialog aria-label="Close dialog"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><div id="content-body"></div></dialog>
-<script type="module" src="/src/main.js"></script></body></html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#a95570" />
+    <meta
+      name="description"
+      content="Discover Roseveil Cosmetics: a considered collection of skincare, makeup, fragrance and everyday beauty essentials."
+    />
+    <link rel="icon" type="image/svg+xml" href="/roseveil-mark.svg" />
+    <title>Roseveil Cosmetics — Reveal Your Natural Beauty</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body id="top">
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m16 16 5 5" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="3.5" />
+          <path d="M5 21v-2a7 7 0 0 1 14 0v2Z" />
+        </symbol>
+        <symbol id="i-bag" viewBox="0 0 24 24">
+          <path d="M5 7h14l1 14H4L5 7Z" />
+          <path d="M9 8V5a3 3 0 0 1 6 0v3" />
+        </symbol>
+        <symbol id="i-leaf" viewBox="0 0 32 32">
+          <path
+            d="M16 29V15M16 22C4 24 2 15 3 10c9-1 13 4 13 12ZM16 17C15 6 24 3 29 3c1 9-5 15-13 14Z"
+          />
+          <path d="m8 16 8 6 8-13" />
+        </symbol>
+        <symbol id="i-rabbit" viewBox="0 0 32 32">
+          <path
+            d="M12 15C5 1 12 0 15 13c2-15 9-13 5 1 8 2 8 13 0 15H10c-6-2-6-8-2-11M9 22l-3-1M19 19h.01M17 25h4"
+          />
+          <circle cx="27" cy="25" r="3" />
+        </symbol>
+        <symbol id="i-flask" viewBox="0 0 32 32">
+          <path d="M12 3h8M14 3v9L5 28h22l-9-16V3M10 20h12M13 23h.01M19 25h.01" />
+        </symbol>
+        <symbol id="i-drop" viewBox="0 0 32 32">
+          <path d="M16 2C14 9 5 16 5 21a11 11 0 0 0 22 0C27 16 18 9 16 2Z" />
+          <path d="M10 21c0 4 3 6 6 6" />
+        </symbol>
+        <symbol id="i-diamond" viewBox="0 0 32 32">
+          <path d="m2 11 6-7h16l6 7-14 19L2 11ZM2 11h28M8 4l8 26 8-26M11 11l5-7 5 7" />
+        </symbol>
+        <symbol id="i-gift" viewBox="0 0 32 32">
+          <path d="M4 13h24v6H4zM6 19v11h20V19M16 13v17" />
+          <path d="M16 13C0 11 6-1 12 5l4 8c14-1 13-13 6-8l-6 8Z" />
+        </symbol>
+        <symbol id="i-flower" viewBox="0 0 32 32">
+          <circle cx="16" cy="16" r="4" />
+          <path d="M12 11c-9-9 8-15 8 0 9-9 15 8 0 9 9 9-8 15-8 0-9 9-15-8 0-9Z" />
+        </symbol>
+        <symbol id="i-recycle" viewBox="0 0 32 32">
+          <path
+            d="m12 7 4-5 7 11M22 7l1 6-6-1M26 16l4 8-5 5H14M18 24l-4 5 4 3M9 27H3L1 21 9 8M3 10l6-2 2 6"
+          />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-5-5 5 5-5 5" /></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="1" />
+          <path d="m3 6 9 7 9-7" />
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24">
+          <path d="M19 9c0 5-7 12-7 12S5 14 5 9a7 7 0 0 1 14 0Z" />
+          <circle cx="12" cy="9" r="2" />
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" /></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19" /></symbol>
+        <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5Z" /></symbol>
+        <symbol id="i-sort" viewBox="0 0 24 24">
+          <path d="M8 4v16m-4-4 4 4 4-4M16 20V4m-4 4 4-4 4 4" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+          <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z" />
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+        </symbol>
+      </defs>
+    </svg>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="announcement">
+      FREE SHIPPING ON ORDERS OVER $50 <span aria-hidden="true">|</span> USE CODE:
+      <button id="copy-code" aria-label="Copy discount code GLOW20">GLOW20</button>
+    </div>
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="logo" href="#top" aria-label="Roseveil Cosmetics home"
+          ><svg class="brand-flower" aria-hidden="true"><use href="#i-flower" /></svg
+          ><span>ROSEVEIL<small>COSMETICS</small></span></a
+        >
+        <button
+          id="menu-toggle"
+          class="icon-button menu-toggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <svg aria-hidden="true"><use href="#i-menu" /></svg>
+        </button>
+        <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+          <a class="active" href="#top">HOME</a><a href="#products" data-category="All">SHOP</a
+          ><a href="#products" data-category="Skin Care">SKIN CARE</a
+          ><a href="#products" data-category="Makeup">MAKEUP</a
+          ><a href="#products" data-category="Hair Care">HAIR CARE</a
+          ><a href="#products" data-category="Body Care">BODY CARE</a><a href="#about">ABOUT US</a
+          ><button data-info="journal">BLOG</button><button data-info="contact">CONTACT US</button>
+        </nav>
+        <div class="header-actions">
+          <button
+            id="theme-toggle"
+            class="icon-button theme-toggle"
+            type="button"
+            aria-label="Switch to dark mode"
+            aria-pressed="false"
+            title="Dark mode"
+          >
+            <svg class="theme-moon" aria-hidden="true"><use href="#i-moon" /></svg
+            ><svg class="theme-sun" aria-hidden="true"><use href="#i-sun" /></svg></button
+          ><button
+            id="search-toggle"
+            class="icon-button"
+            aria-label="Search products"
+            aria-expanded="false"
+            aria-controls="search-panel"
+          >
+            <svg aria-hidden="true"><use href="#i-search" /></svg></button
+          ><button id="account-button" class="icon-button" aria-label="Open your beauty space">
+            <svg aria-hidden="true"><use href="#i-user" /></svg></button
+          ><button
+            id="cart-button"
+            class="icon-button cart-button"
+            aria-label="Open shopping bag, 0 items"
+            aria-haspopup="dialog"
+          >
+            <svg aria-hidden="true"><use href="#i-bag" /></svg><span id="cart-count">0</span>
+          </button>
+        </div>
+      </div>
+      <div id="search-panel" class="search-panel container" hidden>
+        <form id="search-form" role="search">
+          <label for="product-search">Find your everyday beauty essential</label>
+          <div class="search-row">
+            <input
+              id="product-search"
+              type="search"
+              placeholder="Search serum, shampoo, perfume…"
+              autocomplete="off"
+            /><button class="button" type="submit">
+              SEARCH <svg class="icon" aria-hidden="true"><use href="#i-search" /></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <picture class="hero-media"
+          ><img
+            class="hero-image"
+            src="/roseveil/hero.png"
+            alt="Roseveil rose gold skincare collection on a stone tray with delicate blossoms"
+            fetchpriority="high"
+            width="2048"
+            height="1024"
+        /></picture>
+        <div class="hero-inner container">
+          <div class="hero-copy">
+            <h1 id="hero-title">Reveal Your<br />Natural Beauty</h1>
+            <p>Thoughtfully crafted beauty essentials<br />for your everyday moment of glow.</p>
+            <a class="button" href="#products" data-category="All">SHOP NOW</a>
+            <div class="hero-badges">
+              <div>
+                <svg aria-hidden="true"><use href="#i-leaf" /></svg
+                ><span>BOTANICAL<br />INSPIRATION</span>
+              </div>
+              <div>
+                <svg aria-hidden="true"><use href="#i-rabbit" /></svg
+                ><span>THOUGHTFUL<br />BEAUTY</span>
+              </div>
+              <div>
+                <svg aria-hidden="true"><use href="#i-flask" /></svg
+                ><span>CONSIDERED<br />FORMULAS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="benefits" aria-label="The Roseveil philosophy">
+        <div class="benefits-inner container">
+          <article>
+            <svg aria-hidden="true"><use href="#i-leaf" /></svg>
+            <div>
+              <h2>Inspired by Nature</h2>
+              <p>A little botanical beauty<br />in your daily ritual.</p>
+            </div>
+          </article>
+          <article>
+            <svg aria-hidden="true"><use href="#i-drop" /></svg>
+            <div>
+              <h2>Everyday Essentials</h2>
+              <p>A considered collection<br />for moments of self-care.</p>
+            </div>
+          </article>
+          <article>
+            <svg aria-hidden="true"><use href="#i-diamond" /></svg>
+            <div>
+              <h2>A Touch of Luxury</h2>
+              <p>Beautiful textures and<br />details to fall in love with.</p>
+            </div>
+          </article>
+          <article>
+            <svg aria-hidden="true"><use href="#i-gift" /></svg>
+            <div>
+              <h2>Made for Gifting</h2>
+              <p>Little luxuries to share<br />with someone special.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <aside class="signature-ribbon" aria-label="The Roseveil signature">
+        <svg aria-hidden="true"><use href="#i-flower" /></svg>
+        <p>THE ROSEVEIL WAY <span>A softer moment, just for you.</span></p>
+        <svg aria-hidden="true"><use href="#i-flower" /></svg>
+      </aside>
+      <section id="categories" class="categories container" aria-labelledby="categories-title">
+        <p class="eyebrow">SHOP BY CATEGORY</p>
+        <h2 id="categories-title">Find Your Everyday Ritual</h2>
+        <p class="section-note">A little rose. A little ritual. Entirely you.</p>
+        <div class="category-grid">
+          <a href="#products" class="category-card" data-category="Skin Care"
+            ><img
+              src="/roseveil/serum.png"
+              alt="Rose gold skincare serum"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Skin Care</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+          <a href="#products" class="category-card" data-category="Makeup"
+            ><img
+              src="/roseveil/makeup.png"
+              alt="Warm neutral eyeshadow palette and makeup essentials"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Makeup</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+          <a href="#products" class="category-card" data-category="Hair Care"
+            ><img
+              src="/roseveil/hair.png"
+              alt="Mauve and plum bottles of shampoo and hair oil"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Hair Care</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+          <a href="#products" class="category-card" data-category="Fragrance"
+            ><img
+              src="/roseveil/perfume.png"
+              alt="Rose Bloom perfume in a glass bottle"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Fragrance</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+          <a href="#products" class="category-card" data-category="Body Care"
+            ><img
+              src="/roseveil/body-lotion.png"
+              alt="Pale blush body lotion bottle with rose gold pump"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Body Care</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+          <a href="#products" class="category-card" data-category="Face Masks"
+            ><img
+              src="/roseveil/masks.png"
+              alt="Botanical face mask sachets"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Face Masks</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+          <a href="#products" class="category-card" data-category="Gift Sets"
+            ><img
+              src="/roseveil/gifts.png"
+              alt="Blush pink skincare gift box"
+              loading="lazy"
+              width="600"
+              height="600" />
+            <h3>Gift Sets</h3>
+            <span
+              >Shop Now <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span
+          ></a>
+        </div>
+      </section>
+      <section id="about" class="about" aria-labelledby="about-title">
+        <div class="about-inner container">
+          <div class="about-copy">
+            <p class="eyebrow">ABOUT ROSEVEIL</p>
+            <h2 id="about-title">A Softer Way<br />to Bloom</h2>
+            <p>
+              We believe beauty begins with a moment for yourself. Discover an everyday ritual that
+              brings together simple pleasures, thoughtful details, and a little natural
+              inspiration.
+            </p>
+            <button
+              class="button"
+              id="about-more"
+              aria-expanded="false"
+              aria-controls="about-story"
+            >
+              LEARN MORE
+            </button>
+          </div>
+          <div class="about-visual">
+            <img
+              src="/roseveil/gifts.png"
+              alt="Roseveil rose wood gift box with face cream, serum and cleanser"
+              loading="lazy"
+              width="1254"
+              height="1254"
+            />
+          </div>
+          <div class="about-values">
+            <article>
+              <svg aria-hidden="true"><use href="#i-rabbit" /></svg>
+              <div>
+                <h3>A Softer Ritual</h3>
+                <p>Take a little time for yourself.</p>
+              </div>
+            </article>
+            <article>
+              <svg aria-hidden="true"><use href="#i-leaf" /></svg>
+              <div>
+                <h3>Nature as Our Muse</h3>
+                <p>Beauty in the simplest details.</p>
+              </div>
+            </article>
+            <article>
+              <svg aria-hidden="true"><use href="#i-flower" /></svg>
+              <div>
+                <h3>Your Kind of Glow</h3>
+                <p>Discover what feels like you.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div id="about-story" class="about-story container" hidden>
+          <p>
+            Roseveil is an illustrative beauty boutique created around soft colors, tactile
+            textures, and the pleasure of a personal ritual. Explore skincare, makeup, fragrance,
+            and gifts in one thoughtful collection. Product images and descriptions are concepts for
+            this demonstration store.
+          </p>
+        </div>
+      </section>
+      <section id="products" class="products container" aria-labelledby="products-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" id="products-eyebrow">BEST SELLERS</p>
+            <h2 id="products-title">The Roseveil Edit</h2>
+          </div>
+          <button class="text-button" id="view-all">
+            VIEW ALL PRODUCTS <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </button>
+        </div>
+        <div class="collection-toolbar">
+          <nav class="collection-links" aria-label="Beauty collections">
+            <a href="#products" data-category="All">All Beauty</a
+            ><a href="#products" data-category="Body Care">Body Care</a
+            ><a href="#products" data-category="Skin Care">Skin Care</a
+            ><a href="#products" data-category="Hair Care">Hair Care</a
+            ><a href="#products" data-category="Gift Sets">Gift Sets</a>
+          </nav>
+          <form
+            id="catalog-controls"
+            class="catalog-tools"
+            role="search"
+            aria-label="Filter the collection"
+          >
+            <details class="catalog-tool">
+              <summary aria-label="Search products" title="Search products">
+                <svg class="icon" aria-hidden="true"><use href="#i-search" /></svg>
+              </summary>
+              <div class="catalog-popup">
+                <label for="catalog-search">Search products</label
+                ><input
+                  id="catalog-search"
+                  name="query"
+                  type="search"
+                  placeholder="Find your next little luxury"
+                  autocomplete="off"
+                  aria-controls="product-grid"
+                />
+              </div>
+            </details>
+            <details class="catalog-tool">
+              <summary aria-label="All categories" title="All categories">
+                <svg class="icon" aria-hidden="true"><use href="#i-filter" /></svg>
+              </summary>
+              <div class="catalog-popup">
+                <label for="category-select">All Categories</label
+                ><select id="category-select" name="category" aria-controls="product-grid">
+                  <option value="All">All Categories</option>
+                </select>
+              </div>
+            </details>
+            <details class="catalog-tool">
+              <summary aria-label="Sort products by price" title="Sort products by price">
+                <svg class="icon" aria-hidden="true"><use href="#i-sort" /></svg>
+              </summary>
+              <div class="catalog-popup">
+                <label for="price-sort">Sort by</label
+                ><select id="price-sort" name="sort" aria-controls="product-grid">
+                  <option value="default">Default</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                </select>
+              </div>
+            </details>
+          </form>
+        </div>
+        <div id="active-filters" class="active-filters" hidden>
+          <p id="filter-description"></p>
+          <button id="clear-filters" class="text-button">Clear filters ×</button>
+        </div>
+        <p id="filter-status" class="product-results" role="status" aria-atomic="true"></p>
+        <div id="product-grid" class="product-grid"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <h3>A little change of search?</h3>
+          <p>We couldn’t find a match. Try “serum”, “rose”, or explore the full collection.</p>
+          <button id="empty-reset" class="button">EXPLORE ALL PRODUCTS</button>
+        </div>
+      </section>
+      <section class="promise" aria-labelledby="promise-title">
+        <div class="container">
+          <h2 id="promise-title">OUR BEAUTY PHILOSOPHY</h2>
+          <div class="promise-grid">
+            <span
+              ><svg aria-hidden="true"><use href="#i-rabbit" /></svg>Thoughtful Beauty</span
+            ><span
+              ><svg aria-hidden="true"><use href="#i-leaf" /></svg>Nature Inspired</span
+            ><span
+              ><svg aria-hidden="true"><use href="#i-flower" /></svg>Everyday Rituals</span
+            ><span
+              ><svg aria-hidden="true"><use href="#i-gift" /></svg>Little Luxuries</span
+            ><span
+              ><svg aria-hidden="true"><use href="#i-recycle" /></svg>Less Is More</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="contact" class="site-footer">
+      <div class="footer-grid container">
+        <div class="footer-brand">
+          <a class="logo" href="#top"
+            ><svg class="brand-flower" aria-hidden="true"><use href="#i-flower" /></svg
+            ><span>ROSEVEIL<small>COSMETICS</small></span></a
+          >
+          <p>Your everyday moment of beauty.<br />Thoughtfully inspired by nature.</p>
+          <a class="footer-social" href="#newsletter"
+            >A little inspiration, in your inbox <span>↗</span></a
+          >
+        </div>
+        <div>
+          <h2>QUICK LINKS</h2>
+          <a href="#top">Home</a><a href="#products" data-category="All">Shop</a
+          ><a href="#about">About Us</a><button data-info="journal">Beauty Journal</button
+          ><button data-info="contact">Contact Us</button>
+        </div>
+        <div>
+          <h2>CUSTOMER CARE</h2>
+          <button data-info="shipping">Shipping Policy</button
+          ><button data-info="returns">Return Policy</button
+          ><button data-info="terms">Terms & Conditions</button
+          ><button data-info="privacy">Privacy Policy</button><button data-info="faq">FAQs</button>
+        </div>
+        <div class="footer-connect">
+          <h2>LET'S CONNECT</h2>
+          <button data-info="contact">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail" /></svg>Write to Roseveil
+          </button>
+          <p>
+            <svg class="icon" aria-hidden="true"><use href="#i-pin" /></svg>Beauty, wherever you
+            are.
+          </p>
+          <p class="demo-note">
+            Concept store · Demo shopping.<br />No real payments or deliveries.
+          </p>
+        </div>
+        <form id="newsletter" class="newsletter">
+          <h2>NEWSLETTER</h2>
+          <p>Subscribe for a little inspiration,<br />new collections, and beauty notes.</p>
+          <label class="sr-only" for="newsletter-email">Email address</label
+          ><input
+            id="newsletter-email"
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+            maxlength="254"
+          /><button class="button" type="submit">SUBSCRIBE</button>
+          <p id="newsletter-status" role="status"></p>
+        </form>
+      </div>
+      <div class="footer-bottom container">
+        <span>© 2026 Roseveil Cosmetics. Concept design.</span
+        ><span>A little glow, every day.</span>
+      </div>
+    </footer>
+    <p id="toast" class="toast" role="status"></p>
+    <dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">YOUR LITTLE LUXURIES</p>
+          <h2 id="cart-title">Shopping Bag <span id="cart-heading-count"></span></h2>
+        </div>
+        <button class="icon-button" data-close-dialog aria-label="Close shopping bag">
+          <svg aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div id="cart-content"></div>
+    </dialog>
+    <dialog id="content-dialog" class="content-dialog" aria-labelledby="content-title">
+      <div class="dialog-header">
+        <h2 id="content-title"></h2>
+        <button class="icon-button" data-close-dialog aria-label="Close dialog">
+          <svg aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div id="content-body"></div>
+    </dialog>
+  </body>
+</html>

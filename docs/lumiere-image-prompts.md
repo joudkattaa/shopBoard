@@ -1,3 +1,5 @@
+> Historical generation record for the original images. Current Roseveil assets and edit prompt: [roseveil-rebrand.md](roseveil-rebrand.md). Original files are archived in `.local-backup/lumiere-originals/`.
+
 # Lumière image prompts
 
 Generated using the built-in ImageGen tool. Final PNG assets are saved in `public/lumiere/` and were visually inspected before integration. These are illustrative images for the concept store.
@@ -45,4 +47,3 @@ Use case: product-mockup. Square high resolution cosmetics category campaign pho
 ## gifts.png
 
 Use case: product-mockup. Square high resolution cosmetics category campaign photo: open pale pink rigid gift box with ivory satin ribbon and a beautiful coordinated blush skincare set nestled inside, serum bottle, cream jar, slim cleansing tube, subtle copper details, small peach flowers nearby. Tiny LUMIÈRE label on box. Clean bright luxurious photorealistic cosmetics shop aesthetic, soft morning studio light on ivory backdrop, crisp texture. No other text, no watermark.
-

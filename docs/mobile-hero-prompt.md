@@ -1,3 +1,5 @@
+> Historical generation record for the original images. Current Roseveil assets and edit prompt: [roseveil-rebrand.md](roseveil-rebrand.md). Original files are archived in `.local-backup/lumiere-originals/`.
+
 # Mobile hero asset
 
 Generated with the built-in ImageGen tool and saved to `public/lumiere/hero-mobile.png`.
