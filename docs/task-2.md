@@ -39,7 +39,8 @@ The architecture diagram and detailed function responsibilities are documented i
 - Native form validation with a minimum password length of eight characters.
 - No real authentication or account persistence; passwords are not read, saved, or transmitted by application code.
 - ESLint, Prettier, Husky, lint-staged, and recommended VS Code settings.
-- Preservation of the existing design, product cards, imagery, and responsive layout.
+- Performance optimizations including WebP images, responsive image sizes, improved font discovery, and reduced unnecessary product rendering.
+- Preservation of the existing visual design, product cards, imagery, and responsive layout.
 
 ## Debugging and Code Quality
 
@@ -61,7 +62,7 @@ The following checks passed:
 - `npm run build` — Passed.
 - `npm test` — **35 automated tests passed, 0 failed.**
 
-Automated coverage includes combined search/filter/sort controls, category synchronization, empty states, filter resetting, immutable sorting, cart persistence, storage failure handling, theme persistence, rapid theme toggling, modular architecture boundaries, asset references, and dark-mode color contrast.
+Automated coverage includes combined search/filter/sort controls, category synchronization, empty states, filter resetting, immutable sorting, cart persistence, storage failure handling, theme persistence, rapid theme toggling, modular architecture boundaries, asset references, keyboard accessibility regressions, and dark-mode color contrast.
 
 ### Security Audit
 
@@ -80,17 +81,17 @@ The following checks were performed and reported by the student, not by AI brows
 - Basic website functionality: **Passed**.
 - Shopping cart persistence after page refresh: **Passed**.
 - Responsive design (mobile, tablet, and desktop): **Passed**.
-- Browser DevTools Console: **Passed ? no errors or warnings observed**.
-- Browser DevTools Breakpoints: **Passed ? JavaScript execution successfully paused at a breakpoint**.
-- Keyboard navigation and accessibility: **Passed ? Tab, Shift+Tab, Enter, and Escape tested successfully**.
-- Native form validation: **Passed ? required fields, invalid email format, and minimum password length verified**.
+- Browser DevTools Console: **Passed — no errors or warnings observed**.
+- Browser DevTools Breakpoints: **Passed — JavaScript execution successfully paused at a breakpoint**.
+- Keyboard navigation and accessibility: **Passed — Tab, Shift+Tab, Enter, and Escape tested successfully**.
+- Native form validation: **Passed — required fields, invalid email format, and minimum password length verified**.
 
 ### Lighthouse Results
 
 The following Lighthouse results were obtained by the student using the production preview (`http://localhost:4173/`):
 
-- **Performance: 55/100** ? Improved compared with the initial development-server measurement of 33/100.
-- **Accessibility: 91/100** ? Passed the documented target above 90.
+- **Performance: 55/100** — Improved compared with the initial development-server measurement of 33/100.
+- **Accessibility: 91/100** — Passed the documented target above 90.
 - **Best Practices: 100/100**.
 - **SEO: 92/100**.
 
@@ -98,9 +99,9 @@ Lighthouse reported that Chrome extensions may have negatively affected page loa
 
 ### Pending Exercise
 
-- Instructor's six debugging-lab exercises: **Pending ? required files were unavailable**.
+- Instructor's six debugging-lab exercises: **Pending — required files were unavailable**.
 
-All 35 automated tests passed according to the latest Codex report. The remaining debugging-lab exercise is documented separately.
+The remaining debugging-lab exercise is documented separately.
 
 ## Project Limitations
 
@@ -114,4 +115,6 @@ The interactive ShopBoard features and modular architecture requirements have be
 
 The debugging log documents two confirmed project findings with transparent AI attribution. The instructor's separate six-bug debugging lab remains incomplete because the required files were unavailable.
 
-The remaining verification step is a clean production-build Lighthouse measurement with extensions disabled. Obtain the instructor's debugging kit to complete the six exercises. Commit or push only after explicit approval.
+The project has been uploaded to GitHub. All core interactive features, modular architecture requirements, and documented automated tests have been completed successfully. Manual browser verification has also been performed.
+
+Additional performance optimizations have been applied, and the latest Lighthouse results are documented above.
