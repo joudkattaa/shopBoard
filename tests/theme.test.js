@@ -46,16 +46,28 @@ test('light is the default; the toggle persists dark and restores light', () => 
   assert.equal(values.get('roseveil-theme'), 'dark')
   assert.equal(toggle.attributes['aria-label'], 'Switch to light mode')
   assert.equal(toggle.attributes['aria-pressed'], 'true')
-  assert.equal(meta.content, '#21070D')
-  assert.equal(document.documentElement.dataset.themeTransition, 'true')
+  assert.equal(meta.content, '#4B101F')
   toggle.click()
   assert.equal(values.get('roseveil-theme'), 'light')
-  assert.equal(meta.content, '#a95570')
+  assert.equal(meta.content, '#fffafb')
 })
 
 test('saved dark preference loads and unknown preferences default to light', () => {
   assert.equal(mount('dark').document.documentElement.dataset.theme, 'dark')
   assert.equal(mount('invalid').document.documentElement.dataset.theme, 'light')
+})
+
+test('rapid toggles use current state while view-transition callbacks are deferred', () => {
+  const { document, toggle, values } = mount()
+  const pending = []
+  document.startViewTransition = (callback) => pending.push(callback)
+  toggle.click({ detail: 1 })
+  toggle.click({ detail: 1 })
+  assert.equal(values.get('roseveil-theme'), 'light')
+  // Even if the browser runs callbacks late, they must paint the latest selection.
+  pending.reverse().forEach((callback) => callback())
+  assert.equal(document.documentElement.dataset.theme, 'light')
+  assert.equal(toggle.attributes['aria-pressed'], 'false')
 })
 
 test('theme switching remains usable when localStorage reads and writes fail', () => {

@@ -42,3 +42,7 @@ See [docs/architecture.md](docs/architecture.md) for the four-box diagram, funct
 Run `npm run lint`, `npm run format`, and `npm run format:check` for ESLint and Prettier. `npm test` runs the regression suite. `npm install` runs the Husky prepare script; `.husky/pre-commit` runs lint-staged, which applies ESLint fixes and Prettier only to staged files. ESLint rejects undefined variables and loose equality. VS Code recommendations and format-on-save settings are in `.vscode/`.
 
 The account button opens a demo registration form with required name, email and an eight-character minimum password. Use a made-up password: it is never read by application code, saved or transmitted, and the form is reset on completion. Product data, imagery and grid column layout are unchanged by this quality setup.
+
+## Day 2 completion audit
+
+See [the current completion report](docs/day2-completion-report.md) and [debugging log](debugging-log.md) for verified requirements, confirmed fixes, actual command results, missing instructor exercises, dependency warnings and manual steps. Manual browser/student evidence and the missing instructor lab are not claimed as complete.

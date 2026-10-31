@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap');
-
 :root {
   --tile-size: min(150px, calc((100vw - 56px) / 2));
   font-family: 'DM Sans', Arial, sans-serif;
@@ -133,9 +131,12 @@ section {
   font-weight: 700;
   letter-spacing: inherit;
 }
-.announcement button:hover {
-  text-decoration: underline;
+@media (hover: hover) and (pointer: fine) {
+  .announcement button:hover {
+    text-decoration: underline;
+  }
 }
+
 .site-header {
   background: #fff;
   border-bottom: 1px solid #ddc9c6;
@@ -191,9 +192,12 @@ section {
   min-width: 34px;
   min-height: 34px;
 }
-.icon-button:hover {
-  color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .icon-button:hover {
+    color: var(--rose-dark);
+  }
 }
+
 .cart-button {
   position: relative;
 }
@@ -240,10 +244,13 @@ section {
 .main-nav .active {
   color: var(--rose);
 }
-.main-nav > a:hover,
-.main-nav > button:hover {
-  color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .main-nav > a:hover,
+  .main-nav > button:hover {
+    color: var(--rose-dark);
+  }
 }
+
 .search-panel {
   padding-block: 18px 24px;
 }
@@ -280,17 +287,23 @@ section {
   line-height: 1.4;
   transition: background 0.2s;
 }
-.button:hover {
-  background: var(--rose-dark);
-  border-color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background: var(--rose-dark);
+    border-color: var(--rose-dark);
+  }
 }
+
 .button.secondary {
   background: white;
   color: var(--rose-dark);
 }
-.button.secondary:hover {
-  background: #eadbd7;
+@media (hover: hover) and (pointer: fine) {
+  .button.secondary:hover {
+    background: #eadbd7;
+  }
 }
+
 .hero {
   position: relative;
   display: grid;
@@ -438,10 +451,13 @@ h2 {
     transform 0.3s,
     box-shadow 0.3s;
 }
-.category-card:hover img {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px #59373e1c;
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .category-card:hover img {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px #59373e1c;
+  }
 }
+
 .category-card h3 {
   font-size: 11px;
   font-weight: 500;
@@ -554,9 +570,12 @@ h2 {
   letter-spacing: 0.3px;
   text-align: left;
 }
-.text-button:hover {
-  color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .text-button:hover {
+    color: var(--rose-dark);
+  }
 }
+
 .text-button .icon {
   width: 15px;
   height: 15px;
@@ -593,9 +612,12 @@ h2 {
   object-fit: contain;
   transition: transform 0.35s;
 }
-.product-image-button:hover img {
-  transform: scale(1.04);
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .product-image-button:hover img {
+    transform: scale(1.04);
+  }
 }
+
 .product-info {
   padding: 10px 1px 8px;
   flex: 1;
@@ -610,9 +632,12 @@ h2 {
   line-height: 1.5;
   display: block;
 }
-.product-name:hover {
-  color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .product-name:hover {
+    color: var(--rose-dark);
+  }
 }
+
 .product-price {
   font-size: 11px;
   font-weight: 700;
@@ -639,11 +664,14 @@ h2 {
   width: 12px;
   height: 12px;
 }
-.add-button:hover {
-  background: var(--rose);
-  color: white;
-  border-color: var(--rose);
+@media (hover: hover) and (pointer: fine) {
+  .add-button:hover {
+    background: var(--rose);
+    color: white;
+    border-color: var(--rose);
+  }
 }
+
 .active-filters {
   display: flex;
   gap: 18px;
@@ -724,10 +752,13 @@ h2 {
   text-align: left;
   line-height: 1.65;
 }
-.footer-grid > div > a:not(.logo):hover,
-.footer-grid > div > button:hover {
-  color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .footer-grid > div > a:not(.logo):hover,
+  .footer-grid > div > button:hover {
+    color: var(--rose-dark);
+  }
 }
+
 .footer-brand {
   grid-column: 1/-1;
 }
@@ -1601,8 +1632,10 @@ dialog::backdrop {
   color: var(--rose-dark);
   font-size: 12px;
 }
-.collection-links a:hover {
-  background: var(--pink);
+@media (hover: hover) and (pointer: fine) {
+  .collection-links a:hover {
+    background: var(--pink);
+  }
 }
 
 /* Roseveil's petal details and quiet editorial accents. */
@@ -1697,11 +1730,14 @@ dialog::backdrop {
   border-color: #cdb5b2;
   min-height: 34px;
 }
-.product-card .add-button:hover {
-  background: var(--rose-dark);
-  color: #fff;
-  border-color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .product-card .add-button:hover {
+    background: var(--rose-dark);
+    color: #fff;
+    border-color: var(--rose-dark);
+  }
 }
+
 .collection-links a {
   border-radius: 24px;
   font-size: 10px;
@@ -1795,11 +1831,14 @@ dialog::backdrop {
   border-color: #e6bfce;
   color: #88485f;
 }
-.product-card .add-button:hover {
-  background: var(--rose-dark);
-  border-color: var(--rose-dark);
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .product-card .add-button:hover {
+    background: var(--rose-dark);
+    border-color: var(--rose-dark);
+    color: #fff;
+  }
 }
+
 .about-visual img {
   mix-blend-mode: normal;
 }
@@ -1826,11 +1865,14 @@ dialog::backdrop {
 .footer-bottom {
   border-color: #e2cbd5;
 }
-.footer-grid > div > a:not(.logo):hover,
-.footer-grid > div > button:hover {
-  color: var(--rose-dark);
-  text-decoration: underline;
+@media (hover: hover) and (pointer: fine) {
+  .footer-grid > div > a:not(.logo):hover,
+  .footer-grid > div > button:hover {
+    color: var(--rose-dark);
+    text-decoration: underline;
+  }
 }
+
 .newsletter #newsletter-status {
   color: var(--rose-dark);
 }
@@ -1844,10 +1886,13 @@ dialog::backdrop {
   border-color: var(--rose);
   color: #fff;
 }
-.site-footer .newsletter .button:hover {
-  background: var(--rose-dark);
-  border-color: var(--rose-dark);
+@media (hover: hover) and (pointer: fine) {
+  .site-footer .newsletter .button:hover {
+    background: var(--rose-dark);
+    border-color: var(--rose-dark);
+  }
 }
+
 .site-footer :focus-visible {
   outline-color: var(--rose-dark);
 }
@@ -1885,9 +1930,12 @@ dialog::backdrop {
 .catalog-tool summary::-webkit-details-marker {
   display: none;
 }
-.catalog-tool summary:hover {
-  background: #f5dfe9;
+@media (hover: hover) and (pointer: fine) {
+  .catalog-tool summary:hover {
+    background: #f5dfe9;
+  }
 }
+
 .catalog-tool[open] summary {
   background: var(--rose-dark);
   border-color: var(--rose-dark);

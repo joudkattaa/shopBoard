@@ -1,47 +1,117 @@
 # Task 2 — ROSEVEIL Cosmetics
 
-## Required functionality
+## Required Functionality
 
-- Render the existing product catalog from JavaScript data.
-- Search product names immediately using the input event, case-insensitively.
-- Filter by every available category, with an All Categories option.
+- Render the existing product catalog dynamically from JavaScript data.
+- Search product names immediately using the `input` event, case-insensitively.
+- Filter products by every available category, including an All Categories option.
 - Keep category navigation and the category select synchronized.
-- Sort by Default, Price: Low to High, or Price: High to Low.
-- Combine search and category filtering before sorting a copied result array; never mutate the original catalog.
-- Use one renderProducts function to refresh the product grid.
-- Show matching product counts and a friendly empty state.
-- Reset search, category, and sorting together with Clear Filters.
+- Sort products by Default, Price: Low to High, or Price: High to Low.
+- Combine search and category filtering before sorting a copied result array, without mutating the original catalog.
+- Use a single `renderProducts` function to update the product grid.
+- Display matching product counts and a user-friendly empty state.
+- Reset search, category filtering, and sorting together using Clear Filters.
 
-The controls are presented as compact pink circular search, category and sort buttons beside the collection navigation. Their popups support closing with Escape or an outside click.
+The controls are presented as compact pink circular search, category, and sort buttons beside the collection navigation. Their popups support closing with Escape or clicking outside.
 
 ## Architecture
 
-- data.js: 30 product entries across seven categories, including five gift sets.
-- logic.js: pure search, filtering, sorting, price formatting and cart calculations.
-- state.js: cart actions, discount code, saved theme and browser persistence; no DOM access.
-- ui.js: DOM rendering, event handlers, dialogs, forms and theme presentation; no direct storage access.
-- main.js: styles and application wiring only.
+The application follows a modular JavaScript architecture:
 
-The diagram and detailed function ownership are in [architecture.md](architecture.md). Both AGENTS.md and CLAUDE.md document these boundaries.
+- **data.js:** Contains 30 product entries across seven categories, including five gift sets.
+- **logic.js:** Contains pure functions for searching, filtering, sorting, price formatting, and cart calculations. Does not access the DOM or localStorage.
+- **state.js:** Manages shopping cart actions, discount codes, theme preferences, and browser persistence without accessing the DOM.
+- **ui.js:** Handles DOM rendering, event listeners, dialogs, forms, and theme presentation without directly accessing localStorage.
+- **main.js:** Connects the modules and initializes the application.
 
-## Additional improvements
+The architecture diagram and detailed function responsibilities are documented in [architecture.md](architecture.md). Both `AGENTS.md` and `CLAUDE.md` describe the architecture rules.
 
-- ROSEVEIL branding and coordinated Rose Dusk product imagery.
-- Soft pink light mode and a burgundy/rose-gold dark mode with a sun/moon toggle, stored preference and reduced-motion support.
-- Product detail dialogs with smaller, uncropped images.
-- Shopping bag quantities, removal, GLOW20 discount, demo shipping and demo checkout.
-- Demo registration with labelled, required name/email/password fields and native minimum password length of eight characters. Passwords are not read, stored or sent.
-- ESLint, Prettier, Husky, lint-staged and recommended VS Code settings.
-- Existing product cards and responsive column layout retained as requested.
+## Additional Improvements
 
-## Verification
+- Custom ROSEVEIL Cosmetics branding with coordinated Rose Dusk product imagery.
+- Responsive, mobile-first layout.
+- Soft pink light mode and burgundy/rose-gold dark mode with saved theme preferences.
+- Reduced-motion support and improved theme-toggle state handling.
+- Product detail dialogs with appropriately sized, uncropped images.
+- Shopping cart with quantity controls, product removal, and persistent storage.
+- `GLOW20` promotional discount, demo shipping calculations, and demonstration checkout.
+- Demo registration with labelled, required name, email, and password fields.
+- Native form validation with a minimum password length of eight characters.
+- No real authentication or account persistence; passwords are not read, saved, or transmitted by application code.
+- ESLint, Prettier, Husky, lint-staged, and recommended VS Code settings.
+- Preservation of the existing design, product cards, imagery, and responsive layout.
 
-- npm run lint
-- npm run format:check
-- npm run build
-- npm test (18 automated tests)
-- Husky pre-commit runs lint-staged for staged JavaScript and formatting files.
+## Debugging and Code Quality
 
-Automated coverage includes combined controls, category synchronization, empty/reset behavior, immutable sorting, cart persistence, legacy bag migration, storage failure handling, theme persistence and core dark-mode color contrast.
+Two confirmed issues were identified and fixed during the audit:
 
-Browser layout, keyboard/native validation checks and Lighthouse Accessibility >90 still require manual verification; browser automation was unavailable. This is a demonstration store with no real account, payment or delivery service.
+1. **Theme state issue:** Rapid theme toggling could save an incorrect final selection when view-transition callbacks were delayed. The logic was corrected and covered by regression tests.
+2. **Architecture issue:** An unused Vite counter helper accessed the DOM outside `ui.js`. Its DOM implementation was moved into `ui.js`, while preserving its original export and behavior.
+
+Both findings are documented in `debugging-log.md`, including their causes, fixes, verification, and AI assistance.
+
+The instructor's `day2-kit/debug-lab` directory was not available. Therefore, its six planted debugging exercises remain incomplete and are not represented as completed work.
+
+## Automated Verification
+
+The following checks passed:
+
+- `npm run lint` — Passed.
+- `npm run format:check` — Passed.
+- `npm run build` — Passed.
+- `npm test` — **35 automated tests passed, 0 failed.**
+
+Automated coverage includes combined search/filter/sort controls, category synchronization, empty states, filter resetting, immutable sorting, cart persistence, storage failure handling, theme persistence, rapid theme toggling, modular architecture boundaries, asset references, and dark-mode color contrast.
+
+### Security Audit
+
+- Full npm audit: 5 moderate findings in development-tool dependencies.
+- Production-only audit: 0 vulnerabilities reported.
+- No forced dependency upgrades were applied.
+
+## Manual Verification
+
+The following checks were performed and reported by the student, not by AI browser automation.
+
+- Product search (case-insensitive): **Passed**.
+- Category filtering: **Passed**.
+- Price sorting (Low to High): **Passed**.
+- Price sorting (High to Low): **Passed**.
+- Basic website functionality: **Passed**.
+- Shopping cart persistence after page refresh: **Passed**.
+- Responsive design (mobile, tablet, and desktop): **Passed**.
+- Browser DevTools Console: **Passed ? no errors or warnings observed**.
+- Browser DevTools Breakpoints: **Passed ? JavaScript execution successfully paused at a breakpoint**.
+- Keyboard navigation and accessibility: **Passed ? Tab, Shift+Tab, Enter, and Escape tested successfully**.
+- Native form validation: **Passed ? required fields, invalid email format, and minimum password length verified**.
+
+### Lighthouse Results
+
+The following Lighthouse results were obtained by the student using the production preview (`http://localhost:4173/`):
+
+- **Performance: 55/100** ? Improved compared with the initial development-server measurement of 33/100.
+- **Accessibility: 91/100** ? Passed the documented target above 90.
+- **Best Practices: 100/100**.
+- **SEO: 92/100**.
+
+Lighthouse reported that Chrome extensions may have negatively affected page load performance. These scores reflect the observed audit and do not represent an extension-free baseline.
+
+### Pending Exercise
+
+- Instructor's six debugging-lab exercises: **Pending ? required files were unavailable**.
+
+All 35 automated tests passed according to the latest Codex report. The remaining debugging-lab exercise is documented separately.
+
+## Project Limitations
+
+ROSEVEIL Cosmetics is a demonstration storefront. It does not include real user authentication, payment processing, email delivery, or order fulfillment.
+
+The shopping cart, promotional code, and theme preferences are stored locally in the browser. Demo profile information is session-only and is not preserved after refreshing the page.
+
+## Assignment Status
+
+The interactive ShopBoard features and modular architecture requirements have been implemented and verified through automated tests.
+
+The debugging log documents two confirmed project findings with transparent AI attribution. The instructor's separate six-bug debugging lab remains incomplete because the required files were unavailable.
+
+The remaining verification step is a clean production-build Lighthouse measurement with extensions disabled. Obtain the instructor's debugging kit to complete the six exercises. Commit or push only after explicit approval.

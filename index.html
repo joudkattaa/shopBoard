@@ -2,13 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
     <meta name="theme-color" content="#a95570" />
     <meta
       name="description"
       content="Discover Roseveil Cosmetics: a considered collection of skincare, makeup, fragrance and everyday beauty essentials."
     />
     <link rel="icon" type="image/svg+xml" href="/roseveil-mark.svg" />
+    <link
+      rel="preload"
+      as="image"
+      href="/roseveil/hero.webp"
+      imagesrcset="/roseveil/hero-960.webp 960w, /roseveil/hero.webp 1774w"
+      imagesizes="(min-width: 840px) 100vw, (min-width: 600px) 840px, 720px"
+      fetchpriority="high"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap"
+    />
     <title>Roseveil Cosmetics — Reveal Your Natural Beauty</title>
     <script type="module" src="/src/main.js"></script>
   </head>
@@ -152,6 +169,9 @@
             <input
               id="product-search"
               type="search"
+              enterkeyhint="search"
+              autocapitalize="none"
+              autocorrect="off"
               placeholder="Search serum, shampoo, perfume…"
               autocomplete="off"
             /><button class="button" type="submit">
@@ -161,16 +181,19 @@
         </form>
       </div>
     </header>
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
         <picture class="hero-media"
           ><img
             class="hero-image"
-            src="/roseveil/hero.png"
+            src="/roseveil/hero.webp"
+            srcset="/roseveil/hero-960.webp 960w, /roseveil/hero.webp 1774w"
+            sizes="(min-width: 840px) 100vw, (min-width: 600px) 840px, 720px"
+            decoding="async"
             alt="Roseveil rose gold skincare collection on a stone tray with delicate blossoms"
             fetchpriority="high"
-            width="2048"
-            height="1024"
+            width="1774"
+            height="887"
         /></picture>
         <div class="hero-inner container">
           <div class="hero-copy">
@@ -238,7 +261,15 @@
         <div class="category-grid">
           <a href="#products" class="category-card" data-category="Skin Care"
             ><img
-              src="/roseveil/serum.png"
+              src="/roseveil/serum.webp"
+              srcset="
+                /roseveil/serum-240.webp  240w,
+                /roseveil/serum-480.webp  480w,
+                /roseveil/serum-800.webp  800w,
+                /roseveil/serum.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Rose gold skincare serum"
               loading="lazy"
               width="600"
@@ -249,7 +280,15 @@
           ></a>
           <a href="#products" class="category-card" data-category="Makeup"
             ><img
-              src="/roseveil/makeup.png"
+              src="/roseveil/makeup.webp"
+              srcset="
+                /roseveil/makeup-240.webp  240w,
+                /roseveil/makeup-480.webp  480w,
+                /roseveil/makeup-800.webp  800w,
+                /roseveil/makeup.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Warm neutral eyeshadow palette and makeup essentials"
               loading="lazy"
               width="600"
@@ -260,7 +299,15 @@
           ></a>
           <a href="#products" class="category-card" data-category="Hair Care"
             ><img
-              src="/roseveil/hair.png"
+              src="/roseveil/hair.webp"
+              srcset="
+                /roseveil/hair-240.webp  240w,
+                /roseveil/hair-480.webp  480w,
+                /roseveil/hair-800.webp  800w,
+                /roseveil/hair.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Mauve and plum bottles of shampoo and hair oil"
               loading="lazy"
               width="600"
@@ -271,7 +318,15 @@
           ></a>
           <a href="#products" class="category-card" data-category="Fragrance"
             ><img
-              src="/roseveil/perfume.png"
+              src="/roseveil/perfume.webp"
+              srcset="
+                /roseveil/perfume-240.webp  240w,
+                /roseveil/perfume-480.webp  480w,
+                /roseveil/perfume-800.webp  800w,
+                /roseveil/perfume.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Rose Bloom perfume in a glass bottle"
               loading="lazy"
               width="600"
@@ -282,7 +337,15 @@
           ></a>
           <a href="#products" class="category-card" data-category="Body Care"
             ><img
-              src="/roseveil/body-lotion.png"
+              src="/roseveil/body-lotion.webp"
+              srcset="
+                /roseveil/body-lotion-240.webp  240w,
+                /roseveil/body-lotion-480.webp  480w,
+                /roseveil/body-lotion-800.webp  800w,
+                /roseveil/body-lotion.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Pale blush body lotion bottle with rose gold pump"
               loading="lazy"
               width="600"
@@ -293,7 +356,15 @@
           ></a>
           <a href="#products" class="category-card" data-category="Face Masks"
             ><img
-              src="/roseveil/masks.png"
+              src="/roseveil/masks.webp"
+              srcset="
+                /roseveil/masks-240.webp  240w,
+                /roseveil/masks-480.webp  480w,
+                /roseveil/masks-800.webp  800w,
+                /roseveil/masks.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Botanical face mask sachets"
               loading="lazy"
               width="600"
@@ -304,7 +375,15 @@
           ></a>
           <a href="#products" class="category-card" data-category="Gift Sets"
             ><img
-              src="/roseveil/gifts.png"
+              src="/roseveil/gifts.webp"
+              srcset="
+                /roseveil/gifts-240.webp  240w,
+                /roseveil/gifts-480.webp  480w,
+                /roseveil/gifts-800.webp  800w,
+                /roseveil/gifts.webp     1254w
+              "
+              sizes="(min-width: 1200px) 180px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw"
+              decoding="async"
               alt="Blush pink skincare gift box"
               loading="lazy"
               width="600"
@@ -336,7 +415,15 @@
           </div>
           <div class="about-visual">
             <img
-              src="/roseveil/gifts.png"
+              src="/roseveil/gifts.webp"
+              srcset="
+                /roseveil/gifts-240.webp  240w,
+                /roseveil/gifts-480.webp  480w,
+                /roseveil/gifts-800.webp  800w,
+                /roseveil/gifts.webp     1254w
+              "
+              sizes="(min-width: 1000px) 450px, (min-width: 600px) 55vw, 100vw"
+              decoding="async"
               alt="Roseveil rose wood gift box with face cream, serum and cleanser"
               loading="lazy"
               width="1254"
@@ -380,7 +467,7 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow" id="products-eyebrow">BEST SELLERS</p>
-            <h2 id="products-title">The Roseveil Edit</h2>
+            <h2 id="products-title" tabindex="-1">The Roseveil Edit</h2>
           </div>
           <button class="text-button" id="view-all">
             VIEW ALL PRODUCTS <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
@@ -410,6 +497,9 @@
                   id="catalog-search"
                   name="query"
                   type="search"
+                  enterkeyhint="search"
+                  autocapitalize="none"
+                  autocorrect="off"
                   placeholder="Find your next little luxury"
                   autocomplete="off"
                   aria-controls="product-grid"
@@ -537,7 +627,7 @@
       <div class="dialog-header">
         <div>
           <p class="eyebrow">YOUR LITTLE LUXURIES</p>
-          <h2 id="cart-title">Shopping Bag <span id="cart-heading-count"></span></h2>
+          <h2 id="cart-title" tabindex="-1">Shopping Bag <span id="cart-heading-count"></span></h2>
         </div>
         <button class="icon-button" data-close-dialog aria-label="Close shopping bag">
           <svg aria-hidden="true"><use href="#i-close" /></svg>
@@ -547,7 +637,7 @@
     </dialog>
     <dialog id="content-dialog" class="content-dialog" aria-labelledby="content-title">
       <div class="dialog-header">
-        <h2 id="content-title"></h2>
+        <h2 id="content-title" tabindex="-1"></h2>
         <button class="icon-button" data-close-dialog aria-label="Close dialog">
           <svg aria-hidden="true"><use href="#i-close" /></svg>
         </button>

@@ -33,3 +33,7 @@ Arrows show data flow. Imports are one-way: logic imports data; state imports lo
 6. Verify with `npm run build` and `node --test tests/*.test.js`.
 
 Both `AGENTS.md` and `CLAUDE.md` record the same boundaries so either coding assistant follows the assignment. Existing storage keys and legacy bag migration remain supported. Demo profiles are still session-only.
+
+## Legacy counter compatibility
+
+`src/counter.js` preserves the original `setupCounter` export by forwarding it from `ui.js`. The unchanged demo implementation now lives exclusively in the UI box, is not called during storefront startup, and has a compatibility test. Theme presentation also has an `updateTheme` helper; it paints the latest state after deferred browser transitions.

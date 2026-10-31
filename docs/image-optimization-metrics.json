@@ -1,0 +1,858 @@
+[
+  {
+    "name": "bath-set",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1798486,
+    "webpBytes": 1213934,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "bath-set-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 43908
+      },
+      {
+        "file": "bath-set-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 181076
+      },
+      {
+        "file": "bath-set-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 511714
+      }
+    ]
+  },
+  {
+    "name": "body-butter",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1522282,
+    "webpBytes": 939026,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-butter-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 38162
+      },
+      {
+        "file": "body-butter-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 163692
+      },
+      {
+        "file": "body-butter-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 459586
+      }
+    ]
+  },
+  {
+    "name": "body-cream",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1561240,
+    "webpBytes": 954430,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-cream-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 38214
+      },
+      {
+        "file": "body-cream-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 161990
+      },
+      {
+        "file": "body-cream-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 459594
+      }
+    ]
+  },
+  {
+    "name": "body-gift-box",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 2220688,
+    "webpBytes": 1485914,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-gift-box-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 55480
+      },
+      {
+        "file": "body-gift-box-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 220726
+      },
+      {
+        "file": "body-gift-box-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 623620
+      }
+    ]
+  },
+  {
+    "name": "body-lotion",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1514081,
+    "webpBytes": 916280,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-lotion-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 34778
+      },
+      {
+        "file": "body-lotion-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 152062
+      },
+      {
+        "file": "body-lotion-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 434574
+      }
+    ]
+  },
+  {
+    "name": "body-mist",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1582863,
+    "webpBytes": 1003098,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-mist-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 37522
+      },
+      {
+        "file": "body-mist-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 162566
+      },
+      {
+        "file": "body-mist-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 477920
+      }
+    ]
+  },
+  {
+    "name": "body-oil",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1570363,
+    "webpBytes": 960196,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-oil-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 36522
+      },
+      {
+        "file": "body-oil-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 156900
+      },
+      {
+        "file": "body-oil-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 469736
+      }
+    ]
+  },
+  {
+    "name": "body-scrub",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1900496,
+    "webpBytes": 1229518,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-scrub-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 47954
+      },
+      {
+        "file": "body-scrub-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 193996
+      },
+      {
+        "file": "body-scrub-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 544284
+      }
+    ]
+  },
+  {
+    "name": "body-wash",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1529398,
+    "webpBytes": 922502,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "body-wash-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 36114
+      },
+      {
+        "file": "body-wash-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 152566
+      },
+      {
+        "file": "body-wash-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 426230
+      }
+    ]
+  },
+  {
+    "name": "cleanser",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1382747,
+    "webpBytes": 830108,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "cleanser-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 32572
+      },
+      {
+        "file": "cleanser-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 142388
+      },
+      {
+        "file": "cleanser-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 400432
+      }
+    ]
+  },
+  {
+    "name": "cleansing-oil",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1548473,
+    "webpBytes": 926322,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "cleansing-oil-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 35914
+      },
+      {
+        "file": "cleansing-oil-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 154498
+      },
+      {
+        "file": "cleansing-oil-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 435438
+      }
+    ]
+  },
+  {
+    "name": "conditioner",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1603285,
+    "webpBytes": 1080584,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "conditioner-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 36752
+      },
+      {
+        "file": "conditioner-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 164460
+      },
+      {
+        "file": "conditioner-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 475558
+      }
+    ]
+  },
+  {
+    "name": "cream",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1609870,
+    "webpBytes": 1033714,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "cream-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 39998
+      },
+      {
+        "file": "cream-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 167636
+      },
+      {
+        "file": "cream-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 480338
+      }
+    ]
+  },
+  {
+    "name": "evening-gift-box",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 2234915,
+    "webpBytes": 1464966,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "evening-gift-box-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 53008
+      },
+      {
+        "file": "evening-gift-box-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 210942
+      },
+      {
+        "file": "evening-gift-box-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 608922
+      }
+    ]
+  },
+  {
+    "name": "eye-serum",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1602723,
+    "webpBytes": 960458,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "eye-serum-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 36210
+      },
+      {
+        "file": "eye-serum-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 154356
+      },
+      {
+        "file": "eye-serum-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 456218
+      }
+    ]
+  },
+  {
+    "name": "gifts",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 2406746,
+    "webpBytes": 1624082,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "gifts-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 71682
+      },
+      {
+        "file": "gifts-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 262340
+      },
+      {
+        "file": "gifts-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 697700
+      }
+    ]
+  },
+  {
+    "name": "hair",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 2072199,
+    "webpBytes": 1405488,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hair-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 73834
+      },
+      {
+        "file": "hair-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 257762
+      },
+      {
+        "file": "hair-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 638638
+      }
+    ]
+  },
+  {
+    "name": "hair-gift-box",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1991931,
+    "webpBytes": 1339994,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hair-gift-box-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 52612
+      },
+      {
+        "file": "hair-gift-box-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 204350
+      },
+      {
+        "file": "hair-gift-box-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 568934
+      }
+    ]
+  },
+  {
+    "name": "hair-mask",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1516069,
+    "webpBytes": 929048,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hair-mask-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 36652
+      },
+      {
+        "file": "hair-mask-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 151660
+      },
+      {
+        "file": "hair-mask-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 432528
+      }
+    ]
+  },
+  {
+    "name": "hair-mist",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1543396,
+    "webpBytes": 904828,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hair-mist-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 33338
+      },
+      {
+        "file": "hair-mist-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 146962
+      },
+      {
+        "file": "hair-mist-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 421496
+      }
+    ]
+  },
+  {
+    "name": "hair-oil",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1570641,
+    "webpBytes": 946706,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hair-oil-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 37982
+      },
+      {
+        "file": "hair-oil-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 157170
+      },
+      {
+        "file": "hair-oil-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 438932
+      }
+    ]
+  },
+  {
+    "name": "hand-cream",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1595574,
+    "webpBytes": 946706,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hand-cream-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 34492
+      },
+      {
+        "file": "hand-cream-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 150340
+      },
+      {
+        "file": "hand-cream-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 453004
+      }
+    ]
+  },
+  {
+    "name": "hero",
+    "width": 1774,
+    "height": 887,
+    "pngBytes": 1947827,
+    "webpBytes": 1323504,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "hero-960.webp",
+        "width": 960,
+        "height": 480,
+        "bytes": 440224
+      }
+    ]
+  },
+  {
+    "name": "lip-balm",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1559485,
+    "webpBytes": 947396,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "lip-balm-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 37674
+      },
+      {
+        "file": "lip-balm-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 158398
+      },
+      {
+        "file": "lip-balm-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 442848
+      }
+    ]
+  },
+  {
+    "name": "makeup",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 2322751,
+    "webpBytes": 1527862,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "makeup-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 73764
+      },
+      {
+        "file": "makeup-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 264542
+      },
+      {
+        "file": "makeup-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 681532
+      }
+    ]
+  },
+  {
+    "name": "masks",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 2609209,
+    "webpBytes": 1649840,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "masks-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 66232
+      },
+      {
+        "file": "masks-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 251952
+      },
+      {
+        "file": "masks-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 696522
+      }
+    ]
+  },
+  {
+    "name": "night-cream",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1718645,
+    "webpBytes": 1073500,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "night-cream-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 38772
+      },
+      {
+        "file": "night-cream-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 165658
+      },
+      {
+        "file": "night-cream-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 481812
+      }
+    ]
+  },
+  {
+    "name": "perfume",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1771969,
+    "webpBytes": 1103452,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "perfume-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 44710
+      },
+      {
+        "file": "perfume-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 183674
+      },
+      {
+        "file": "perfume-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 520356
+      }
+    ]
+  },
+  {
+    "name": "serum",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1602815,
+    "webpBytes": 981970,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "serum-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 37922
+      },
+      {
+        "file": "serum-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 161890
+      },
+      {
+        "file": "serum-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 452840
+      }
+    ]
+  },
+  {
+    "name": "shampoo",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1764479,
+    "webpBytes": 1081300,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "shampoo-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 37686
+      },
+      {
+        "file": "shampoo-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 167078
+      },
+      {
+        "file": "shampoo-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 491706
+      }
+    ]
+  },
+  {
+    "name": "toner",
+    "width": 1254,
+    "height": 1254,
+    "pngBytes": 1518137,
+    "webpBytes": 928240,
+    "pixelIdentical": true,
+    "variants": [
+      {
+        "file": "toner-240.webp",
+        "width": 240,
+        "height": 240,
+        "bytes": 31862
+      },
+      {
+        "file": "toner-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 155596
+      },
+      {
+        "file": "toner-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 451504
+      }
+    ]
+  }
+]

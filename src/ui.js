@@ -1,5 +1,16 @@
 import { productById, formatMoney, cartTotals, findProducts, productCategories } from './logic.js'
 
+// Legacy Vite demo API: keep DOM work here, even though the storefront does not use it.
+export function setupCounter(element) {
+  let counter = 0
+  const setCounter = (count) => {
+    counter = count
+    element.innerHTML = `Count is ${counter}`
+  }
+  element.addEventListener('click', () => setCounter(counter + 1))
+  setCounter(0)
+}
+
 export function initializeTheme(state, document = globalThis.document) {
   const root = document.documentElement
   const toggle = document.querySelector('#theme-toggle')
@@ -10,19 +21,31 @@ export function initializeTheme(state, document = globalThis.document) {
     toggle.setAttribute('aria-pressed', String(dark))
     toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode')
     toggle.setAttribute('title', dark ? 'Light mode' : 'Dark mode')
-    meta?.setAttribute('content', dark ? '#21070D' : '#a95570')
+    meta?.setAttribute('content', dark ? '#4B101F' : '#fffafb')
   }
   apply(state.theme)
-  toggle.addEventListener('click', () => {
-    root.dataset.themeTransition = 'true'
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark'
+  toggle.addEventListener('click', (event = {}) => {
+    const next = state.theme === 'dark' ? 'light' : 'dark'
+    state.setTheme(next)
     const reducedMotion = document.defaultView?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     ).matches
-    if (document.startViewTransition && !reducedMotion)
-      document.startViewTransition(() => apply(next))
-    else apply(next)
-    state.setTheme(next)
+    function updateTheme() {
+      root.dataset.themeChanging = 'true'
+      apply(state.theme)
+      void root.offsetHeight
+      const view = document.defaultView
+      if (view?.requestAnimationFrame)
+        view.requestAnimationFrame(() =>
+          view.requestAnimationFrame(() => {
+            delete root.dataset.themeChanging
+          }),
+        )
+      else delete root.dataset.themeChanging
+    }
+    if (document.startViewTransition && !reducedMotion && event.detail !== 0)
+      document.startViewTransition(updateTheme)
+    else updateTheme()
   })
 }
 
@@ -38,9 +61,17 @@ export function initializeUI(state) {
         ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character],
     )
   function productMedia(product, size = 600) {
-    return `<img src="/roseveil/${product.image}.png" alt="${product.name}" width="${size}" height="${size}" loading="lazy">`
+    const base = `/roseveil/${product.image}`
+    const sizes =
+      size === 70
+        ? '70px'
+        : size === 700
+          ? '280px'
+          : '(min-width: 1200px) 250px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw'
+    return `<img src="${base}.webp" srcset="${base}-240.webp 240w, ${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1254w" sizes="${sizes}" alt="${product.name}" width="${size}" height="${size}" loading="${size === 600 ? 'lazy' : 'eager'}" decoding="async">`
   }
   const filters = { category: 'All', query: '', sort: 'default', bestsellers: false }
+  let renderedProductIds
   let toastTimer
   $('#category-select').innerHTML += productCategories
     .map((category) => `<option value="${category}">${category}</option>`)
@@ -68,16 +99,22 @@ export function initializeUI(state) {
     $('#content-title').textContent = title
     $('#content-body').innerHTML = html
     if (!$('#content-dialog').open) $('#content-dialog').showModal()
+    $('#content-title').focus()
   }
 
   function renderProducts() {
     const matches = findProducts(filters.category, filters.query, filters.bestsellers, filters.sort)
-    $('#product-grid').innerHTML = matches
-      .map(
-        (product) =>
-          `<article class="product-card"><button class="product-image-button" data-product="${product.id}" aria-label="View ${product.name}">${productMedia(product)}</button><div class="product-info"><p class="product-category">${product.category}</p><h3><button class="product-name" data-product="${product.id}">${product.name}</button></h3><p class="product-price">${formatMoney(product.price)}</p></div><button class="add-button" data-add="${product.id}" aria-label="Add ${product.name} to bag">${icon('bag')} ADD TO CART</button></article>`,
-      )
-      .join('')
+    const productIds = matches.map((product) => product.id).join(',')
+    // Keep existing nodes when a search/category change produces the same ordered products.
+    if (productIds !== renderedProductIds) {
+      $('#product-grid').innerHTML = matches
+        .map(
+          (product) =>
+            `<article class="product-card"><button class="product-image-button" data-product="${product.id}" aria-label="View ${product.name}">${productMedia(product)}</button><div class="product-info"><p class="product-category">${product.category}</p><h3><button class="product-name" data-product="${product.id}">${product.name}</button></h3><p class="product-price">${formatMoney(product.price)}</p></div><button class="add-button" data-add="${product.id}" aria-label="Add ${product.name} to bag">${icon('bag')} ADD TO CART</button></article>`,
+        )
+        .join('')
+      renderedProductIds = productIds
+    }
     const filtered =
       filters.category !== 'All' || Boolean(filters.query) || filters.sort !== 'default'
     $('#catalog-search').value = filters.query
@@ -126,9 +163,11 @@ export function initializeUI(state) {
   }
 
   function resetFilters(bestsellers = false) {
+    const resetHadFocus = [$('#clear-filters'), $('#empty-reset')].includes(document.activeElement)
     Object.assign(filters, { category: 'All', query: '', sort: 'default', bestsellers })
     $('#product-search').value = ''
     renderProducts()
+    if (resetHadFocus) $('#products-title').focus()
   }
 
   function addProduct(id) {
@@ -193,6 +232,7 @@ export function initializeUI(state) {
   function showCart() {
     renderCart()
     $('#cart-dialog').showModal()
+    $('#cart-title').focus()
   }
 
   function showCheckout() {
@@ -243,7 +283,8 @@ export function initializeUI(state) {
   function continueShopping() {
     document.querySelectorAll('dialog[open]').forEach((dialog) => dialog.close())
     resetFilters()
-    $('#products').scrollIntoView({ behavior: 'smooth' })
+    $('#products').scrollIntoView({ behavior: 'auto' })
+    $('#products-title').focus()
   }
 
   const info = {
@@ -288,10 +329,12 @@ export function initializeUI(state) {
 
   document.querySelectorAll('.catalog-tool').forEach((tool) => {
     tool.addEventListener('toggle', () => {
-      if (tool.open)
+      if (tool.open) {
+        tool.querySelector('input, select')?.focus()
         document.querySelectorAll('.catalog-tool').forEach((other) => {
           if (other !== tool) other.open = false
         })
+      }
     })
   })
 
@@ -394,12 +437,15 @@ export function initializeUI(state) {
     filters.query = $('#product-search').value
     filters.bestsellers = false
     renderProducts()
-    $('#products').scrollIntoView({ behavior: 'smooth' })
+    $('#products').scrollIntoView({ behavior: 'auto' })
+    $('#products-title').focus()
   })
   function closeMenu() {
+    const focusWasInside = $('#main-nav').contains(document.activeElement)
     $('#main-nav').classList.remove('is-open')
     $('#menu-toggle').setAttribute('aria-expanded', 'false')
     $('#menu-toggle').setAttribute('aria-label', 'Open navigation')
+    if (focusWasInside && $('#menu-toggle').getClientRects().length) $('#menu-toggle').focus()
   }
   $('#menu-toggle').addEventListener('click', () => {
     const open = $('#main-nav').classList.toggle('is-open')
@@ -410,17 +456,28 @@ export function initializeUI(state) {
     .querySelectorAll('.main-nav a:not([data-category])')
     .forEach((link) => link.addEventListener('click', closeMenu))
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      document.querySelectorAll('.catalog-tool[open]').forEach((tool) => {
-        tool.open = false
-        tool.querySelector('summary').focus()
-      })
+    // Native modal dialogs own Escape, Tab and Shift+Tab; never focus their background.
+    if (event.key !== 'Escape' || event.defaultPrevented || $('dialog[open]')) return
+    const focusedTool = [...document.querySelectorAll('.catalog-tool[open]')].find((tool) =>
+      tool.contains(document.activeElement),
+    )
+    if (focusedTool) {
+      event.preventDefault()
+      focusedTool.open = false
+      focusedTool.querySelector('summary').focus()
+      return
+    }
+    if (!$('#search-panel').hidden && $('#search-panel').contains(document.activeElement)) {
+      event.preventDefault()
+      $('#search-panel').hidden = true
+      $('#search-toggle').setAttribute('aria-expanded', 'false')
+      $('#search-toggle').focus()
+      return
+    }
+    if ($('#menu-toggle').getAttribute('aria-expanded') === 'true') {
+      event.preventDefault()
       closeMenu()
-      if (!$('#search-panel').hidden) {
-        $('#search-panel').hidden = true
-        $('#search-toggle').setAttribute('aria-expanded', 'false')
-        $('#search-toggle').focus()
-      }
+      $('#menu-toggle').focus()
     }
   })
   $('#about-more').addEventListener('click', () => {

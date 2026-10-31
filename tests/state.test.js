@@ -80,3 +80,15 @@ test('architecture keeps data declarative, logic pure, DOM in UI, storage in sta
     /<script(?![^>]*\bsrc=)[^>]*>/,
   )
 })
+
+test('every non-UI source module is free of DOM queries, mutations and event binding', () => {
+  for (const file of fs.readdirSync(new URL('../src/', import.meta.url))) {
+    if (!file.endsWith('.js') || file === 'ui.js') continue
+    const source = fs.readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8')
+    assert.doesNotMatch(
+      source,
+      /\.(?:innerHTML|textContent|addEventListener|querySelector|querySelectorAll)\b/,
+      file,
+    )
+  }
+})
