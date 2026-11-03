@@ -4,7 +4,7 @@ A Rose Dusk cosmetics storefront in muted blush, dusty rose, mauve, plum, and wi
 
 ## Stack
 
-Vite (Vanilla JavaScript), HTML5, CSS3
+Vite (Vanilla TypeScript), HTML5, CSS3
 
 ## Rules
 
@@ -17,22 +17,25 @@ Vite (Vanilla JavaScript), HTML5, CSS3
 ## Project Structure
 
 - index.html: Main HTML page.
-- src/main.js: application wiring.
-- src/data.js: product catalog.
-- src/logic.js: pure functions.
-- src/state.js: cart and persistence.
-- src/ui.js: DOM rendering and events.
+- src/main.ts: application wiring.
+- src/data.ts: product catalog.
+- src/logic.ts: public entry point for pure functions and shared price formatting.
+- src/modules/products/products.logic.ts: pure product lookup, search, filtering and sorting.
+- src/modules/cart/cart.logic.ts: pure cart validation and totals.
+- src/state.ts: cart and persistence.
+- src/ui.ts: DOM rendering and events.
 - src/style.css: Website styles.
 - public/: Static assets.
 - package.json: Project dependencies and scripts.
 
 ## Architecture
 
-- src/data.js: product data only. Add or edit catalog entries here.
-- src/logic.js: pure calculations, search, filtering and sorting. No DOM, localStorage, browser globals, or mutation of product data or caller inputs.
-- src/state.js: owns cart, promo code, theme preference and session profile. All browser storage access belongs here. No DOM access. Expose actions and defensive snapshots; never mutate the cart from UI code.
-- src/ui.js: the only JavaScript file that touches the DOM. Owns rendering, events, dialogs, forms and theme presentation. Calls state actions and pure logic functions; never reads or writes localStorage.
-- src/main.js: imports styles, creates state and initializes the UI only. No rendering, DOM access, persistence or business rules.
+- src/data.ts: product data only. Add or edit catalog entries here.
+- src/logic.ts: pure calculations, search, filtering and sorting. No DOM, localStorage, browser globals, or mutation of product data or caller inputs.
+- Product and cart logic belong to the pure logic box. Cart logic imports product logic; product logic imports data. Neither imports the public logic.ts entry point. UI and state use the public entry point.
+- src/state.ts: owns cart, promo code, theme preference and session profile. All browser storage access belongs here. No DOM access. Expose actions and defensive snapshots; never mutate the cart from UI code.
+- src/ui.ts: the only application file that touches the DOM. Owns rendering, events, dialogs, forms and theme presentation. Calls state actions and pure logic functions; never reads or writes localStorage.
+- src/main.ts: imports styles, creates state and initializes the UI only. No rendering, DOM access, persistence or business rules.
 - index.html: semantic markup only; no inline scripts that bypass the UI/state boundary.
 - Keep import direction one-way: logic -> data; state -> logic; UI -> logic; main -> state + UI. Pass state into the UI.
 - Architecture diagram and function ownership: docs/architecture.md.

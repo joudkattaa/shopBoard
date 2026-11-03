@@ -1,7 +1,23 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { products } from '../src/data.js'
-import { cartTotals, normalizeCart, findProducts, productById } from '../src/logic.js'
+import { products } from '../src/data.ts'
+import { cartTotals, normalizeCart, findProducts, productById } from '../src/logic.ts'
+
+test('untrusted cart lines reject primitive entries and non-numeric quantities', () => {
+  assert.deepEqual(
+    normalizeCart([
+      null,
+      42,
+      'serum',
+      { id: 'serum', quantity: '2' },
+      { id: 'serum', quantity: Infinity },
+      { id: 'serum', quantity: 1.5 },
+      { id: 'missing', quantity: 3 },
+      { id: 'serum', quantity: 2 },
+    ]),
+    [{ id: 'serum', quantity: 2 }],
+  )
+})
 
 test('a bag uses catalog prices and computes a 20% discount to the cent', () => {
   const bag = [
@@ -71,8 +87,9 @@ test('an unknown code never changes the merchandise price', () => {
   assert.equal(totals.total, 4094)
 })
 
-test('category browsing, search, and the expanded bestsellers stay distinct', () => {
-  assert.equal(findProducts('All', '', true).length, 11)
+test('category browsing, search, and the featured preview stay distinct', () => {
+  assert.equal(findProducts('All', '', true).length, 5)
+  assert.equal(new Set(findProducts('All', '', true).map((product) => product.category)).size, 5)
   assert.equal(findProducts('Skin Care').length, 8)
   assert.equal(findProducts('Body Care').length, 8)
   assert.deepEqual(

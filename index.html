@@ -15,9 +15,9 @@
     <link
       rel="preload"
       as="image"
-      href="/roseveil/hero.webp"
-      imagesrcset="/roseveil/hero-960.webp 960w, /roseveil/hero.webp 1774w"
-      imagesizes="(min-width: 840px) 100vw, (min-width: 600px) 840px, 720px"
+      href="/roseveil/hero-ivory-classic.jpg"
+      imagesrcset="/roseveil/hero-ivory-classic-640.jpg 640w, /roseveil/hero-ivory-classic.jpg 1254w"
+      imagesizes="(min-width: 1313px) 840px, (min-width: 800px) 64vw, (min-width: 778px) 700px, 90vw"
       fetchpriority="high"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,7 +27,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap"
     />
     <title>Roseveil Cosmetics — Reveal Your Natural Beauty</title>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.ts"></script>
   </head>
   <body id="top">
     <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -182,23 +182,15 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="hero" aria-labelledby="hero-title">
-        <picture class="hero-media"
-          ><img
-            class="hero-image"
-            src="/roseveil/hero.webp"
-            srcset="/roseveil/hero-960.webp 960w, /roseveil/hero.webp 1774w"
-            sizes="(min-width: 840px) 100vw, (min-width: 600px) 840px, 720px"
-            decoding="async"
-            alt="Roseveil rose gold skincare collection on a stone tray with delicate blossoms"
-            fetchpriority="high"
-            width="1774"
-            height="887"
-        /></picture>
+      <section class="hero hero-editorial" aria-labelledby="hero-title">
         <div class="hero-inner container">
           <div class="hero-copy">
-            <h1 id="hero-title">Reveal Your<br />Natural Beauty</h1>
-            <p>Thoughtfully crafted beauty essentials<br />for your everyday moment of glow.</p>
+            <p class="hero-kicker">YOUR DAILY DOSE OF ROSEVEIL</p>
+            <h1 id="hero-title">A softer kind<br />of <em>radiance.</em></h1>
+            <p>
+              A little rose. A little ritual. Discover beauty essentials that make the everyday feel
+              extraordinary.
+            </p>
             <a class="button" href="#products" data-category="All">SHOP NOW</a>
             <div class="hero-badges">
               <div>
@@ -214,6 +206,85 @@
                 ><span>CONSIDERED<br />FORMULAS</span>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="hero-artwork">
+          <picture class="hero-media"
+            ><img
+              class="hero-image"
+              src="/roseveil/hero-ivory-classic.jpg"
+              srcset="
+                /roseveil/hero-ivory-classic-640.jpg  640w,
+                /roseveil/hero-ivory-classic.jpg     1254w
+              "
+              sizes="(min-width: 1313px) 840px, (min-width: 800px) 64vw, (min-width: 778px) 700px, 90vw"
+              decoding="async"
+              alt="Roseveil mauve tube, plum serum, cream jar and rose-gold pump on ivory marble with blush blossoms"
+              fetchpriority="high"
+              width="1254"
+              height="1254"
+          /></picture>
+          <div
+            class="hero-layered-scene hero-media"
+            role="img"
+            aria-label="Roseveil mauve tube, dark serum, cream jar and pump bottle on ivory marble with a vase of blossoms"
+            hidden
+          >
+            <img
+              class="hero-scene-background"
+              src="/roseveil/hero-stage-ivory.jpg"
+              srcset="/roseveil/hero-stage-ivory.jpg 1254w"
+              sizes="(min-width: 1313px) 840px, (min-width: 800px) 64vw, (min-width: 778px) 700px, 90vw"
+              width="1254"
+              height="1254"
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+            <span class="hero-product-layer hero-layer-tube"
+              ><img
+                src="/roseveil/hero-layer-classic-tube.png"
+                srcset="/roseveil/hero-layer-classic-tube.png 265w"
+                sizes="(min-width: 800px) 160px, 110px"
+                width="265"
+                height="650"
+                alt=""
+                loading="eager"
+                decoding="async"
+            /></span>
+            <span class="hero-product-layer hero-layer-pump"
+              ><img
+                src="/roseveil/hero-layer-classic-pump.png"
+                srcset="/roseveil/hero-layer-classic-pump.png 227w"
+                sizes="(min-width: 800px) 160px, 110px"
+                width="227"
+                height="650"
+                alt=""
+                loading="eager"
+                decoding="async"
+            /></span>
+            <span class="hero-product-layer hero-layer-serum"
+              ><img
+                src="/roseveil/hero-layer-classic-serum.png"
+                srcset="/roseveil/hero-layer-classic-serum.png 248w"
+                sizes="(min-width: 800px) 160px, 110px"
+                width="248"
+                height="650"
+                alt=""
+                loading="eager"
+                decoding="async"
+            /></span>
+            <span class="hero-product-layer hero-layer-jar"
+              ><img
+                src="/roseveil/hero-layer-classic-jar.png"
+                srcset="/roseveil/hero-layer-classic-jar.png 450w"
+                sizes="(min-width: 800px) 160px, 110px"
+                width="450"
+                height="362"
+                alt=""
+                loading="eager"
+                decoding="async"
+            /></span>
           </div>
         </div>
       </section>
@@ -466,8 +537,8 @@
       <section id="products" class="products container" aria-labelledby="products-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow" id="products-eyebrow">BEST SELLERS</p>
-            <h2 id="products-title" tabindex="-1">The Roseveil Edit</h2>
+            <p class="eyebrow" id="products-eyebrow">CURATED FAVORITES</p>
+            <h2 id="products-title" tabindex="-1">The Roseveil Collection</h2>
           </div>
           <button class="text-button" id="view-all">
             VIEW ALL PRODUCTS <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
@@ -563,7 +634,43 @@
         </div>
       </section>
     </main>
-    <footer id="contact" class="site-footer">
+    <footer id="contact" class="site-footer footer-premium">
+      <div class="footer-invitation container">
+        <form
+          id="newsletter"
+          class="newsletter footer-newsletter"
+          aria-labelledby="newsletter-title"
+        >
+          <div class="footer-invitation-copy">
+            <p class="eyebrow">LET YOUR EVERYDAY BLOOM</p>
+            <h2 id="newsletter-title">A little beauty, <em>in your inbox.</em></h2>
+            <p>New rituals, thoughtful notes, and a little Roseveil inspiration.</p>
+          </div>
+          <div class="footer-signup">
+            <label for="newsletter-email">Your email address</label>
+            <div class="footer-signup-row">
+              <input
+                id="newsletter-email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                maxlength="254"
+                aria-describedby="newsletter-demo"
+              />
+              <button class="button" type="submit">
+                JOIN THE RITUAL <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+              </button>
+            </div>
+            <p id="newsletter-demo" class="footer-signup-note">
+              Demo signup only. Your email is not saved or sent.
+            </p>
+            <p id="newsletter-status" role="status"></p>
+          </div>
+        </form>
+      </div>
+
       <div class="footer-grid container">
         <div class="footer-brand">
           <a class="logo" href="#top"
@@ -576,7 +683,7 @@
           >
         </div>
         <div>
-          <h2>QUICK LINKS</h2>
+          <h2>EXPLORE ROSEVEIL</h2>
           <a href="#top">Home</a><a href="#products" data-category="All">Shop</a
           ><a href="#about">About Us</a><button data-info="journal">Beauty Journal</button
           ><button data-info="contact">Contact Us</button>
@@ -601,21 +708,6 @@
             Concept store · Demo shopping.<br />No real payments or deliveries.
           </p>
         </div>
-        <form id="newsletter" class="newsletter">
-          <h2>NEWSLETTER</h2>
-          <p>Subscribe for a little inspiration,<br />new collections, and beauty notes.</p>
-          <label class="sr-only" for="newsletter-email">Email address</label
-          ><input
-            id="newsletter-email"
-            name="email"
-            type="email"
-            placeholder="Enter your email"
-            autocomplete="email"
-            required
-            maxlength="254"
-          /><button class="button" type="submit">SUBSCRIBE</button>
-          <p id="newsletter-status" role="status"></p>
-        </form>
       </div>
       <div class="footer-bottom container">
         <span>© 2026 Roseveil Cosmetics. Concept design.</span

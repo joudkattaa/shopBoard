@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { initializeTheme } from '../src/ui.js'
-import { createState } from '../src/state.js'
+import { initializeTheme } from '../src/ui.ts'
+import { createState } from '../src/state.ts'
 
 function mount(saved, blocked = false) {
   const values = new Map(saved === undefined ? [] : [['roseveil-theme', saved]])

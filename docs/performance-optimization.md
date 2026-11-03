@@ -60,7 +60,7 @@ Per-image dimensions, source bytes, output bytes and variants are recorded in [i
 - `src/style.css`: removed the now-duplicate font import; other styles preserved.
 - `src/ui.js`: responsive dynamic images and skip equivalent grid renders; all DOM work remains in UI.
 - `public/roseveil/*.webp`: 122 generated delivery images, originals preserved.
-- `scripts/optimize-images.py`: reproducible generation and full-size pixel verification. Requires Python and Pillow as an offline asset tool; neither is an application dependency.
+- A one-off Python/Pillow utility generated and verified the images for this historical optimization. The obsolete utility was removed during final cleanup; the delivered images, metrics and asset regression tests remain.
 - `tests/catalog-controls.test.js`: grid-write instrumentation and two new behavior regressions.
 - `tests/performance-assets.test.js`: two asset/priority/dimension/accessibility-preservation regressions.
 - `docs/image-optimization-metrics.json`: measured image outputs.

@@ -1,10 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
-import { products } from '../src/data.js'
-import { findProducts, cartTotals, productCategories } from '../src/logic.js'
-import { createState } from '../src/state.js'
-import { setupCounter } from '../src/counter.js'
+import { products } from '../src/data.ts'
+import { findProducts, cartTotals, productCategories } from '../src/logic.ts'
+import { createState } from '../src/state.ts'
+import { setupCounter } from '../src/counter.ts'
 
 test('Day 2 uses a data-driven grid with valid product assets and no static product cards', () => {
   const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8')

@@ -1,9 +1,10 @@
+import { stripTypeScriptTypes } from 'node:module'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import vm from 'node:vm'
-import * as store from '../src/logic.js'
-import { createState } from '../src/state.js'
+import * as store from '../src/logic.ts'
+import { createState } from '../src/state.ts'
 
 // Exercise the real event handlers without adding a DOM dependency.
 function mountCatalog() {
@@ -61,6 +62,7 @@ function mountCatalog() {
     tool.field = element()
     tool.summary = element()
     tool.children = [tool.field, tool.summary]
+    tool.querySelectorAll = () => [tool.field]
     tool.querySelector = (selector) => (selector === 'summary' ? tool.summary : tool.field)
     return tool
   })
@@ -85,12 +87,51 @@ function mountCatalog() {
   }
   const saved = new Map()
   const source =
-    fs
-      .readFileSync(new URL('../src/ui.js', import.meta.url), 'utf8')
+    stripTypeScriptTypes(fs.readFileSync(new URL('../src/ui.ts', import.meta.url), 'utf8'))
       .replace(/^import[\s\S]*?from ['"][^'"]+['"];?\r?\n/gm, '')
       .replaceAll('export function', 'function') + '\ninitializeUI(state)'
   vm.runInNewContext(source, {
     ...store,
+    Element: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLDetailsElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLButtonElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLInputElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLSelectElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLDialogElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
+    HTMLFormElement: class {
+      static [Symbol.hasInstance](value) {
+        return value !== null && typeof value === 'object'
+      }
+    },
     document,
     state: createState({
       getItem: (key) => saved.get(key) ?? null,
@@ -114,6 +155,21 @@ function mountCatalog() {
     })
   return { get, change, click, saved, links, tools, document }
 }
+
+test('collection starts with five varied products and View All expands the catalog', () => {
+  const { get, change } = mountCatalog()
+  const preview = get('#product-grid').innerHTML
+  assert.equal((preview.match(/class="product-card"/g) ?? []).length, 5)
+  assert.equal(get('#products-title').textContent, 'The Roseveil Collection')
+  for (const id of ['body-cream', 'shampoo', 'serum', 'perfume', 'makeup'])
+    assert.ok(preview.includes('data-product="' + id + '"'))
+  assert.ok(get('#view-all').innerHTML.includes('VIEW ALL PRODUCTS'))
+  get('#view-all').listeners.click()
+  assert.equal((get('#product-grid').innerHTML.match(/class="product-card"/g) ?? []).length, 30)
+  change('#catalog-search', 'input', 'night cream')
+  assert.match(get('#filter-status').textContent, /^1 product/)
+  assert.ok(get('#product-grid').innerHTML.includes('Moonlight Night Cream'))
+})
 
 test('real controls combine, synchronize category links, and clear all state', () => {
   const { get, change, click, links } = mountCatalog()
@@ -165,7 +221,7 @@ test('header search stays synchronized and adding from filtered results still sa
   assert.equal(get('#catalog-search').value, 'radiance')
   assert.match(get('#filter-status').textContent, /^1 product shown/)
   click('[data-add]', { add: 'serum' })
-  assert.equal(get('#cart-count').textContent, 1)
+  assert.equal(get('#cart-count').textContent, '1')
   assert.deepEqual(JSON.parse(saved.get('roseveil-shopping-bag-v1')).items, [
     { id: 'serum', quantity: 1 },
   ])
