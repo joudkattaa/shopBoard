@@ -3,11 +3,18 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import vm from 'node:vm'
-import * as store from '../src/logic.ts'
+import * as productLogic from '../src/modules/products/products.logic.ts'
+import { cartTotals } from '../src/modules/cart/cart.logic.ts'
 import { createState } from '../src/state.ts'
+import { products } from '../server/catalog.ts'
+
+const store = { ...productLogic, cartTotals }
 
 // Exercise the real event handlers without adding a DOM dependency.
-function mountCatalog() {
+async function mountCatalog() {
+  const listenerCounts = new Map()
+  let fetchCalls = 0
+  let subscriptions = 0
   const elements = new Map()
   const links = store.productCategories.map((category) => element({ category }))
   function element(dataset = {}) {
@@ -22,6 +29,14 @@ function mountCatalog() {
       set innerHTML(value) {
         this._innerHTML = value
         this.innerHTMLWrites++
+        // Replaced dialog contents create new form nodes in the real browser.
+        const replaced =
+          this === elements.get('#cart-content')
+            ? ['#promo-form', '#promo-code', '#promo-status']
+            : this === elements.get('#content-body')
+              ? ['#checkout-form', '#checkout-first']
+              : []
+        replaced.forEach((selector) => elements.delete(selector))
       },
       textContent: '',
       hidden: false,
@@ -37,6 +52,10 @@ function mountCatalog() {
       getClientRects() {
         return [{}]
       },
+      close() {
+        this.open = false
+      },
+      replaceChildren() {},
       showModal() {
         this.open = true
       },
@@ -47,7 +66,9 @@ function mountCatalog() {
         delete this.attributes[name]
       },
       addEventListener(name, handler) {
-        this.listeners[name] = handler
+        const handlers = (this.handlers ??= {})
+        ;(handlers[name] ??= []).push(handler)
+        this.listeners[name] = (event) => handlers[name].forEach((fn) => fn(event))
       },
       scrollIntoView() {},
       focus() {
@@ -82,15 +103,41 @@ function mountCatalog() {
       return selector.includes('[data-category]') ? links : []
     },
     addEventListener(name, handler) {
-      this.listeners[name] = handler
+      listenerCounts.set(name, (listenerCounts.get(name) ?? 0) + 1)
+      const handlers = (this.handlers ??= {})
+      ;(handlers[name] ??= []).push(handler)
+      this.listeners[name] = (event) => handlers[name].forEach((fn) => fn(event))
     },
   }
   const saved = new Map()
   const source =
-    stripTypeScriptTypes(fs.readFileSync(new URL('../src/ui.ts', import.meta.url), 'utf8'))
+    ['../src/modules/products/products.ui.ts', '../src/modules/cart/cart.ui.ts', '../src/ui.ts']
+      .map((file) =>
+        stripTypeScriptTypes(fs.readFileSync(new URL(file, import.meta.url), 'utf8'))
+          .replace(/^import[\s\S]*?from ['"][^'"]+['"];?\r?\n/gm, '')
+          .replaceAll('export function', 'function'),
+      )
+      .join('\n')
       .replace(/^import[\s\S]*?from ['"][^'"]+['"];?\r?\n/gm, '')
+      // Match Vite's production replacement before executing as a VM script.
+      .replaceAll('import.meta.env?.DEV', 'false')
       .replaceAll('export function', 'function') + '\ninitializeUI(state)'
+  const loadedState = createState({
+    getItem: (key) => saved.get(key) ?? null,
+    setItem: (key, value) => saved.set(key, value),
+  })
+  await loadedState.loadCatalogProducts(async () => Response.json({ items: products }))
+  const subscribe = loadedState.subscribeCatalogProducts
+  loadedState.subscribeCatalogProducts = (listener) => {
+    subscriptions++
+    return subscribe(listener)
+  }
   vm.runInNewContext(source, {
+    URLSearchParams,
+    fetch: async () => {
+      fetchCalls++
+      return Response.json({ items: products })
+    },
     ...store,
     Element: class {
       static [Symbol.hasInstance](value) {
@@ -133,10 +180,7 @@ function mountCatalog() {
       }
     },
     document,
-    state: createState({
-      getItem: (key) => saved.get(key) ?? null,
-      setItem: (key, value) => saved.set(key, value),
-    }),
+    state: loadedState,
     localStorage: {
       getItem: (key) => saved.get(key) ?? null,
       setItem: (key, value) => saved.set(key, value),
@@ -144,6 +188,7 @@ function mountCatalog() {
     setTimeout: () => 1,
     clearTimeout() {},
   })
+  await new Promise((resolve) => setImmediate(resolve))
   const change = (selector, event, value) => {
     const control = get(selector)
     control.value = value
@@ -153,11 +198,82 @@ function mountCatalog() {
     document.listeners.click({
       target: { closest: (match) => (match === selector ? { dataset } : null) },
     })
-  return { get, change, click, saved, links, tools, document }
+  return {
+    get,
+    change,
+    click,
+    saved,
+    links,
+    tools,
+    document,
+    state: loadedState,
+    listenerCounts,
+    fetchCalls,
+    subscriptions,
+  }
 }
 
-test('collection starts with five varied products and View All expands the catalog', () => {
-  const { get, change } = mountCatalog()
+test('Clear Bag empties the real UI, resets totals and promo, and persists across reloads', async () => {
+  const { get, click, saved, state, document } = await mountCatalog()
+  click('[data-add]', { add: 'serum' })
+  click('[data-add]', { add: 'cream' })
+  state.bag.setPromoCode('GLOW20')
+  get('#cart-button').listeners.click()
+  const before = get('#cart-content').innerHTML
+  assert.ok(before.indexOf('id="clear-bag"') > before.indexOf('</ul>'))
+  assert.ok(before.indexOf('id="clear-bag"') < before.indexOf('id="promo-form"'))
+  assert.match(before, /data-remove="serum"/)
+  assert.match(before, /data-quantity="cream"/)
+  assert.match(before, /GLOW20 applied/)
+  assert.match(before, /id="checkout-button"/)
+  get('#cart-content').listeners.click({
+    target: { closest: (selector) => (selector === '#clear-bag' ? get('#clear-bag') : null) },
+  })
+  assert.deepEqual(state.bag.items, [])
+  assert.equal(state.bag.promoCode, '')
+  assert.equal(get('#cart-count').textContent, '0')
+  assert.equal(get('#cart-heading-count').textContent, '')
+  assert.match(get('#cart-content').innerHTML, /Your shopping bag is empty/)
+  assert.doesNotMatch(get('#cart-content').innerHTML, /id="clear-bag"|id="checkout-button"/)
+  assert.equal(document.activeElement, get('#cart-title'))
+  assert.equal(get('#cart-dialog').open, true)
+  const reloaded = createState({
+    getItem: (key) => saved.get(key) ?? null,
+    setItem: (key, value) => saved.set(key, value),
+  })
+  await reloaded.loadCatalogProducts(async () => Response.json({ items: products }))
+  assert.deepEqual(reloaded.bag.items, [])
+  assert.equal(reloaded.bag.promoCode, '')
+  assert.deepEqual(
+    store.cartTotals(reloaded.bag.items, reloaded.bag.promoCode, reloaded.catalogProducts),
+    {
+      count: 0,
+      subtotal: 0,
+      discount: 0,
+      merchandise: 0,
+      shipping: 0,
+      total: 0,
+    },
+  )
+})
+
+test('Clear Bag is also available when API data is unavailable but saved items remain', async () => {
+  const { get, click, state } = await mountCatalog()
+  click('[data-add]', { add: 'serum' })
+  await state.loadCatalogProducts(async () => Response.json({ items: [] }))
+  get('#cart-button').listeners.click()
+  assert.match(get('#cart-content').innerHTML, /Product prices are unavailable/)
+  assert.match(get('#cart-content').innerHTML, /id="clear-bag"/)
+  get('#cart-content').listeners.click({
+    target: { closest: (selector) => (selector === '#clear-bag' ? get('#clear-bag') : null) },
+  })
+  assert.deepEqual(state.bag.items, [])
+  assert.match(get('#cart-content').innerHTML, /Your shopping bag is empty/)
+  assert.equal(get('#cart-count').textContent, '0')
+})
+
+test('collection starts with five varied products and View All expands the catalog', async () => {
+  const { get, change } = await mountCatalog()
   const preview = get('#product-grid').innerHTML
   assert.equal((preview.match(/class="product-card"/g) ?? []).length, 5)
   assert.equal(get('#products-title').textContent, 'The Roseveil Collection')
@@ -171,8 +287,8 @@ test('collection starts with five varied products and View All expands the catal
   assert.ok(get('#product-grid').innerHTML.includes('Moonlight Night Cream'))
 })
 
-test('real controls combine, synchronize category links, and clear all state', () => {
-  const { get, change, click, links } = mountCatalog()
+test('real controls combine, synchronize category links, and clear all state', async () => {
+  const { get, change, click, links } = await mountCatalog()
   for (const category of store.productCategories)
     assert.ok(get('#category-select').innerHTML.includes(category))
   change('#catalog-search', 'input', 'BOTANICAL')
@@ -200,8 +316,8 @@ test('real controls combine, synchronize category links, and clear all state', (
   assert.equal(get('#empty-state').hidden, true)
 })
 
-test('catalog popup opening focuses the field and Escape restores the trigger', () => {
-  const { tools, document } = mountCatalog()
+test('catalog popup opening focuses the field and Escape restores the trigger', async () => {
+  const { tools, document } = await mountCatalog()
   tools[0].open = true
   tools[0].listeners.toggle()
   assert.equal(tools[0].field.focused, true)
@@ -215,8 +331,8 @@ test('catalog popup opening focuses the field and Escape restores the trigger', 
   assert.equal(document.activeElement, tools[1].summary)
 })
 
-test('header search stays synchronized and adding from filtered results still saves the bag', () => {
-  const { get, change, click, saved } = mountCatalog()
+test('header search stays synchronized and adding from filtered results still saves the bag', async () => {
+  const { get, change, click, saved } = await mountCatalog()
   change('#product-search', 'input', 'radiance')
   assert.equal(get('#catalog-search').value, 'radiance')
   assert.match(get('#filter-status').textContent, /^1 product shown/)
@@ -227,8 +343,8 @@ test('header search stays synchronized and adding from filtered results still sa
   ])
 })
 
-test('Escape inside a modal never dismisses or focuses background search tools', () => {
-  const { get, tools, document } = mountCatalog()
+test('Escape inside a modal never dismisses or focuses background search tools', async () => {
+  const { get, tools, document } = await mountCatalog()
   tools[0].open = true
   get('#search-panel').hidden = false
   get('#cart-button').listeners.click()
@@ -244,8 +360,8 @@ test('Escape inside a modal never dismisses or focuses background search tools',
   assert.equal(document.activeElement, get('#cart-title'))
 })
 
-test('Escape affects only the focused search layer and honors consumed keys', () => {
-  const { get, tools, document } = mountCatalog()
+test('Escape affects only the focused search layer and honors consumed keys', async () => {
+  const { get, tools, document } = await mountCatalog()
   get('#search-panel').hidden = false
   tools[0].open = true
   tools[0].field.focus()
@@ -261,8 +377,8 @@ test('Escape affects only the focused search layer and honors consumed keys', ()
   assert.equal(document.activeElement, get('#search-toggle'))
 })
 
-test('resetting from a disappearing control and submitting search focus results', () => {
-  const { get, change, document } = mountCatalog()
+test('resetting from a disappearing control and submitting search focus results', async () => {
+  const { get, change, document } = await mountCatalog()
   change('#catalog-search', 'input', 'nothing matches')
   get('#empty-reset').focus()
   get('#empty-reset').listeners.click()
@@ -273,8 +389,8 @@ test('resetting from a disappearing control and submitting search focus results'
   assert.equal(document.activeElement, get('#products-title'))
 })
 
-test('closing mobile navigation restores focus from the link it hides', () => {
-  const { get, click, document } = mountCatalog()
+test('closing mobile navigation restores focus from the link it hides', async () => {
+  const { get, click, document } = await mountCatalog()
   const link = get('#mobile-link')
   get('#main-nav').children = [link]
   link.focus()
@@ -282,8 +398,8 @@ test('closing mobile navigation restores focus from the link it hides', () => {
   assert.equal(document.activeElement, get('#menu-toggle'))
 })
 
-test('product dialog opening and content replacement focus its stable heading', () => {
-  const { get, click, document } = mountCatalog()
+test('product dialog opening and content replacement focus its stable heading', async () => {
+  const { get, click, document } = await mountCatalog()
   click('[data-product]', { product: 'serum' })
   assert.equal(get('#content-dialog').open, true)
   assert.equal(document.activeElement, get('#content-title'))
@@ -292,8 +408,8 @@ test('product dialog opening and content replacement focus its stable heading', 
   assert.equal(document.activeElement, get('#content-title'))
 })
 
-test('Tab, Shift+Tab, Enter and Space retain native keyboard behavior', () => {
-  const { tools, document } = mountCatalog()
+test('Tab, Shift+Tab, Enter and Space retain native keyboard behavior', async () => {
+  const { tools, document } = await mountCatalog()
   tools[0].open = true
   tools[0].field.focus()
   for (const event of [
@@ -313,8 +429,8 @@ test('Tab, Shift+Tab, Enter and Space retain native keyboard behavior', () => {
   }
 })
 
-test('equivalent search results reuse product nodes while updating filter text', () => {
-  const { get, change } = mountCatalog()
+test('equivalent search results reuse product nodes while updating filter text', async () => {
+  const { get, change } = await mountCatalog()
   change('#catalog-search', 'input', 'botanical')
   const writes = get('#product-grid').innerHTMLWrites
   change('#catalog-search', 'input', 'BOTANICAL')
@@ -325,11 +441,71 @@ test('equivalent search results reuse product nodes while updating filter text',
   assert.equal(get('#product-grid').innerHTMLWrites, writes + 1)
 })
 
-test('product media provides responsive lazy cards and eager dialog images', () => {
-  const { get, click } = mountCatalog()
+test('product media provides responsive lazy cards and eager dialog images', async () => {
+  const { get, click } = await mountCatalog()
   assert.match(get('#product-grid').innerHTML, /srcset="[^"]+-240\.webp 240w/)
   assert.match(get('#product-grid').innerHTML, /loading="lazy" decoding="async"/)
   click('[data-product]', { product: 'serum' })
   assert.match(get('#content-body').innerHTML, /sizes="280px"/)
   assert.match(get('#content-body').innerHTML, /loading="eager" decoding="async"/)
+})
+
+test('feature initialization registers one router, one Escape listener and one catalog subscription', async () => {
+  const { get, click, state, listenerCounts, fetchCalls, subscriptions } = await mountCatalog()
+  assert.equal(listenerCounts.get('click'), 1)
+  assert.equal(listenerCounts.get('keydown'), 1)
+  assert.equal(subscriptions, 1)
+  assert.equal(fetchCalls, 1)
+  assert.equal(get('#cart-content').handlers.click.length, 1)
+  assert.equal(get('#cart-button').handlers.click.length, 1)
+  assert.equal(get('#catalog-retry').handlers.click.length, 1)
+  click('[data-add]', { add: 'serum' })
+  assert.deepEqual(state.bag.items, [{ id: 'serum', quantity: 1 }])
+  click('[data-product]', { product: 'serum' })
+  click('[data-add]', { add: 'serum' })
+  assert.deepEqual(state.bag.items, [{ id: 'serum', quantity: 2 }])
+})
+
+test('real extracted checkout handler clears the persisted bag and promo exactly once', async () => {
+  const { get, click, state, saved, document } = await mountCatalog()
+  click('[data-add]', { add: 'serum' })
+  state.bag.setPromoCode('GLOW20')
+  get('#cart-button').listeners.click()
+  assert.equal(get('#promo-form').handlers.submit.length, 1)
+  get('#cart-content').listeners.click({
+    target: { closest: (selector) => (selector === '#checkout-button' ? {} : null) },
+  })
+  assert.equal(get('#cart-dialog').open, false)
+  assert.equal(get('#content-dialog').open, true)
+  assert.equal(get('#checkout-form').handlers.submit.length, 1)
+  get('#checkout-first').value = 'Demo'
+  get('#checkout-form').listeners.submit({ preventDefault() {} })
+  assert.deepEqual(state.bag.items, [])
+  assert.equal(state.bag.promoCode, '')
+  assert.equal(get('#cart-count').textContent, '0')
+  assert.equal(document.activeElement, get('#content-title'))
+  assert.match(get('#content-body').innerHTML, /Your demo order is complete/)
+  const reloaded = createState({
+    getItem: (key) => saved.get(key) ?? null,
+    setItem() {},
+  })
+  assert.deepEqual(reloaded.bag.items, [])
+  assert.equal(reloaded.bag.promoCode, '')
+})
+
+test('rerendered promo forms bind one handler and retain apply/remove focus behavior', async () => {
+  const { get, click, state, document } = await mountCatalog()
+  click('[data-add]', { add: 'serum' })
+  get('#cart-button').listeners.click()
+  const originalForm = get('#promo-form')
+  get('#promo-code').value = ' glow20 '
+  originalForm.listeners.submit({ preventDefault() {} })
+  assert.equal(state.bag.promoCode, 'GLOW20')
+  assert.notEqual(get('#promo-form'), originalForm)
+  assert.equal(get('#promo-form').handlers.submit.length, 1)
+  assert.equal(document.activeElement, get('#promo-code'))
+  get('#promo-form').listeners.submit({ preventDefault() {} })
+  assert.equal(state.bag.promoCode, '')
+  assert.equal(get('#promo-form').handlers.submit.length, 1)
+  assert.equal(document.activeElement, get('#promo-code'))
 })

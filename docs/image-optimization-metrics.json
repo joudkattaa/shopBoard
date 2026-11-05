@@ -616,22 +616,6 @@
     ]
   },
   {
-    "name": "hero",
-    "width": 1774,
-    "height": 887,
-    "pngBytes": 1947827,
-    "webpBytes": 1323504,
-    "pixelIdentical": true,
-    "variants": [
-      {
-        "file": "hero-960.webp",
-        "width": 960,
-        "height": 480,
-        "bytes": 440224
-      }
-    ]
-  },
-  {
     "name": "lip-balm",
     "width": 1254,
     "height": 1254,

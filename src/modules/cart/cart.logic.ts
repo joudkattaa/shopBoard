@@ -1,8 +1,9 @@
+import type { Product } from '../products/products.types.ts'
 import type { Cart, CartTotals } from './cart.types.ts'
 import { productById } from '../products/products.logic.ts'
 
 // Revalidate saved cart data so stale or edited browser storage cannot set prices.
-export function normalizeCart(value: unknown): Cart {
+export function normalizeCart(value: unknown, catalog?: readonly Product[]): Cart {
   if (!isUnknownArray(value)) return []
   const quantities = new Map<string, number>()
   for (const item of value) {
@@ -11,7 +12,7 @@ export function normalizeCart(value: unknown): Cart {
       item === null ||
       !('id' in item) ||
       typeof item.id !== 'string' ||
-      !productById(item.id) ||
+      (catalog !== undefined && !productById(item.id, catalog)) ||
       !('quantity' in item) ||
       typeof item.quantity !== 'number' ||
       !Number.isInteger(item.quantity) ||
@@ -23,10 +24,14 @@ export function normalizeCart(value: unknown): Cart {
   return [...quantities].map(([id, quantity]) => ({ id, quantity }))
 }
 
-export function cartTotals(cart: unknown, promoCode = ''): CartTotals {
-  const validCart = normalizeCart(cart)
+export function cartTotals(
+  cart: unknown,
+  promoCode = '',
+  catalog: readonly Product[] = [],
+): CartTotals {
+  const validCart = normalizeCart(cart, catalog)
   const subtotal = validCart.reduce(
-    (sum, item) => sum + (productById(item.id)?.price ?? 0) * item.quantity,
+    (sum, item) => sum + (productById(item.id, catalog)?.price ?? 0) * item.quantity,
     0,
   )
   const discount = promoCode.trim().toUpperCase() === 'GLOW20' ? Math.round(subtotal * 0.2) : 0

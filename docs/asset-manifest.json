@@ -1,0 +1,1151 @@
+[
+  {
+    "file": "roseveil-mark.svg",
+    "bytes": 282,
+    "format": "svg",
+    "sha256": "e8630606817846ddf7429211a934daf71eaa25067d0d50f8263bb0c11c1c855b"
+  },
+  {
+    "file": "roseveil/bath-set-240.webp",
+    "bytes": 43908,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "374872193f1dcdc7af3eb4098c07ddc6c275f93a9a93ad25484e7f9ceaabe750"
+  },
+  {
+    "file": "roseveil/bath-set-480.webp",
+    "bytes": 181076,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "f8c9e7498d8a61e3e5c4d0888cb617281e3df370cd9212eb7b908edd943e3fc1"
+  },
+  {
+    "file": "roseveil/bath-set-800.webp",
+    "bytes": 511714,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "65d01a34e40d2b3274b5e060cfb9797669c860eb7a506408125c074acf476f29"
+  },
+  {
+    "file": "roseveil/bath-set.webp",
+    "bytes": 1213934,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "08bba38de378494b40f3626e1bba5ed4677b9f3cf227304d77fdedd718dd8644"
+  },
+  {
+    "file": "roseveil/body-butter-240.webp",
+    "bytes": 38162,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "d841e77c6e906d8e84b23d46f59ffdbd688de5a309dd9f954db6dbd079f95df6"
+  },
+  {
+    "file": "roseveil/body-butter-480.webp",
+    "bytes": 163692,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "1ceb6339580be884d787a006e883ff5807f038c694715553e75b2efe818e5b80"
+  },
+  {
+    "file": "roseveil/body-butter-800.webp",
+    "bytes": 459586,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "e9be33594770519ee1039e5034cb7e4c7f021d6b644aa5dde698edaef5c89aa6"
+  },
+  {
+    "file": "roseveil/body-butter.webp",
+    "bytes": 939026,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "4857677bec2275a29a373c853ffdf89836c7ffcf5e122dacf1affd3531c242e5"
+  },
+  {
+    "file": "roseveil/body-cream-240.webp",
+    "bytes": 38214,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "4e26f78d8d878e25ac43003b51b71c48e344ea85cecadf3ce276d145325fc0b3"
+  },
+  {
+    "file": "roseveil/body-cream-480.webp",
+    "bytes": 161990,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "27c060f0ee39545dea4079d359d168cb59ffee41439f10f134e14883f8a4d5b0"
+  },
+  {
+    "file": "roseveil/body-cream-800.webp",
+    "bytes": 459594,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "c31bad408d9b72827f012406d33af55b4c36af287e6551583bd59942e9c09755"
+  },
+  {
+    "file": "roseveil/body-cream.webp",
+    "bytes": 954430,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "20f6f62fd76e2d08f848a17fa1ee10f3194e5878b6a18186dc6f7abcef89d250"
+  },
+  {
+    "file": "roseveil/body-gift-box-240.webp",
+    "bytes": 55480,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "338dbb182c922e5902c956281d0f8c244ba1cdca2bf59268c3d2aaa5d4988397"
+  },
+  {
+    "file": "roseveil/body-gift-box-480.webp",
+    "bytes": 220726,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "e0697b16bdce0f2046cf14a08bee802f36de22c3367fe752beb4c164f6ce522b"
+  },
+  {
+    "file": "roseveil/body-gift-box-800.webp",
+    "bytes": 623620,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "dca5ee03e2fe0a44885ee13e543cba97e8ddffb4caf87273dec55c126e567ea1"
+  },
+  {
+    "file": "roseveil/body-gift-box.webp",
+    "bytes": 1485914,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "597e86e47f3da08f13747192ad9dac1cde4eaac6b76e80f3a3482004c7ad9432"
+  },
+  {
+    "file": "roseveil/body-lotion-240.webp",
+    "bytes": 34778,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "dafe39b670ccdcd1a211b1bcfb994fafe0412bd9e8f2dd6d85ad1a17a6e756c6"
+  },
+  {
+    "file": "roseveil/body-lotion-480.webp",
+    "bytes": 152062,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "6a872a0a32e1af21af43acd14fe96897b7c1c54cf2ba24bfedb7e0daf8a3b0e3"
+  },
+  {
+    "file": "roseveil/body-lotion-800.webp",
+    "bytes": 434574,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "d60072723537b479499c6bffb752addbec96ca3c4f0d7971b8656d0fc2299a10"
+  },
+  {
+    "file": "roseveil/body-lotion.webp",
+    "bytes": 916280,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "2ed0c6b21bfb8b4fe6ed4568d282c9f089d46690b20bfaf25fe5090086ded62f"
+  },
+  {
+    "file": "roseveil/body-mist-240.webp",
+    "bytes": 37522,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "16ca6208fdc4258d704e599447870e99248aeb097faf9d26b99870c90a47eb7c"
+  },
+  {
+    "file": "roseveil/body-mist-480.webp",
+    "bytes": 162566,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "cadebbdb2584065735d16aaf63c6f32ce9c3e0fb3132582e0f3b87e2b3544b09"
+  },
+  {
+    "file": "roseveil/body-mist-800.webp",
+    "bytes": 477920,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "f045c47f61c9017ab4375917fe698f7569af397e80b2393d3868c9c7850e2865"
+  },
+  {
+    "file": "roseveil/body-mist.webp",
+    "bytes": 1003098,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "b2b9ce9ac307ee5623b624320fda199c08d8c8341db22a3456c952e26b456f53"
+  },
+  {
+    "file": "roseveil/body-oil-240.webp",
+    "bytes": 36522,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "6148ad773c9c2e97bb7763bed106e24a6dcd1d6fd16486428c894935f8206042"
+  },
+  {
+    "file": "roseveil/body-oil-480.webp",
+    "bytes": 156900,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "4811a7dd71714a9badcfbb0a4971aec853d953230f3aa83e3936768b9978dfbe"
+  },
+  {
+    "file": "roseveil/body-oil-800.webp",
+    "bytes": 469736,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "51c98aab3c237ff9b7b7820006534cc03235982ab0ff7feea2374a443bebe064"
+  },
+  {
+    "file": "roseveil/body-oil.webp",
+    "bytes": 960196,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "6224cab0d0265fa67368dd20aa3b296b85973bcf16fd5c73e4c2b0dfd5a29c51"
+  },
+  {
+    "file": "roseveil/body-scrub-240.webp",
+    "bytes": 47954,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "a229b1fecebe7cbdc7e1516fbf1dfef85faff241bce056b2fc884908a1a55785"
+  },
+  {
+    "file": "roseveil/body-scrub-480.webp",
+    "bytes": 193996,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "fad355a8ad7ebe14894613f137db1523c8f18c7d6a87398bc36ff7c87ca4b148"
+  },
+  {
+    "file": "roseveil/body-scrub-800.webp",
+    "bytes": 544284,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "4ce9693a9ee91deba1517987a43b963d8cfa1b9307cdb6c1391293c80dc24af2"
+  },
+  {
+    "file": "roseveil/body-scrub.webp",
+    "bytes": 1229518,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "ca7b8b7222204f7f442208e8c5e1ebe52ee35020b0377f2cb4642763928c277d"
+  },
+  {
+    "file": "roseveil/body-wash-240.webp",
+    "bytes": 36114,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "f5c49094fd69117cbbb19b8aaec8f8e238d0d838b44bf8a2ea1bbbdf7572e065"
+  },
+  {
+    "file": "roseveil/body-wash-480.webp",
+    "bytes": 152566,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "d9f86ba6a1653ac312767567d640262879a1fc12b3b81724dd9c61988c36b27c"
+  },
+  {
+    "file": "roseveil/body-wash-800.webp",
+    "bytes": 426230,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "518f9447514a23a94f1dd5aa52f1dbca57001ddc4bd510c1663e048b98ee87df"
+  },
+  {
+    "file": "roseveil/body-wash.webp",
+    "bytes": 922502,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "94b6629bb1d3dc386f881b0914979ee5b4577e350d11c08768d0993d9c68ccad"
+  },
+  {
+    "file": "roseveil/cleanser-240.webp",
+    "bytes": 32572,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "c2ab70a1fceb6e4a85801df100daa03275a5b060ffb962d6c622533c5d3a039c"
+  },
+  {
+    "file": "roseveil/cleanser-480.webp",
+    "bytes": 142388,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "7be9bf26a7066d05bd952cb3e0dd8870f20e25a75fca6447b0e0d6c327d0c474"
+  },
+  {
+    "file": "roseveil/cleanser-800.webp",
+    "bytes": 400432,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "ddc41a305e571b169e2cb1e2b058514678157d16e30623d83de422b959639568"
+  },
+  {
+    "file": "roseveil/cleanser.webp",
+    "bytes": 830108,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "b44ee98e27ad1d143a90f3a337b0ffbc0769a399e4d7c376a3310ad07883272e"
+  },
+  {
+    "file": "roseveil/cleansing-oil-240.webp",
+    "bytes": 35914,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "350c7c231a9f469eff7682292c5218dec6449f14f8433673a79c7374294a271e"
+  },
+  {
+    "file": "roseveil/cleansing-oil-480.webp",
+    "bytes": 154498,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "d83336fd4a53dc2a2e25e8a0984fd89530fe70711462e640b05d4a4f6d174556"
+  },
+  {
+    "file": "roseveil/cleansing-oil-800.webp",
+    "bytes": 435438,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "c7942cb2d3d9d4549a05f08ce7c3e9dafe1fa9e63144cbcb06065666b0109d12"
+  },
+  {
+    "file": "roseveil/cleansing-oil.webp",
+    "bytes": 926322,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "d19ffe5f538bac4d302699016ef619e326771e047d960353828293f36738787c"
+  },
+  {
+    "file": "roseveil/conditioner-240.webp",
+    "bytes": 36752,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "55541418b24d8f8b6cff05ce81595817926a0098beb899ad7b09439e66d52d7e"
+  },
+  {
+    "file": "roseveil/conditioner-480.webp",
+    "bytes": 164460,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "e61f9c6a93b7aa036bbe449e6a27f0854082c141a6568fedcfe0aaab85e92d08"
+  },
+  {
+    "file": "roseveil/conditioner-800.webp",
+    "bytes": 475558,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "20293216d50bb7aef6b85ba536ad82a6ded0c95f1fd377d1b5bad26d9799b047"
+  },
+  {
+    "file": "roseveil/conditioner.webp",
+    "bytes": 1080584,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "e8d155c31a5f2ace67f61ec2ed08898ced5f6703bf95f1e516ee92fe0f256139"
+  },
+  {
+    "file": "roseveil/cream-240.webp",
+    "bytes": 39998,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "cf91e832e2ae752c2344c50706cee376eff205153070fc4aff3135bb4b5630fc"
+  },
+  {
+    "file": "roseveil/cream-480.webp",
+    "bytes": 167636,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "93028485d8780ade1a82f3a5e26a5484040b95819c69cc398ee0a06ff28c561a"
+  },
+  {
+    "file": "roseveil/cream-800.webp",
+    "bytes": 480338,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "3a7e8e1a827142634e22f6cde73efa6159a4dba23599af967eaeefe44c76e65d"
+  },
+  {
+    "file": "roseveil/cream.webp",
+    "bytes": 1033714,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "b2a98ee10cb9d86f1d2af4be9d4e3601b0acf1a3cb414dc5acbea2db05403876"
+  },
+  {
+    "file": "roseveil/evening-gift-box-240.webp",
+    "bytes": 53008,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "3adbb3e330231c0bcf20fcb7a651509454c0f84ad6fbab0e79c2dd8f17fa4c8d"
+  },
+  {
+    "file": "roseveil/evening-gift-box-480.webp",
+    "bytes": 210942,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "ac61aa1a95cbd11b26cec620bac81f35d00e64abe9d23b81c2ac9438f3192e00"
+  },
+  {
+    "file": "roseveil/evening-gift-box-800.webp",
+    "bytes": 608922,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "91d12b177a292725c76077d90242b00f64e5ab7a9f295655e538aaa6247db37a"
+  },
+  {
+    "file": "roseveil/evening-gift-box.webp",
+    "bytes": 1464966,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "ba1bee90ae33730c8ecffbb80670cbfa21175c831871a664b6e077a55971eed6"
+  },
+  {
+    "file": "roseveil/eye-serum-240.webp",
+    "bytes": 36210,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "2b852e969599907d4bbdf02cc69d61d65a6177ef7c965b4d460b1ce1a9ad5120"
+  },
+  {
+    "file": "roseveil/eye-serum-480.webp",
+    "bytes": 154356,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "398a52d1f6da1134ed4653b61c7d89b2771663bd1697f294fea45e4efd7f1f79"
+  },
+  {
+    "file": "roseveil/eye-serum-800.webp",
+    "bytes": 456218,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "0dd62df0334f211355d98d488617c5346a08aa6cdda8ad09679e16dc74ce1376"
+  },
+  {
+    "file": "roseveil/eye-serum.webp",
+    "bytes": 960458,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "1ffe8388473d9d9d166cc01e7fad64ea18360332c864665105e61bf61ad06054"
+  },
+  {
+    "file": "roseveil/gifts-240.webp",
+    "bytes": 71682,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "bf0b2b30878f83289db1f568ff7e785d53203861e332cf0da4b974fd491bf74e"
+  },
+  {
+    "file": "roseveil/gifts-480.webp",
+    "bytes": 262340,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "fa078af4bf3f92972bdb98fc933eb2cca565921037d608dbf07c9f04c3880503"
+  },
+  {
+    "file": "roseveil/gifts-800.webp",
+    "bytes": 697700,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "5f1d14adafab23512eaad2c54f5405561f46fa5b46db7c99517e833339bd35a7"
+  },
+  {
+    "file": "roseveil/gifts.webp",
+    "bytes": 1624082,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "0fe387cd3c94c73f6a010551c0defafb2bd010dd2905e18185ed312a7d5c5d09"
+  },
+  {
+    "file": "roseveil/hair-240.webp",
+    "bytes": 73834,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "214f84d3bb950d505820460c2476f78c308d5874b5f3e0866a5d56d264f138d6"
+  },
+  {
+    "file": "roseveil/hair-480.webp",
+    "bytes": 257762,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "597e01a8cdda85430419ab74d0f5de0d35abbe497c65d7b84b9d1dcc10f38228"
+  },
+  {
+    "file": "roseveil/hair-800.webp",
+    "bytes": 638638,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "0b2b99d90336c62434bd5cfb166e8a3aba12489542573d855e2e950196dd1f04"
+  },
+  {
+    "file": "roseveil/hair-gift-box-240.webp",
+    "bytes": 52612,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "e589e6087a3a681d6ffdaad06048c7a5691d342495bc823b3044a557830dd766"
+  },
+  {
+    "file": "roseveil/hair-gift-box-480.webp",
+    "bytes": 204350,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "ddeb8c556a65914c96083b590ca19b3d333458ce9e63edc2ecee20bd8e9f8c6a"
+  },
+  {
+    "file": "roseveil/hair-gift-box-800.webp",
+    "bytes": 568934,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "8ee0ab7e605f4790337678dcc856b69f6e6a5738836322ae091900bed3a03e9e"
+  },
+  {
+    "file": "roseveil/hair-gift-box.webp",
+    "bytes": 1339994,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "0deb3c5c87d7d5e283bfd10bbaa09b734a3360d6b44c0e0ef43baf910dbb8b45"
+  },
+  {
+    "file": "roseveil/hair-mask-240.webp",
+    "bytes": 36652,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "7a2ba68f3e81ee34b1350f9c67d19de668bb772a586e840718a95afb4e29514a"
+  },
+  {
+    "file": "roseveil/hair-mask-480.webp",
+    "bytes": 151660,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "f08eca22d8227820b6795d2e2d0f22d76c9cd1fd3cf0497a318b9458a44078e8"
+  },
+  {
+    "file": "roseveil/hair-mask-800.webp",
+    "bytes": 432528,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "3276d87b3d087e603774274dd5aba232657b821da37fdbfc1864e3ed4ee9fd4b"
+  },
+  {
+    "file": "roseveil/hair-mask.webp",
+    "bytes": 929048,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "6bbdf19e074d66108ecef9fc604614dac0c5536c161f1aa8451c170591439157"
+  },
+  {
+    "file": "roseveil/hair-mist-240.webp",
+    "bytes": 33338,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "8516d83111c5245b080f40eae96e714a3588a04714d7698326c88d6241c51c22"
+  },
+  {
+    "file": "roseveil/hair-mist-480.webp",
+    "bytes": 146962,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "aebbd1f632e876ed41f4814351a921d41cbe91d444b50ef0a1c4a2f900c1b42f"
+  },
+  {
+    "file": "roseveil/hair-mist-800.webp",
+    "bytes": 421496,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "7956ed18334f75e6ddc86e78497f368c4c00d5becd396350c8eac7df59a8b6a0"
+  },
+  {
+    "file": "roseveil/hair-mist.webp",
+    "bytes": 904828,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "eaf22c4433356d7ee33302d2389bf0a113cfe78d31c4b7e17defa70588e97831"
+  },
+  {
+    "file": "roseveil/hair-oil-240.webp",
+    "bytes": 37982,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "eef77cec8ed125c6778d54d3de577a0e086d2201ab8258c25d462922ab77101d"
+  },
+  {
+    "file": "roseveil/hair-oil-480.webp",
+    "bytes": 157170,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "db6ce4ab6f84bd5dd6c784324dadba46c60db29ddc8b55e509f85905df42205a"
+  },
+  {
+    "file": "roseveil/hair-oil-800.webp",
+    "bytes": 438932,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "f0661955a999f1fb59d4223e78ccbd194e24bf1f71c3f2c85e807947a7980d98"
+  },
+  {
+    "file": "roseveil/hair-oil.webp",
+    "bytes": 946706,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "a6f3d537e9a976637992d48606825d561240337d0ea852eae82d5ad495bab027"
+  },
+  {
+    "file": "roseveil/hair.webp",
+    "bytes": 1405488,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "eb7af5a839a1ad4c81aa697dd4b4aa47589baf1d2d50a8afeb711495a39b5c7f"
+  },
+  {
+    "file": "roseveil/hand-cream-240.webp",
+    "bytes": 34492,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "2cbd84ed110e50e64b19ae4e2b100877923095d753bf48480ea1a0d901dacb23"
+  },
+  {
+    "file": "roseveil/hand-cream-480.webp",
+    "bytes": 150340,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "63aee1cd101e8c8a391db4ea73b5201aa24ca775b383fe6822dd2025b432d3d6"
+  },
+  {
+    "file": "roseveil/hand-cream-800.webp",
+    "bytes": 453004,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "d3fd499a1469d8b3c46847635f9841f6dbd07736d2910c6238df91419f1d9ac6"
+  },
+  {
+    "file": "roseveil/hand-cream.webp",
+    "bytes": 946706,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "3b6d6ce3f187a9338b8fca65ed94696117b77d28a2e2e7154cc50119a8941ba3"
+  },
+  {
+    "file": "roseveil/hero-ivory-classic-640.jpg",
+    "bytes": 87238,
+    "format": "jpeg",
+    "width": 640,
+    "height": 640,
+    "hasAlpha": false,
+    "sha256": "65b1f8e3a33261304cf551cfe6811f6c6d212ce350db97d90623305945c6cbc7"
+  },
+  {
+    "file": "roseveil/hero-ivory-classic.jpg",
+    "bytes": 265567,
+    "format": "jpeg",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "9d05d787d3d7089ebb3b969f0338d0d555ea3d7d92ae891d71bbaf67832dee31"
+  },
+  {
+    "file": "roseveil/hero-layer-classic-jar.webp",
+    "bytes": 139200,
+    "format": "webp",
+    "width": 450,
+    "height": 362,
+    "hasAlpha": true,
+    "sha256": "533f3c70bc1f6e56aa8997c1430893e8e882fbf04d1e7b5c97907f4ad809c97b"
+  },
+  {
+    "file": "roseveil/hero-layer-classic-pump.webp",
+    "bytes": 118512,
+    "format": "webp",
+    "width": 227,
+    "height": 650,
+    "hasAlpha": true,
+    "sha256": "b3515146155c48d63830810fe3d096c2968b70b092a4730107988da6532a6547"
+  },
+  {
+    "file": "roseveil/hero-layer-classic-serum.webp",
+    "bytes": 135182,
+    "format": "webp",
+    "width": 248,
+    "height": 650,
+    "hasAlpha": true,
+    "sha256": "da5c5b196e27bd59e500200bc12b9903a50628760eee819e33e9cbf82d2361ae"
+  },
+  {
+    "file": "roseveil/hero-layer-classic-tube.webp",
+    "bytes": 123334,
+    "format": "webp",
+    "width": 265,
+    "height": 650,
+    "hasAlpha": true,
+    "sha256": "e1df20ae3d7c08ed3f19d150e400f809bafd5507a5ca8d8ebb4c635ccf2ceda7"
+  },
+  {
+    "file": "roseveil/hero-stage-ivory.jpg",
+    "bytes": 234067,
+    "format": "jpeg",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "1fe9cd536cd3f4ea4408040440fe600060cd1eb6a394e15ee772e98d4fd303ac"
+  },
+  {
+    "file": "roseveil/lip-balm-240.webp",
+    "bytes": 37674,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "652029c9a451ad7fe4895a0b835963ed6d32ba8d74174960a837e76662a5ced3"
+  },
+  {
+    "file": "roseveil/lip-balm-480.webp",
+    "bytes": 158398,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "e770288108475fd1b89f048bdf1c8f82562cfb5956ee046c7221c09d046b5569"
+  },
+  {
+    "file": "roseveil/lip-balm-800.webp",
+    "bytes": 442848,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "2602d23b8112f441efb85d9b2a289c2347f2662dbb943f728dea511c67a03356"
+  },
+  {
+    "file": "roseveil/lip-balm.webp",
+    "bytes": 947396,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "fbaab5bc6d5ab3a50349fd356d45ba00de6950bc623704dc9f1418511cb18201"
+  },
+  {
+    "file": "roseveil/makeup-240.webp",
+    "bytes": 73764,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "61c25a1831d4e334ace6d0404d44f97402d123d57920e0bdb2b11652784f641a"
+  },
+  {
+    "file": "roseveil/makeup-480.webp",
+    "bytes": 264542,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "edd863ea3859699d1f41f0f9846b6e15072b70d13b6ae0a197463404d6b44bdd"
+  },
+  {
+    "file": "roseveil/makeup-800.webp",
+    "bytes": 681532,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "a2515fa3f7581f768f4deaae7c99820a6be1a2ce3f23e6c753bedb5ed11030d1"
+  },
+  {
+    "file": "roseveil/makeup.webp",
+    "bytes": 1527862,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "ea2e6bba9666591ffd3290b8a33c0cf0f06a1e1722392891608ece7b147e9bb0"
+  },
+  {
+    "file": "roseveil/masks-240.webp",
+    "bytes": 66232,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "d2fb495fdb9569ab880a259e4cd5f13db40c236d08511216781b8a61fe397c80"
+  },
+  {
+    "file": "roseveil/masks-480.webp",
+    "bytes": 251952,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "ad0351a7189872fd4b5d99d86c4226fbb277c820f4328088f7d411e5eaaf5a24"
+  },
+  {
+    "file": "roseveil/masks-800.webp",
+    "bytes": 696522,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "d9a027b9b72b402d5e20083990f484632e3f59a7d7a31ebfafc586cb4bd39ff4"
+  },
+  {
+    "file": "roseveil/masks.webp",
+    "bytes": 1649840,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "b7f76271355bb5d1e8565048ac17518f0dd59bd5775aafa2e096f174ee6765c1"
+  },
+  {
+    "file": "roseveil/night-cream-240.webp",
+    "bytes": 38772,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "4ddb7a895f5484bd7e5e70cd0421f62c0ff4b6621552ac2175ebaaf81c2246f1"
+  },
+  {
+    "file": "roseveil/night-cream-480.webp",
+    "bytes": 165658,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "e282475ced4b97a24bae1d69c373e467fdc7b13bf8df5d478c95bd689fbc9234"
+  },
+  {
+    "file": "roseveil/night-cream-800.webp",
+    "bytes": 481812,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "d63c1c0d2357c257d32be1f2f95c41b14c14f97d416c8c6218a6c7674f9557a0"
+  },
+  {
+    "file": "roseveil/night-cream.webp",
+    "bytes": 1073500,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "1fa8bc0872aa07cf6e48b1be9f93d66ab259003be348ec03c7d80bae76202478"
+  },
+  {
+    "file": "roseveil/perfume-240.webp",
+    "bytes": 44710,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "c226761122456d7de7c5b18c18811548162e52bbeacd28beffc575c43df2f0a3"
+  },
+  {
+    "file": "roseveil/perfume-480.webp",
+    "bytes": 183674,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "e13ff5b3bc33a2704ab648deafdd860a01b6db4b4da408726021823663841da7"
+  },
+  {
+    "file": "roseveil/perfume-800.webp",
+    "bytes": 520356,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "a8d4a45ae7017d54ab9d4e61d2682f3c024b9c776e320a93debf734553e851fa"
+  },
+  {
+    "file": "roseveil/perfume.webp",
+    "bytes": 1103452,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "7f052173caca1dbc635d1e3c8789bc4e103b6977257fe63859068667c575d2dc"
+  },
+  {
+    "file": "roseveil/serum-240.webp",
+    "bytes": 37922,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "f120ac03731043faaba1e573e95d2ff2fe5de4b0f18a9a7d87bf03859dd6114b"
+  },
+  {
+    "file": "roseveil/serum-480.webp",
+    "bytes": 161890,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "9fb080903db32a9c435272dc025ab18922c98b0be0512498114fd852b36e6069"
+  },
+  {
+    "file": "roseveil/serum-800.webp",
+    "bytes": 452840,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "2f7605fa34c1d0bf9a85ef229acac05ae345dec95908819cc0246d44dbc56b93"
+  },
+  {
+    "file": "roseveil/serum.webp",
+    "bytes": 981970,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "3a04284e7082a68de3de6ea9eb180aeb79a48d38ca6efcb75cef51ef406b48d4"
+  },
+  {
+    "file": "roseveil/shampoo-240.webp",
+    "bytes": 37686,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "5e02c5d30019e9ec29f5cdff19424bdd9f23e90ba0c16fd7f6d4e990cd77fd4d"
+  },
+  {
+    "file": "roseveil/shampoo-480.webp",
+    "bytes": 167078,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "0f2a9845638064a23d49f62ce09a4af9a84f0c19187553f2fbb8c49d9e6550dc"
+  },
+  {
+    "file": "roseveil/shampoo-800.webp",
+    "bytes": 491706,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "b8d5e726590c8138d0294e6b8e72bf8c63e61c3fa5f7251329ac7d9dc03f937b"
+  },
+  {
+    "file": "roseveil/shampoo.webp",
+    "bytes": 1081300,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "33d7b10c1be3235de4750c42319e05f4a7abc9dc58e2b6b714c6c0ddd397ccb8"
+  },
+  {
+    "file": "roseveil/toner-240.webp",
+    "bytes": 31862,
+    "format": "webp",
+    "width": 240,
+    "height": 240,
+    "hasAlpha": false,
+    "sha256": "639c021609c8645f6bdf1e73f1944127b818a52db662163dfce512d4168cb979"
+  },
+  {
+    "file": "roseveil/toner-480.webp",
+    "bytes": 155596,
+    "format": "webp",
+    "width": 480,
+    "height": 480,
+    "hasAlpha": false,
+    "sha256": "0d614be28cbf378207288e6cf3773aaea256ce90ce6df9dfe2c1b6be5969915a"
+  },
+  {
+    "file": "roseveil/toner-800.webp",
+    "bytes": 451504,
+    "format": "webp",
+    "width": 800,
+    "height": 800,
+    "hasAlpha": false,
+    "sha256": "220b671351a3f9424a9bdb4af60afb09ac1e4d4ba8447a6eae66f635cfef97bf"
+  },
+  {
+    "file": "roseveil/toner.webp",
+    "bytes": 928240,
+    "format": "webp",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": false,
+    "sha256": "d80c4b055d20746bbdd09b354e31fbb5dc6c5a58c8fbd8ec1fec28f32c0fc0b5"
+  }
+]

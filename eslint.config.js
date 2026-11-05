@@ -21,7 +21,7 @@ export default [
     rules: { eqeqeq: ['error', 'always'] },
   },
   {
-    files: ['src/**/*.ts'],
+    files: ['src/**/*.ts', 'server/**/*.ts', 'api/**/*.ts'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 'latest',
@@ -35,5 +35,8 @@ export default [
       eqeqeq: ['error', 'always'],
     },
   },
-  { files: ['tests/**/*.js', 'eslint.config.js'], languageOptions: { globals: globals.node } },
+  {
+    files: ['tests/**/*.js', 'server/**/*.js', 'vite.config.js', 'eslint.config.js'],
+    languageOptions: { globals: globals.node },
+  },
 ]

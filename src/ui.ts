@@ -1,26 +1,11 @@
 import type { AppState, Theme } from './modules/state/state.types.ts'
-import type { Product, Category } from './modules/products/products.types.ts'
-import type { SortOrder } from './logic.ts'
-import {
-  productById,
-  formatMoney,
-  cartTotals,
-  findProducts,
-  productCategories,
-  isCategory,
-  isSortOrder,
-} from './logic.ts'
+import type { Product } from './modules/products/products.types.ts'
+import { cartTotals } from './modules/cart/cart.logic.ts'
+import { initializeCartUI } from './modules/cart/cart.ui.ts'
+import { initializeProductsUI } from './modules/products/products.ui.ts'
 
-// Legacy Vite demo API: keep DOM work here, even though the storefront does not use it.
-export function setupCounter(element: HTMLElement) {
-  let counter = 0
-  const setCounter = (count: number) => {
-    counter = count
-    element.innerHTML = `Count is ${counter}`
-  }
-  element.addEventListener('click', () => setCounter(counter + 1))
-  setCounter(0)
-}
+const formatMoney = (cents: number): string =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100)
 
 export function initializeTheme(state: AppState, document = globalThis.document) {
   const root = document.documentElement
@@ -180,19 +165,9 @@ export function initializeUI(state: AppState) {
         : size === 700
           ? '280px'
           : '(min-width: 1200px) 250px, (min-width: 900px) 25vw, (min-width: 600px) 34vw, 50vw'
-    return `<img src="${base}.webp" srcset="${base}-240.webp 240w, ${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1254w" sizes="${sizes}" alt="${product.name}" width="${size}" height="${size}" loading="${size === 600 ? 'lazy' : 'eager'}" decoding="async">`
+    return `<img src="${base}.webp" srcset="${base}-240.webp 240w, ${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1254w" sizes="${sizes}" alt="${escape(product.name)}" width="${size}" height="${size}" loading="${size === 600 ? 'lazy' : 'eager'}" decoding="async">`
   }
-  const filters: {
-    category: Category | 'All'
-    query: string
-    sort: SortOrder
-    featured: boolean
-  } = { category: 'All', query: '', sort: 'default', featured: true }
-  let renderedProductIds: string | undefined
   let toastTimer: ReturnType<typeof setTimeout> | undefined
-  select('#category-select').innerHTML += productCategories
-    .map((category) => `<option value="${category}">${category}</option>`)
-    .join('')
 
   function notify(message: string) {
     clearTimeout(toastTimer)
@@ -202,16 +177,6 @@ export function initializeUI(state: AppState) {
     }, 3800)
   }
 
-  function renderCartCount() {
-    const { count } = cartTotals(state.cart, state.promoCode)
-    $('#cart-count').textContent = String(count)
-    $('#cart-heading-count').textContent = count ? `(${count})` : ''
-    $('#cart-button').setAttribute(
-      'aria-label',
-      `Open shopping bag, ${count} ${count === 1 ? 'item' : 'items'}`,
-    )
-  }
-
   function openContent(title: string, html: string) {
     $('#content-title').textContent = title
     $('#content-body').innerHTML = html
@@ -219,165 +184,28 @@ export function initializeUI(state: AppState) {
     $('#content-title').focus()
   }
 
-  function renderProducts() {
-    const matches = findProducts(filters.category, filters.query, filters.featured, filters.sort)
-    const productIds = matches.map((product) => product.id).join(',')
-    // Keep existing nodes when a search/category change produces the same ordered products.
-    if (productIds !== renderedProductIds) {
-      $('#product-grid').innerHTML = matches
-        .map(
-          (product) =>
-            `<article class="product-card"><button class="product-image-button" data-product="${product.id}" aria-label="View ${product.name}">${productMedia(product)}</button><div class="product-info"><p class="product-category">${product.category}</p><h3><button class="product-name" data-product="${product.id}">${product.name}</button></h3><p class="product-price">${formatMoney(product.price)}</p></div><button class="add-button" data-add="${product.id}" aria-label="Add ${product.name} to bag">${icon('bag')} ADD TO CART</button></article>`,
-        )
-        .join('')
-      renderedProductIds = productIds
-    }
-    const filtered =
-      filters.category !== 'All' || Boolean(filters.query) || filters.sort !== 'default'
-    input('#catalog-search').value = filters.query
-    input('#product-search').value = filters.query
-    select('#category-select').value = filters.category
-    select('#price-sort').value = filters.sort
-    $('#active-filters').hidden = !filtered
-    $('#filter-description').textContent = [
-      filters.category !== 'All' ? filters.category : '',
-      filters.query ? `Search: “${filters.query}”` : '',
-      `${matches.length} products`,
-    ]
-      .filter(Boolean)
-      .join(' · ')
-    $('#products-title').textContent =
-      filters.category !== 'All'
-        ? filters.category
-        : filters.query
-          ? 'Find Your Next Favorite'
-          : 'The Roseveil Collection'
-    $('#products-eyebrow').textContent = filters.featured
-      ? 'CURATED FAVORITES'
-      : 'EXPLORE THE COLLECTION'
-    $('#filter-status').textContent =
-      `${matches.length} ${matches.length === 1 ? 'product' : 'products'} shown${filters.category !== 'All' ? ` in ${filters.category}` : ''}.`
-    $('#empty-state').hidden = matches.length > 0
-    $('#view-all').innerHTML =
-      `${!filters.featured && !filtered ? 'VIEW FEATURED PRODUCTS' : 'VIEW ALL PRODUCTS'} ${icon('arrow')}`
-    all('.main-nav [data-category]', HTMLElement).forEach((link) => {
-      link.classList.toggle(
-        'active',
-        !filters.featured && link.dataset.category === filters.category,
-      )
-    })
-    all('.collection-links [data-category], .category-card[data-category]', HTMLElement).forEach(
-      (link) => {
-        if (!filters.featured && link.dataset.category === filters.category)
-          link.setAttribute('aria-current', 'true')
-        else link.removeAttribute('aria-current')
-      },
-    )
-    const home = $('.main-nav a[href="#top"]')
-    home.classList.toggle('active', filters.featured && !filtered)
+  const helpers = {
+    $,
+    input,
+    select,
+    dialog,
+    all,
+    closest,
+    icon,
+    escape,
+    formatMoney,
+    productMedia,
+    openContent,
+    notify,
   }
-
-  function resetFilters(featured = false) {
-    const resetHadFocus = [$('#clear-filters'), $('#empty-reset')].some(
-      (element) => element === document.activeElement,
-    )
-    Object.assign(filters, { category: 'All', query: '', sort: 'default', featured })
-    input('#product-search').value = ''
-    renderProducts()
-    if (resetHadFocus) $('#products-title').focus()
-  }
-
-  function addProduct(id: string) {
-    const product = productById(id)
-    if (!product) return
-    const existing = state.cart.find((item) => item.id === id)
-    if (existing?.quantity === 99) {
-      notify('You’ve reached the limit of 99 for this item.')
-      return
-    }
-    state.addProduct(id)
-    renderCartCount()
-    notify(`${product.name} added to your bag.`)
-  }
-
-  function showProduct(id: string) {
-    const product = productById(id)
-    if (!product) return
-    openContent(
-      product.name,
-      `<div class="modal-product">${productMedia(product, 700)}<div><p class="eyebrow">${product.category}</p><p>${product.description}</p><p class="modal-price">${formatMoney(product.price)}</p><p>${product.size}</p><button class="button" data-add="${product.id}">${icon('bag')} ADD TO BAG</button><small>Illustrative product. Images and sizes are for this concept store. No real purchase or product claims.</small></div></div>`,
-    )
-  }
-
-  function renderCart(focusAction?: string) {
-    const totals = cartTotals(state.cart, state.promoCode)
-    if (!state.cart.length) {
-      $('#cart-content').innerHTML =
-        `<div class="cart-empty">${icon('bag')}<h3>Your next little luxury awaits.</h3><p>Your shopping bag is empty. Find something you’ll love.</p><button class="button" data-continue-shopping>EXPLORE THE COLLECTION</button></div>`
-      return
-    }
-    const toFreeShipping = Math.max(0, 5001 - totals.merchandise)
-    $('#cart-content').innerHTML =
-      `<div class="shipping-note">${toFreeShipping ? `Add ${formatMoney(toFreeShipping)} more after discounts for free shipping.` : 'Lovely! Your bag qualifies for free shipping.'}<div class="shipping-progress"><span style="width:${Math.min(100, (totals.merchandise / 5001) * 100)}%"></span></div></div><ul class="cart-lines">${state.cart
-        .map((item) => {
-          const product = productById(item.id)
-          if (!product) return ''
-          return `<li class="cart-line">${productMedia(product, 70)}<div><h3>${product.name}</h3><p>${formatMoney(product.price)} · ${product.size}</p><div class="quantity"><button data-quantity="${item.id}" data-delta="-1" aria-label="Decrease quantity of ${product.name}">−</button><span aria-label="Quantity">${item.quantity}</span><button data-quantity="${item.id}" data-delta="1" aria-label="Increase quantity of ${product.name}" ${item.quantity >= 99 ? 'disabled' : ''}>+</button></div></div><div><p class="cart-line-total">${formatMoney(product.price * item.quantity)}</p><button class="remove-line" data-remove="${item.id}" aria-label="Remove ${product.name}">Remove</button></div></li>`
-        })
-        .join(
-          '',
-        )}</ul><form id="promo-form" class="promo-form"><label for="promo-code">Have a little treat? Enter your code.</label><div class="search-row"><input id="promo-code" name="promo" placeholder="GLOW20" value="${state.promoCode}" maxlength="20" autocomplete="off"><button class="button secondary" type="submit">${state.promoCode ? 'REMOVE' : 'APPLY'}</button></div><p id="promo-status" class="form-status" role="status">${state.promoCode ? 'GLOW20 applied — enjoy 20% off your items.' : ''}</p></form><div class="cart-totals"><div><span>Subtotal</span><span>${formatMoney(totals.subtotal)}</span></div>${totals.discount ? `<div><span>GLOW20 · 20% off</span><span>−${formatMoney(totals.discount)}</span></div>` : ''}<div><span>Demo shipping</span><span>${totals.shipping ? formatMoney(totals.shipping) : 'FREE'}</span></div><div class="grand-total"><span>Total</span><span>${formatMoney(totals.total)}</span></div></div><button class="button cart-checkout" id="checkout-button">DEMO CHECKOUT ${icon('arrow')}</button><p class="cart-demo">A concept store. No payment is collected or real order placed.</p>`
-    $('#promo-form').addEventListener('submit', (event) => {
-      event.preventDefault()
-      if (state.promoCode) {
-        state.setPromoCode('')
-        renderCartCount()
-        renderCart('promo')
-        return
-      }
-      const entered = input('#promo-code').value.trim().toUpperCase()
-      if (entered !== 'GLOW20') {
-        $('#promo-status').textContent = 'That code isn’t available. Try GLOW20 for 20% off.'
-        return
-      }
-      state.setPromoCode('GLOW20')
-      renderCartCount()
-      renderCart('promo')
-    })
-    if (focusAction === 'promo') input('#promo-code').focus()
-  }
-
-  function showCart() {
-    renderCart()
-    dialog('#cart-dialog').showModal()
-    $('#cart-title').focus()
-  }
-
-  function showCheckout() {
-    if (!state.cart.length) return
-    const totals = cartTotals(state.cart, state.promoCode)
-    dialog('#cart-dialog').close()
-    openContent(
-      'A little glow is on its way.',
-      `<p>Review your demo bag: ${totals.count} ${totals.count === 1 ? 'item' : 'items'} · <strong>${formatMoney(totals.total)}</strong> including demo shipping. This form completes a demonstration only. No payment or delivery will take place.</p><form id="checkout-form" class="form-stack"><div class="field-row"><div><label for="checkout-first">First name</label><input id="checkout-first" name="first" autocomplete="given-name" required maxlength="80"></div><div><label for="checkout-last">Last name</label><input id="checkout-last" name="last" autocomplete="family-name" required maxlength="80"></div></div><label for="checkout-email">Email address</label><input id="checkout-email" name="email" type="email" autocomplete="email" required maxlength="254"><button class="button" type="submit">COMPLETE DEMO ORDER ${icon('arrow')}</button><p class="cart-demo">Details are not saved or sent. No card information required.</p></form>`,
-    )
-    $('#checkout-form').addEventListener('submit', (event) => {
-      event.preventDefault()
-      const name = input('#checkout-first').value.trim()
-      state.clearCart()
-      renderCartCount()
-      openContent(
-        'A beautiful little moment.',
-        `<div class="confirmation">${icon('gift')}<h3>Thank you${name ? `, ${escape(name)}` : ''}!</h3><p>Your demo order is complete. No order was placed, no payment was taken, and your details were not saved.</p><button class="button" data-continue-shopping>CONTINUE EXPLORING</button></div>`,
-      )
-    })
-  }
+  const cartUI = initializeCartUI(state, helpers)
+  const productsUI = initializeProductsUI(state, helpers, closeMenu)
 
   function showAccount() {
     if (state.profile) {
       openContent(
         'Your beauty space',
-        `<p>Welcome back, <strong>${escape(state.profile.name)}</strong>. Your demo profile is available for this visit. Your shopping bag has ${cartTotals(state.cart).count} items.</p><button class="button" id="profile-shop">EXPLORE THE COLLECTION</button><button class="text-button" id="profile-reset">Clear my demo profile</button>`,
+        `<p>Welcome back, <strong>${escape(state.profile.name)}</strong>. Your demo profile is available for this visit. Your shopping bag has ${cartTotals(state.bag.items, '', state.catalogProducts).count} items.</p><button class="button" id="profile-shop">EXPLORE THE COLLECTION</button><button class="text-button" id="profile-reset">Clear my demo profile</button>`,
       )
       $('#profile-shop').addEventListener('click', continueShopping)
       $('#profile-reset').addEventListener('click', () => {
@@ -400,7 +228,7 @@ export function initializeUI(state: AppState) {
 
   function continueShopping() {
     all('dialog[open]', HTMLDialogElement).forEach((dialog) => dialog.close())
-    resetFilters()
+    productsUI.resetFilters()
     $('#products').scrollIntoView({ behavior: 'auto' })
     $('#products-title').focus()
   }
@@ -445,35 +273,13 @@ export function initializeUI(state: AppState) {
     })
   }
 
-  all('.catalog-tool', HTMLDetailsElement).forEach((tool) => {
-    tool.addEventListener('toggle', () => {
-      if (tool.open) {
-        all('input, select', HTMLElement, tool)[0]?.focus()
-        all('.catalog-tool', HTMLDetailsElement).forEach((other) => {
-          if (other !== tool) other.open = false
-        })
-      }
-    })
-  })
-
   document.addEventListener('click', (event) => {
     const target = event.target
     if (!(target instanceof Element)) return
-    if (!target.closest('.catalog-tools'))
-      all('.catalog-tool[open]', HTMLDetailsElement).forEach((tool) => {
-        tool.open = false
-      })
-    const addButton = closest(target, '[data-add]')
-    if (addButton?.dataset.add) addProduct(addButton.dataset.add)
-    const productButton = closest(target, '[data-product]')
-    if (productButton?.dataset.product) showProduct(productButton.dataset.product)
-    const categoryLink = closest(target, '[data-category]')
-    if (categoryLink && isCategory(categoryLink.dataset.category)) {
-      filters.category = categoryLink.dataset.category
-      filters.featured = false
-      renderProducts()
-      closeMenu()
-    }
+    productsUI.closeToolsOutside(target)
+    productsUI.closeHeaderSearchOutside(target)
+    cartUI.handleAdd(target)
+    productsUI.handleClick(target)
     const closeButton = closest(target, '[data-close-dialog]')
     if (closeButton) closeButton.closest('dialog')?.close()
     if (closest(target, '[data-continue-shopping]')) continueShopping()
@@ -486,86 +292,7 @@ export function initializeUI(state: AppState) {
     }
   })
 
-  $('#cart-content').addEventListener('click', (event) => {
-    const target = event.target
-    if (!(target instanceof Element)) return
-    const quantityButton = closest(target, '[data-quantity]')
-    const removeButton = closest(target, '[data-remove]')
-    if (quantityButton?.dataset.quantity) {
-      const id = quantityButton.dataset.quantity
-      const delta = Number(quantityButton.dataset.delta)
-      const line = state.cart.find((item) => item.id === id)
-      if (!line) return
-      state.changeQuantity(id, delta)
-      renderCartCount()
-      renderCart()
-      const next = [...all('[data-quantity]', HTMLButtonElement, $('#cart-content'))].find(
-        (button) =>
-          button.dataset.quantity === id &&
-          Number(button.dataset.delta) === delta &&
-          !button.disabled,
-      )
-      ;(next || $('#cart-content').querySelector('button'))?.focus()
-    }
-    if (removeButton?.dataset.remove) {
-      const name = productById(removeButton.dataset.remove)?.name
-      state.removeProduct(removeButton.dataset.remove)
-      renderCartCount()
-      renderCart()
-      $('#cart-content').querySelector('button')?.focus()
-      notify(`${name} removed from your bag.`)
-    }
-    if (target.closest('#checkout-button')) showCheckout()
-  })
-
-  $('#cart-button').addEventListener('click', showCart)
   $('#account-button').addEventListener('click', showAccount)
-  $('#view-all').addEventListener('click', () =>
-    resetFilters(
-      !filters.featured &&
-        filters.category === 'All' &&
-        !filters.query &&
-        filters.sort === 'default',
-    ),
-  )
-  $('#clear-filters').addEventListener('click', () => resetFilters())
-  $('#empty-reset').addEventListener('click', () => resetFilters())
-  $('#search-toggle').addEventListener('click', () => {
-    const panel = $('#search-panel')
-    panel.hidden = !panel.hidden
-    $('#search-toggle').setAttribute('aria-expanded', String(!panel.hidden))
-    if (!panel.hidden) input('#product-search').focus()
-  })
-  function updateSearch(input: HTMLInputElement) {
-    filters.query = input.value
-    filters.featured = false
-    renderProducts()
-  }
-  input('#product-search').addEventListener('input', () => updateSearch(input('#product-search')))
-  input('#catalog-search').addEventListener('input', () => updateSearch(input('#catalog-search')))
-  $('#catalog-controls').addEventListener('submit', (event) => event.preventDefault())
-  select('#category-select').addEventListener('change', () => {
-    const value = select('#category-select').value
-    if (!isCategory(value)) return
-    filters.category = value
-    filters.featured = false
-    renderProducts()
-  })
-  select('#price-sort').addEventListener('change', () => {
-    const value = select('#price-sort').value
-    if (!isSortOrder(value)) return
-    filters.sort = value
-    filters.featured = false
-    renderProducts()
-  })
-  $('#search-form').addEventListener('submit', (event) => {
-    event.preventDefault()
-    filters.query = input('#product-search').value
-    filters.featured = false
-    renderProducts()
-    $('#products').scrollIntoView({ behavior: 'auto' })
-    $('#products-title').focus()
-  })
   function closeMenu() {
     const focusWasInside = $('#main-nav').contains(document.activeElement)
     $('#main-nav').classList.remove('is-open')
@@ -585,22 +312,7 @@ export function initializeUI(state: AppState) {
     // Native modal dialogs own Escape, Tab and Shift+Tab; never focus their background.
     if (event.key !== 'Escape' || event.defaultPrevented || document.querySelector('dialog[open]'))
       return
-    const focusedTool = [...all('.catalog-tool[open]', HTMLDetailsElement)].find((tool) =>
-      tool.contains(document.activeElement),
-    )
-    if (focusedTool) {
-      event.preventDefault()
-      focusedTool.open = false
-      focusedTool.querySelector('summary')?.focus()
-      return
-    }
-    if (!$('#search-panel').hidden && $('#search-panel').contains(document.activeElement)) {
-      event.preventDefault()
-      $('#search-panel').hidden = true
-      $('#search-toggle').setAttribute('aria-expanded', 'false')
-      $('#search-toggle').focus()
-      return
-    }
+    if (productsUI.dismissSearch(event)) return
     if ($('#menu-toggle').getAttribute('aria-expanded') === 'true') {
       event.preventDefault()
       closeMenu()
@@ -641,6 +353,6 @@ export function initializeUI(state: AppState) {
     }),
   )
 
-  renderCartCount()
-  renderProducts()
+  cartUI.renderCartCount()
+  productsUI.startCatalog(() => cartUI.refreshCatalog())
 }

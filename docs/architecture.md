@@ -1,60 +1,83 @@
 # ROSEVEIL architecture
 
-Four boxes contain the implementation; `main.ts` connects them and imports the styles.
+The server owns the 30 products. Browser modules consume the API; no frontend module imports the server catalog. Main imports styles, creates application state and passes it into the UI.
 
 ```mermaid
 flowchart LR
-  Data["data.ts — product data only"] --> Logic["logic.ts — pure functions"]
-  Logic --> State["state.ts — cart and saving"]
-  Logic --> UI["ui.ts — rendering and events"]
-  State <-->|"actions and snapshots"| UI
+  Main["main.ts"] --> App["state.ts"]
+  Main --> UI["ui.ts"]
+  UI --> App
+  UI --> CartUI["cart.ui.ts"]
+  UI --> ProductsUI["products.ui.ts"]
+  CartUI --> Bag["cart.state.ts via state.bag"]
+  ProductsUI --> App
+  ProductsUI --> ProductLogic["products.logic.ts"]
+  UI --> CartLogic["cart.logic.ts"]
+  CartUI --> CartLogic
+  App --> Bag
+  App --> Adapter["products.api.ts"]
+  Adapter --> Client["shared/api/client.ts"]
+  Adapter --> ProductLogic
+  Client --> API["/api/products"]
+  API --> Catalog["server/catalog.ts"]
+  Bag --> CartLogic
+  Bag --> ProductLogic
+  CartLogic --> ProductLogic
 ```
 
-Arrows show data flow. Imports are one-way: logic imports data; state imports logic; UI imports logic. Main creates state and passes it to `initializeUI(state)`.
+Arrows show dependencies or calls. Application state passes a current-catalog callback to the cart factory; the cart never imports application state. Type-only contracts are erased at runtime.
 
-## Function ownership
+## Responsibilities
 
-| Box      | Functions and responsibilities                                                                                                                                                                                                                                                                                                                                                                                                   |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| data.ts  | `products` only; no functions. Add products here.                                                                                                                                                                                                                                                                                                                                                                                |
-| logic.ts | `productById`, `formatMoney`, `normalizeCart`, `cartTotals`, `findProducts`; derives `productCategories`. No DOM/storage or mutation of inputs.                                                                                                                                                                                                                                                                                  |
-| state.ts | `browserStorage`, `createState`, private `saveCart`; actions `addProduct`, `changeQuantity`, `removeProduct`, `setPromoCode`, `clearCart`, `setProfile`, `setTheme`; defensive getters for cart, code, profile and theme.                                                                                                                                                                                                        |
-| ui.ts    | `initializeUI`, `initializeTheme` and its presentation helper `apply`; `$`, `icon`, `escape`, `productMedia`, `notify`, `renderCartCount`, `openContent`, `renderProducts`, `resetFilters`, `addProduct`, `showProduct`, `renderCart`, `showCart`, `showCheckout`, `showAccount`, `continueShopping`, `showContact`, `updateSearch`, `closeMenu`, plus DOM event callbacks. Calls state actions instead of editing cart entries. |
+| File                                   | Ownership                                                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| server/catalog.ts                      | Sole maintained product data source.                                                                                           |
+| api/products.ts                        | Vercel production API, backed by that catalog.                                                                                 |
+| server/products-api.js                 | Vite development/preview middleware; simulations only in development.                                                          |
+| src/modules/products/products.api.ts   | Fetch and runtime validation through the shared HTTP client.                                                                   |
+| src/modules/products/products.logic.ts | Pure lookup, categories, search, featured filtering, sorting and control-value guards.                                         |
+| src/modules/cart/cart.logic.ts         | Pure normalization, validation, pricing, GLOW20 discount and shipping totals.                                                  |
+| src/modules/cart/cart.state.ts         | Single owner of cart items, promo code, cart actions, defensive getters, persistence and legacy migration.                     |
+| src/state.ts                           | Catalog loading/status/error/subscriptions, bag composition, theme persistence and session profile.                            |
+| src/ui.ts                              | Shared UI coordinator: helpers, document click/Escape routing, dialogs, general forms, theme, hero and feature initialization. |
+| src/main.ts                            | Startup wiring and style imports only.                                                                                         |
 
-`main.ts` performs only composition: imports CSS, calls `createState()`, then `initializeUI(state)`.
+Import pure functions directly from the relevant product/cart module. The central src/logic.ts facade was removed. The filtered array in findProducts is already newly allocated by filter, so sorting it does not mutate the input catalog.
 
-`initializeHeroEntrance` belongs to the UI box. It waits for all decorative layer images to load, then swaps the static hero for the layered scene. An IntersectionObserver starts one staggered entrance when 12% of the artwork becomes visible and rearms only after it fully leaves the viewport. Reduced motion, image failures and unsupported browsers retain the static image. No scroll listener or business state is involved.
+## Cart and application state
 
-## Rules for another team
+createCartState(storage, getCatalog) receives the storage adapter and a callback returning the current fetched catalog. It keeps no catalog copy. state.bag is the actual returned object; it is never spread into a snapshot and application state has no forwarding cart methods.
 
-1. New product? Edit `data.ts`.
-2. Calculation/search/sort? Add a pure function to the appropriate logic module, return fresh results, and leave the input catalog unchanged. Export public functions through `logic.ts`.
-3. Cart/profile/theme change or persistence? Add an action to `state.ts`. Never edit a cart snapshot in the UI.
-4. DOM query, listener, form, dialog or theme styling? Use `ui.ts`. Never access storage there.
-5. Keep the cosmetics layout, image references, native validation and keyboard behavior intact.
-6. Verify with `npm run build` and `node --test tests/*.test.js`.
+The UI uses state.bag.items, state.bag.promoCode and the bag's addProduct, changeQuantity, removeProduct, setPromoCode and clearCart actions. items returns fresh item objects on every read. Cart calculations remain in cart.logic.ts; no UI or storage belongs there.
 
-Both `AGENTS.md` and `CLAUDE.md` record the same boundaries so either coding assistant follows the assignment. Existing storage keys and legacy bag migration remain supported. Demo profiles are still session-only.
+Application state resolves browser storage once, passes the adapter to the cart and persists only the theme itself. Cart storage keeps the exact roseveil-shopping-bag-v1 and legacy lumiere-shopping-bag-v1 keys and JSON shape. The current key takes priority. Legacy data is read as a fallback and written to the current key on a cart edit, without deleting the legacy key. Invalid/blocked storage retains the existing in-memory fallback behavior.
 
-## Legacy counter compatibility
+Saved items are shape-validated before products arrive. On successful loading, application state calls bag.reconcileCatalog before setting ready and notifying subscribers. Reconciliation reads the current catalog, skips empty catalogs and does not immediately write storage. Loading, failed and empty requests preserve saved selections and promo codes. Prices and checkout are unavailable when there is no loaded catalog. Clear Bag remains available and persists empty items plus an empty promo code, including when the API is unavailable. Quantity limits and demo checkout behavior are unchanged.
 
-`src/counter.ts` preserves the original `setupCounter` export by forwarding it from `ui.ts`. The unchanged demo implementation now lives exclusively in the UI box, is not called during storefront startup, and has a compatibility test. Theme presentation also has an `updateTheme` helper; it paints the latest state after deferred browser transitions.
+Catalog states remain idle/loading/ready/error; ready plus an empty list renders the empty API state. Loading, error/retry, empty and success rendering stays in the UI. Repeated loads while a request is pending are ignored. No fallback catalog is maintained.
 
-The initial collection preview shows five catalog products across body care, hair care, skincare, fragrance and makeup. View All expands the complete catalog; search, category and sort controls continue to use the full catalog.
+## Contracts and boundaries
 
-## TypeScript contracts
+Product, Category and SortOrder live in products/products.types.ts. CartItem, Cart and CartTotals live in cart/cart.types.ts. Theme, Profile, StorageAdapter and AppState live in state/state.types.ts. AppState is derived from createState so its nested bag contract remains synchronized. Cart state imports StorageAdapter as a type only; it has no runtime dependency on application state. Avoid importing AppState into cart.state.ts. Feature UI may import AppState as a type.
 
-The logic box is split by responsibility while `logic.ts` remains its public entry point:
+Only state.ts and cart.state.ts own browser persistence. Only ui.ts, modules/products/products.ui.ts and modules/cart/cart.ui.ts touch the DOM. The reserved shared/ui/toast.ts remains empty. Future product behavior belongs in products.logic.ts, cart calculations in cart.logic.ts, cart transitions in cart.state.ts and application coordination in state.ts.
 
-- `src/modules/products/products.logic.ts`: `productById`, `productCategories`, `findProducts`, `isCategory` and `isSortOrder`, plus the private featured IDs. Reads the catalog from `data.ts`.
-- `src/modules/cart/cart.logic.ts`: `normalizeCart`, `cartTotals` and private `isUnknownArray`. Uses product lookup from the products logic module to validate IDs and obtain catalog prices.
-- `src/logic.ts`: re-exports both modules and keeps the shared `formatMoney` function. Existing UI, state and test imports stay compatible.
-- `SortOrder` lives beside `Product` and `Category` in `products.types.ts` and is re-exported through `logic.ts`.
+Theme callbacks read current state during deferred transitions. Hero observers, reduced-motion behavior, static fallbacks, product media, responsive styling and native form validation are unchanged. The profile remains session-only.
 
-Both modules belong to the existing pure logic box: no DOM, storage, browser globals or input mutation. Imports flow from cart logic to products logic to data, with no imports back into the public entry point.
+## Feature UI ownership
 
-Product and Category live in src/modules/products/products.types.ts; CartItem, Cart and CartTotals live in src/modules/cart/cart.types.ts. Theme, Profile, StorageAdapter and AppState live in src/modules/state/state.types.ts. AppState is derived from createState so its action signatures stay synchronized.
+products.ui.ts owns filters and the rendered-ID cache, cards, responsive-media calls, product details, search/category/sort controls, catalog status/retry and the single catalog subscription. cart.ui.ts owns counts, bag rendering, add/quantity/remove/Clear Bag feedback, promo forms and demo checkout. Both call existing state and pure logic; neither owns persistence or fetch implementation.
 
-Storage JSON enters as unknown and is validated before use. UI helpers check element constructors at runtime and use generic narrowing instead of assertions. Category and sorting values are validated before updating filters. All source modules use TypeScript; Node 24 runs the tests with native type stripping. The catalog event harness strips types with node:module before running the actual UI in its existing VM.
+ui.ts creates both features once and injects the same shared helper implementations. shared/ui/ui.types.ts contains only their contracts. Feature modules import neither the coordinator nor each other. The existing shared/ui/toast.ts remains empty.
 
-Run `npm run typecheck`, `npm run build`, `npm test` and `npm run lint`. The lint command runs `eslint .` followed by `npm run typecheck`. ESLint checks all 13 current TypeScript source files through `src/**/*.ts` using `@typescript-eslint/parser` and `@typescript-eslint/eslint-plugin`, as well as JavaScript tooling/tests. Typecheck runs `tsc --noEmit` for strict compiler checks.
+The coordinator keeps one document click router: product outside-click handling, cart add handling, product/category handling, then shared dialog/info handling. It keeps one Escape coordinator with the existing native-dialog and defaultPrevented guards; product search/tool dismissal precedes mobile-navigation dismissal. Dynamic promo and checkout forms attach handlers after rendering; stable containers attach once. Product UI starts catalog loading once and invokes the coordinator callback after product rendering to refresh cart counts and any open bag. There is no second cart subscription or extra startup product render.
+
+Shared formatMoney, escaping, productMedia, DOM helpers, notifications and openContent remain implemented only in ui.ts. Focus restoration, node reuse, native validation, theme state reads and observer behavior are preserved.
+
+## API and deployment
+
+UI -> state.loadCatalogProducts -> products.api.ts -> shared/api/client.ts -> /api/products. Local Vite middleware and the production Vercel function use the single server catalog. Production simulations remain disabled. No SPA rewrite is needed for hash navigation. Preserve rewriteRelativeImportExtensions in the TypeScript configuration so deployed ESM imports resolve to emitted JavaScript. See [API setup](local-api.md) and [Vercel preparation and incident diagnosis](vercel-deployment.md).
+
+## Verification
+
+Run npm run typecheck, npm run lint, npm run format:check, npm run build and npm test. ESLint includes src/**/\*.ts, server/**/_.ts and api/\**/_.ts. Tests cover cart state in isolation and through the application/UI, legacy migration, blocked storage, live snapshots, all catalog states, search/filter/sort, theme transitions, animations, image integrity and the emitted production API.

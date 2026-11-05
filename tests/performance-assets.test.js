@@ -1,13 +1,17 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
-import { products } from '../src/data.ts'
+import { createHash } from 'node:crypto'
+import { products } from '../server/catalog.ts'
 
 const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8')
 const metrics = JSON.parse(
   fs.readFileSync(new URL('../docs/image-optimization-metrics.json', import.meta.url), 'utf8'),
 )
 const asset = (name) => new URL(`../public/roseveil/${name}`, import.meta.url)
+const manifest = JSON.parse(
+  fs.readFileSync(new URL('../docs/asset-manifest.json', import.meta.url), 'utf8'),
+)
 
 // VP8L contains exact intrinsic dimensions, so descriptors cannot silently drift.
 function imageSize(file) {
@@ -47,7 +51,6 @@ test('all delivered image variants exist with accurate dimensions and smaller fu
     assert.deepEqual(imageSize(asset(`${item.name}.webp`)), [item.width, item.height])
     assert.equal(fs.statSync(asset(`${item.name}.webp`)).size, item.webpBytes)
     assert.ok(item.webpBytes < item.pngBytes)
-    assert.ok(fs.existsSync(asset(`${item.name}.png`)), 'Preserve original image')
     for (const variant of item.variants) {
       assert.deepEqual(imageSize(asset(variant.file)), [variant.width, variant.height])
       assert.equal(fs.statSync(asset(variant.file)).size, variant.bytes)
@@ -61,6 +64,33 @@ test('all delivered image variants exist with accurate dimensions and smaller fu
       item.variants.map((entry) => entry.width),
       [240, 480, 800],
     )
+  }
+})
+
+test('every public asset is referenced, intact and dimensionally correct; hero layers preserve alpha', () => {
+  const expected = new Set(['roseveil-mark.svg'])
+  for (const product of products)
+    for (const suffix of ['.webp', '-240.webp', '-480.webp', '-800.webp'])
+      expected.add(`roseveil/${product.image}${suffix}`)
+  for (const match of html.matchAll(/\/(roseveil\/[a-zA-Z0-9-]+\.(?:jpg|webp))/g))
+    expected.add(match[1])
+  const actual = fs
+    .readdirSync(new URL('../public/', import.meta.url), { recursive: true })
+    .filter((file) => fs.statSync(new URL(`../public/${file}`, import.meta.url)).isFile())
+    .map((file) => file.replaceAll('\\', '/'))
+  assert.deepEqual([...actual].sort(), [...expected].sort())
+  assert.deepEqual(manifest.map((entry) => entry.file).sort(), [...actual].sort())
+  for (const entry of manifest) {
+    const file = new URL(`../public/${entry.file}`, import.meta.url)
+    const bytes = fs.readFileSync(file)
+    assert.equal(bytes.length, entry.bytes)
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), entry.sha256)
+    if (entry.width) assert.deepEqual(imageSize(file), [entry.width, entry.height])
+    if (entry.file.includes('hero-layer-')) {
+      assert.equal(entry.hasAlpha, true)
+      assert.equal(bytes.toString('ascii', 12, 16), 'VP8L')
+      assert.equal((bytes.readUInt32LE(21) >>> 28) & 1, 1)
+    }
   }
 })
 

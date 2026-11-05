@@ -8,16 +8,18 @@ All application modules now use TypeScript. The migration preserved the catalog,
 
 ## Current ownership
 
-| File                                   | Responsibility                                                                    |
-| -------------------------------------- | --------------------------------------------------------------------------------- |
-| src/data.ts                            | Catalog typed as readonly Product[]                                               |
-| src/modules/products/products.logic.ts | Product lookup, search, filtering, sorting and control-value validation           |
-| src/modules/cart/cart.logic.ts         | Validation of untrusted cart entries and calculation of totals                    |
-| src/logic.ts                           | Public logic exports and shared currency formatting                               |
-| src/state.ts                           | Cart actions, defensive snapshots, theme, session profile and browser persistence |
-| src/ui.ts                              | Rendering, events, dialogs, validated DOM lookups and theme presentation          |
-| src/main.ts                            | Styles and state/UI initialization                                                |
-| src/counter.ts                         | Legacy counter compatibility export required by an existing test                  |
+| File                                   | Responsibility                                                               |
+| -------------------------------------- | ---------------------------------------------------------------------------- |
+| server/catalog.ts                      | Catalog typed as readonly Product[]                                          |
+| src/modules/products/products.logic.ts | Product lookup, search, filtering, sorting and control-value validation      |
+| src/modules/cart/cart.logic.ts         | Validation of untrusted cart entries and calculation of totals               |
+| src/modules/cart/cart.state.ts         | Cart actions, live defensive getters, promo handling and browser persistence |
+| src/state.ts                           | Application coordination, catalog loading, theme and session profile         |
+| src/modules/products/products.ui.ts    | Catalog presentation, controls, details and loading states                   |
+| src/modules/cart/cart.ui.ts            | Bag presentation, actions, promo forms and demo checkout                     |
+| src/shared/ui/ui.types.ts              | Type-only injected helper contracts                                          |
+| src/ui.ts                              | Shared helpers, routing, dialogs, general forms, theme and hero              |
+| src/main.ts                            | Styles and state/UI initialization                                           |
 
 See [the architecture documentation](architecture.md) for import boundaries and function ownership.
 
@@ -35,7 +37,7 @@ tsconfig.json includes all of src, enables strict, noUnusedLocals and noEmit, an
 
 The tests use Node 24 native type stripping. The existing VM-based catalog event harness strips types through node:module before exercising real UI handlers. Node may print an experimental warning for stripTypeScriptTypes; that warning is not a test failure. Additional regressions cover invalid stored JSON shapes and invalid cart entries.
 
-`npm run lint` runs `eslint .` followed by `npm run typecheck`. ESLint checks all 13 current TypeScript source files through `src/**/*.ts` using `@typescript-eslint/parser` and `@typescript-eslint/eslint-plugin`, as well as JavaScript tooling/tests. Typecheck runs `tsc --noEmit` for strict compiler checks.
+`npm run lint` runs `eslint .` followed by `npm run typecheck`. ESLint checks frontend TypeScript, the server catalog and the Vercel function through `src/**/*.ts`, `server/**/*.ts` and `api/**/*.ts` using `@typescript-eslint/parser` and `@typescript-eslint/eslint-plugin`, as well as JavaScript tooling/tests. Typecheck runs `tsc --noEmit` for strict compiler checks.
 
 ## Verification and coursework scope
 
@@ -45,4 +47,4 @@ Check product rendering, images and prices; combined search/category/sort contro
 
 Automated behavior checks do not establish visual or physical-device results. Browser automation was unavailable during migration, so responsive layout and native browser form validation were not claimed as verified by AI.
 
-Day 2 evidence remains in [the task record](task-2.md), [the historical completion report](day2-completion-report.md) and [the debugging log](../debugging-log.md). The API and toast placeholders in src/shared/ are retained for upcoming Day 3 work; their presence does not claim completed API integration.
+Debugging evidence remains in [the debugging log](../debugging-log.md). Day 3 now fetches the exact ROSEVEIL catalog from the local /api/products endpoint backed by server/catalog.ts, with loading, error/retry, empty and success states in the existing grid. See [local API setup](local-api.md). The shared toast file remains an empty placeholder.

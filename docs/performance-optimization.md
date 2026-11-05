@@ -1,5 +1,7 @@
 # ROSEVEIL performance optimization report
 
+This is the historical optimization report. Final submission cleanup subsequently removed unused PNG originals and the retired flattened hero, and converted the four active transparent layers to lossless WebP. See [the current asset manifest](asset-manifest.json). Performance measurements below are historical, not current results. Historical file sizes and original-retention statements below describe the earlier work, not current files.
+
 ## Investigation and limits
 
 The supplied Lighthouse results were Performance 33, Accessibility 91, Best Practices 100, SEO 92. Lighthouse warned about extensions. These are student-supplied results, not a controlled baseline measured by AI. Extensions, device load, network conditions and a Vite development server can affect a run; their contribution cannot be quantified from the scores alone.
@@ -74,6 +76,6 @@ Per-image dimensions, source bytes, output bytes and variants are recorded in [i
 4. Treat the earlier score of 33 as an uncontrolled reference. A valid before/after comparison requires the previous version under identical settings; do not describe a new clean-profile result as purely code-caused improvement. Keep production server compression and hosting conditions consistent too.
 5. In Network, disable cache and reload. Confirm only one hero candidate downloads, its priority is high, product/category images request WebP, no image/font requests return 404, and `currentSrc` selects a suitable source at 390, 768 and 1440 px widths and high pixel density. Scroll the page to check lazy loading and compare image sharpness, cropping and transparency with the originals.
 6. Record a Performance trace while typing in search, opening filters/sort, scrolling and changing cart quantities. Inspect long tasks and layout shifts. Lighthouse navigation does not establish field INP: use a local interaction trace for diagnosis and real-user data for field INP when available. TBT is a lab diagnostic, not an INP replacement.
-7. Verify all products, combined search/filter/sort, empty/reset states, cart quantity/promo/refresh persistence, theme persistence, keyboard dialogs and native form validation. Compare light/dark mobile/tablet/desktop appearance and animations. Follow [the keyboard checklist](keyboard-accessibility-audit.md).
+7. Verify all products, combined search/filter/sort, empty/reset states, cart quantity/promo/refresh persistence, theme persistence, keyboard dialogs and native form validation. Compare light/dark mobile/tablet/desktop appearance and animations. Check Tab/Shift+Tab traversal, Enter/Space activation, Escape dismissal and focus restoration.
 
 Remaining limits: the hero is still 1.32 MB at original resolution because lossless quality was prioritized; external font timing, real hosting compression/cache headers, extension overhead, visual quality of resized variants and actual CWV outcomes remain to be checked in the browser. There is no evidence here to justify removing animations, changing fonts/layout, adding a framework, or forcing dependency updates.

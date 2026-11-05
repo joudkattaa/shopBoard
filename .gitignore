@@ -13,8 +13,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+.vscode/
 .idea
 .DS_Store
 *.suo
@@ -23,9 +22,11 @@ dist-ssr
 *.sln
 *.sw?
 
-!.vscode/settings.json
 
 # Local archives and assistant-specific files
 .local-backup/
 .agents/
 skills-lock.json
+.vercel/
+
+.vercel

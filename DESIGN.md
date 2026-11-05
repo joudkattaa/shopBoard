@@ -1,47 +1,147 @@
 # ROSEVEIL Cosmetics — Design Rationale
 
-## Inspiration and development
+## 1. My Design Inspiration
 
-The design process began with inspiration found on Pinterest, as described by the project author. No specific pin URL or original reference is supplied, so this document records the author's customizations and the implemented design rather than claiming a verified comparison with a particular reference.
+When I started working on ROSEVEIL, I wanted to create a cosmetics website that looked elegant, soft, and modern.
 
-The initial direction was developed into ROSEVEIL's own beauty-store identity through a customized palette, replacement product imagery, revised product presentation and a floral brand mark. Search, category filtering and ascending/descending price sorting were added to make the storefront interactive. Later iterations refined the hero composition, mobile text placement and footer proportions.
+I found a design on Pinterest called **LUMIÈRE Cosmetics**. I liked its clean layout, soft pink colors, product photography, and the way the sections were organized.
 
-Repository history records the storefront foundation in `5a70a26` and the ROSEVEIL search/filter/sort and modular architecture work in `69880ec`. The current layered hero and compact footer are subsequent working-tree changes; this document does not imply they have been committed.
+I used this design as my starting reference, but I wanted to create my own version rather than copy everything exactly.
 
-## Visual identity
+I kept some of the general layout ideas and developed them with my own branding, colors, fonts, product images, animations, and shopping features.
 
-Blush and soft pink lead the interface. Warm beige gives the hero a quieter backdrop, while mauve, burgundy and rose-gold details connect the packaging, accents and optional dark theme.
+**Original reference:** LUMIÈRE Cosmetics — Pinterest design inspiration.
 
-| Element         | Current treatment                                            |
-| --------------- | ------------------------------------------------------------ |
-| Light surfaces  | Near-white blush `#fffafb` and soft pink `#fff1f5`           |
-| Hero surface    | Warm beige `#f5ece4`, blended into the photographic scene    |
-| Primary accents | Dusty rose `#a95570` and deeper rose `#88485f`               |
-| Text            | Deep raisin `#36242d`, with muted rose-brown supporting text |
-| Dark theme      | Burgundy surfaces, pale text and rose-gold accents           |
+![Original LUMIÈRE Cosmetics design reference](docs/design-reference.jpg)
 
-Cormorant Garamond provides expressive headings and the serif wordmark; DM Sans supports navigation, product details, controls and body copy. Italic heading accents, restrained letter spacing, subtle borders and rounded controls create hierarchy without adding visual clutter. The header/footer wordmark and floral icon establish consistent branding; the favicon is `public/roseveil-mark.svg`.
+## 2. My Brand Identity
 
-## Product presentation and hero
+I chose the name **ROSEVEIL Cosmetics** because I wanted a beauty brand that felt feminine, elegant, and a little luxurious.
 
-The catalog contains 30 products across seven categories. Five varied products appear initially, with a View All control revealing the complete catalog. Search, category selection and price sorting work together, and product details reuse the existing dialog and shopping-bag actions.
+I changed the original colors and used my **Rose Dusk** palette. My main colors are soft pink, blush, dusty rose, and warm beige, with darker burgundy and rose-gold accents.
 
-The final hero is a full-width beige composition rather than a separate framed image card. A marble/travertine platform, ceramic vase and blush blossoms support a compact, tiered group of four products: mauve tube, dark serum, cream jar and rose-gold pump. The tube and pump sit behind the foreground products, with light overlap and space for stationary copy on the left.
+I also created two different themes:
 
-The product artwork was generated and edited with OpenAI ImageGen. Four transparent PNG layers were prepared from the original ROSEVEIL hero; generated extraction can introduce small edge or reflection differences. A product-free background prevents duplicate products beneath the moving layers. A matching complete photograph provides a static fallback. See [image attribution and palette details](docs/rose-dusk-palette.md).
+- **Light theme:** Soft pink and beige backgrounds with rose-colored details.
+- **Dark theme:** Deep burgundy colors with lighter text and rose-gold accents.
 
-Products enter with 180-millisecond offsets and 1.1-second transform/opacity animations, then settle. IntersectionObserver rearms the sequence only after the artwork fully leaves the viewport. Reduced motion, failed image loading or unavailable observer support retain the static hero. No animation library is used.
+For the typography, I used **Cormorant Garamond** for headings and **DM Sans** for smaller text, buttons, and navigation.
 
-## Layout, spacing and responsive behavior
+I changed the brand name, logo, product images, and packaging presentation to make everything feel consistent with ROSEVEIL.
 
-Mobile-first CSS uses fluid widths, constrained containers and min-width breakpoints. On mobile, compact hero copy remains left-aligned and vertically centered beside the scene. At 800px, the hero adopts its larger desktop proportions. Explicit image dimensions reserve space, and decorative layers use a shared coordinate system.
+## 3. What I Changed and Improved
 
-Product grids expand with available width. The footer uses organized branding, navigation, customer-care and contact groups, plus a newsletter area. Its final revision reduces heading/logo sizes and spacing instead of using an oversized promotional block. Newsletter controls stack on small screens and share a row from 600px; wider footer columns and a two-column newsletter layout apply from 1000px. Typical footer gaps are 18–28px, with 24px invitation padding and restrained dividing borders.
+### Hero Section
 
-These are the project's departures from the starting Pinterest inspiration: a distinct ROSEVEIL identity, customized imagery and logo, interactive catalog controls, an independently animated layered hero, a mobile overlay composition and a compact footer. They are not claims about features missing from an unidentified source design.
+The hero section is one of my favorite parts of the website.
 
-## Accessibility and verification limits
+The original reference showed cosmetics products in a beautiful static scene. I liked that idea, but I wanted to make my hero more interesting.
 
-The implementation retains semantic page regions, a skip link, visible keyboard focus, native buttons and dialogs, associated form labels, required fields and email validation. Newsletter signup remains a demonstration: addresses are not saved or sent. Hero artwork has an accessible scene description, while decorative layers use empty image alternatives. Motion preferences are respected, and footer form controls retain at least 44px height.
+I created a different composition using a warm beige background, a marble platform, flowers, a vase, and ROSEVEIL products.
 
-Regression tests cover catalog interactions, cart persistence, dialog/focus behavior, image dimensions, hero replay, reduced-motion changes and image-loading fallbacks. Validation commands are `npm run typecheck`, `npm run build`, `npm test` and `npm run lint`. These checks do not establish visual quality, full accessibility conformance or cross-device compatibility. Final browser checks should confirm small/large layouts, text/image overlap, keyboard navigation, native form validation and motion behavior.
+I also added animations so the products enter the scene one after another and then settle into their positions.
+
+I adjusted the text and product placement for smaller screens, and I kept a static version for users who prefer reduced motion or when the animation cannot load.
+
+### Product Categories
+
+I kept the idea of showing product categories with images because it makes the website easier to explore.
+
+However, I changed the images, spacing, and card shapes to match my brand.
+
+The website has seven categories, including Skin Care, Makeup, Hair Care, Fragrance, Body Care, Face Masks, and Gift Sets.
+
+I used rounded corners and soft colors to give this section a different look from the original reference.
+
+### About Section
+
+In the reference design, the About section included a model's photograph.
+
+I decided to use a ROSEVEIL gift box with beauty products instead because I wanted the section to focus more on my brand and its packaging.
+
+I also changed the text, icons, colors, and layout to create a softer presentation.
+
+### Product Collection
+
+I wanted the product collection to look attractive but also be easy to use.
+
+I redesigned the product cards with rounded corners, soft backgrounds, and pink Add to Bag buttons.
+
+I also added interactive features such as product search, category filtering, price sorting, and product details.
+
+The catalog contains 30 products across seven categories.
+
+### Shopping Bag
+
+I worked on the shopping bag to make it more useful and consistent with the website.
+
+Users can add products, change quantities, remove items, clear the bag, and use the GLOW20 discount code.
+
+I adjusted the layout, buttons, spacing, and colors so the shopping experience feels connected to the rest of ROSEVEIL.
+
+### Footer
+
+I also redesigned the footer.
+
+I reorganized the navigation links, customer-care information, contact details, and newsletter area.
+
+I reduced unnecessary spacing and made the layout more compact, especially on smaller screens.
+
+## 4. Responsive Design
+
+I wanted ROSEVEIL to work on both mobile and larger screens.
+
+I used mobile-first CSS and adjusted the navigation, hero, category cards, product grid, and footer for different screen sizes.
+
+On mobile, the categories and product cards appear in fewer columns. On larger screens, more items can appear side by side.
+
+I also paid attention to input labels, keyboard navigation, visible focus, and the Escape key for closing search controls.
+
+My goal was to keep the website comfortable to use without losing its visual style.
+
+## 5. How My Design Is Different from the Reference
+
+The Pinterest design helped me choose the general direction, but I made several changes to create my own version.
+
+| Element        | My Changes in ROSEVEIL                                         |
+| -------------- | -------------------------------------------------------------- |
+| Branding       | Changed LUMIÈRE to my own ROSEVEIL identity and logo.          |
+| Colors         | Created the Rose Dusk palette and added a burgundy dark theme. |
+| Typography     | Changed the fonts and text styling.                            |
+| Product images | Used different cosmetics products and packaging designs.       |
+| Hero           | Created a new scene and added animated product layers.         |
+| Categories     | Updated the images, spacing, and rounded card shapes.          |
+| About section  | Replaced the model image with a ROSEVEIL gift box.             |
+| Product cards  | Redesigned the cards and added interactive shopping controls.  |
+| Shopping bag   | Improved the layout and added cart management features.        |
+| Footer         | Reorganized the content and improved the responsive layout.    |
+
+I kept some of the original structure because I liked how it guided the user through the website. However, the final colors, product presentation, animations, and details reflect the direction I chose for ROSEVEIL.
+
+## 6. Testing My Design
+
+While developing the website, I checked the design in my local browser and made changes when something did not look or work correctly.
+
+For example, I noticed that the collection search panel was covering the product cards. I investigated the issue, tried a manual fix, and then used Codex to help complete the layout correction.
+
+I also improved the header search so it closes when pressing Escape, clicking outside, or submitting a search.
+
+I used these commands to help check the project:
+
+- `npm run typecheck`
+- `npm run lint`
+- `npm test`
+- `npm run build`
+- `npm run format:check`
+
+Automated tests help me check the code, but I also learned that I need to review visual changes in the browser.
+
+## 7. Final Result
+
+My goal was to turn a Pinterest design reference into my own cosmetics website.
+
+I kept the elegant feeling and some of the original layout ideas, but I changed the branding, colors, typography, product presentation, and several sections.
+
+I also added animations and interactive shopping features to make the website more engaging.
+
+I am happy with how ROSEVEIL developed because it now has a more personal identity and reflects the style I wanted to create.

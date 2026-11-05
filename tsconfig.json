@@ -8,7 +8,8 @@
     "noEmit": true,
     "types": ["vite/client"],
     "noUnusedLocals": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true
   },
-  "include": ["src"]
+  "include": ["src", "server/catalog.ts", "api"]
 }

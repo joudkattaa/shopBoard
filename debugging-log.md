@@ -1,59 +1,35 @@
-# Day 2 debugging log — ROSEVEIL Cosmetics
+ROSEVEIL Cosmetics — My Debugging Log
+Name: Joud Kattaa
+Project: ShopBoard / ROSEVEIL Cosmetics
+Date updated: November 5, 2026
 
-Audit date: 2026-10-31.
+While testing my website, I found some problems with the product search and the layout. I tried to understand each problem before making changes. I also used AI when I needed help, and I wrote down which parts I did myself.
+Bug 1 — Searching for “serum” showed no products
 
-## Scope and attribution
+- What I saw: I selected the Skin Care category and searched for serum, but the website showed zero results even though I knew there was a product called Radiance Facial Serum.
+- Type: Logic.
+- How I found it: I tested the search and category filter in my local browser. This was a practice bug that AI had deliberately introduced so I could try to find it myself.
+- Cause: In src/modules/products/products.logic.ts, the search used startsWith(term). That only matches names beginning with the search word. I wanted the search to find a word anywhere in a product name.
+- Fix: I changed startsWith(term) to includes(term) myself.
+- Did I use AI? For what? Yes. AI set up the practice bug and later helped explain why it happened. I found the incorrect search result and made the actual code change myself.
+- How I checked: I repeated the serum search and confirmed that it found the matching product.
+  Bug 2 — The collection search covered the products
+- What I saw: When I opened the search control near the product collection, the search panel appeared on top of the product cards. It did not look right and made the products harder to see.
+- Type: UI / layout.
+- How I found it: I noticed it while opening and testing the collection search on my local website.
+- Cause: The popup had position: absolute, so it did not take up space in the page layout and could overlap the cards.
+- Fix: I first tried changing the HTML and CSS myself, but my attempt did not fix it. I asked Codex to help. The final changes were made in index.html and src/responsive.css. The controls were adjusted to use in-flow positioning and a flex layout so the search field could open beside its icon without covering the products.
+- Did I use AI? For what? Yes. I discovered the layout problem and tried a manual fix. Codex helped with the final HTML/CSS changes and the layout test.
+- How I checked: I opened the search again in my browser and saw that it no longer covered the product cards.
+  Bug 3 — Header search did not close properly
+- What I saw: The search panel at the top of the page stayed open when I pressed Escape after moving away from the search field. Refreshing the page made it disappear, but I wanted it to close normally.
+- Type: UI / accessibility / event handling.
+- How I found it: I noticed this while testing the header search in my browser. I tried opening the search, moving the focus, and pressing Escape.
+- Cause: The closing condition checked whether the keyboard focus was still inside #search-panel. When the focus moved somewhere else, Escape did not close it.
+- Fix: In src/modules/products/products.ui.ts, I changed the condition so Escape could close the panel whenever it was open. I also added closing after submitting a search and when clicking outside the panel. During this work, I accidentally added another document.addEventListener('click', ...) inside the products UI. Two automated tests failed because the project already had a global click listener in src/ui.ts. Codex helped me find and remove the duplicate listener. The existing listener in src/ui.ts now calls closeHeaderSearchOutside().
+- Did I use AI? For what? Yes. I discovered the original problem and made the first changes myself. When two tests failed, I used Codex to understand the error and fix the extra event listener.
+- How I checked: I tested all three cases in my browser: pressing Escape, clicking outside the search, and pressing Enter to search. All three worked.
+  What I learned
+  I learned that startsWith() and includes() give different search results, and that position: absolute can make a popup overlap other elements. I also learned why the project should have only one main document click listener. The product UI can provide functions, while src/ui.ts handles the global events and calls those functions.
 
-This log records confirmed findings in the real project, not invented instructor bugs. Codex (AI) inspected the code, wrote reproductions, implemented the fixes, and ran the automated checks. It does **not** claim that the student personally discovered these issues, used browser DevTools, or completed the manual exercises below.
-
-The starting suite passed 19 tests. Passing that suite did not establish coverage for rapid deferred theme transitions or DOM access in the unused legacy counter.
-
-## Finding 1 — rapid theme toggles saved the wrong final selection
-
-- **What I saw:** In a Node reproduction with deferred `startViewTransition` callbacks, two rapid clicks from light mode left the saved and final visible theme dark. Two toggles should return to light. The new regression initially failed with `'dark' !== 'light'`.
-- **Type:** State.
-- **How I found it:** AI code inspection identified that the next state came from `root.dataset.theme`, while that DOM value was updated asynchronously. Codex then ran the reproduction and the failing regression in `tests/theme.test.js`. This was a simulated transition queue, not an observed browser session.
-- **Cause:** Persistence updated synchronously, but the next click consulted stale DOM state while the earlier transition callback was still queued.
-- **Fix:** Derive the next selection from `state.theme`, update state before scheduling presentation, and make deferred presentation read the latest state. No palette or layout change.
-- **Verification:** `rapid toggles use current state while view-transition callbacks are deferred` passes after the fix, including deliberately reversed callback execution in the test harness. Existing persistence, blocked-storage and keyboard-toggle paths remain covered by the suite.
-- **Did I use AI?** Yes. Codex found, reproduced, fixed and tested this issue. The student must still perform the real-browser check below.
-
-## Finding 2 — legacy counter violated the DOM ownership rule
-
-- **What I saw:** `src/counter.js` contained `element.innerHTML` and `element.addEventListener` even though `CLAUDE.md` permits DOM work only in `ui.js`. It is an unused Vite demo helper, not a confirmed live-store runtime failure.
-- **Type:** Logic — architectural boundary violation in dormant code.
-- **How I found it:** AI inspected every source module and added a source-boundary regression. It initially failed specifically on `counter.js`.
-- **Cause:** The original Vite demo helper remained outside the later modular architecture; earlier boundary tests only checked the five main modules.
-- **Fix:** Move the existing counter implementation unchanged into `ui.js`; retain `counter.js` as a compatibility re-export. The helper, its exported API and behavior are preserved; no file was deleted and it was not added to the storefront startup path.
-- **Verification:** The all-source DOM-boundary regression passes. A separate test calls the original counter export and checks that it renders `Count is 0`, then `Count is 1` after its click handler runs.
-- **Did I use AI?** Yes. Codex identified the boundary violation, changed the ownership and ran the tests. No claim of a student-discovered runtime bug is made.
-
-## Instructor debugging lab — unavailable
-
-`day2-kit/debug-lab` is absent. Directory discovery searched the project, including hidden/ignored local archives, while excluding `node_modules` and `.git`. Neither a `day2-kit` nor a `debug-lab` directory was found.
-
-The required six planted bugs (two runtime, two logic, two state) therefore could not be identified or fixed. No replacement lab was invented and no deliberate bugs were introduced into ShopBoard. The two confirmed findings above are not presented as those six instructor bugs. Obtain the original kit from the instructor and complete/document that exercise separately, preserving its original version.
-
-## Security audit — separate dependency warning
-
-- The first restricted `npm audit --json` attempt failed to reach the advisory endpoint; that failure was not a clean audit result.
-- A subsequent network-enabled `npm audit` completed with exit code 1 and **5 moderate findings**, 0 high/critical findings in the JSON report.
-- The reported chain involves `minimatch`, `@eslint/config-array`, `eslint`, `@eslint-community/eslint-utils` and `@eslint/js`; these are development tooling. The underlying advisory is [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249), potential denial of service via globparts amplification in minimatch.
-- npm proposed `npm audit fix --force` and `eslint@4.0.0`, explicitly a breaking change. That command was **not** run; no dependencies or lockfile were changed in this audit.
-- Additional `npm audit --omit=dev`: exit code 0, **0 vulnerabilities reported**. This does not cancel the full audit warnings or prove the application is universally secure.
-
-## Manual debugging steps the student must perform
-
-These steps are **not completed by this automated audit**. Record your own observations, screenshots, console output and breakpoint findings before claiming them in your submission.
-
-1. Run `npm run dev`, open the local URL, open DevTools Console, clear it and reload. Record whether there are errors. Enable Pause on exceptions and place a breakpoint in `ui.js`'s `renderProducts`.
-2. Search `BOTANICAL`, select Hair Care, then test both price orders. There should be five matches, ordered from $23.99 to $42.99 ascending and the reverse descending. Inspect the `filters` and `matches` values at the breakpoint. Try an impossible query, then Clear Filters and confirm all 30 products return.
-3. After those re-renders, add two Radiance Facial Serums and one Hydrating Day Cream using the rendered controls. The subtotal should be $99.97; applying GLOW20 should produce $79.98 merchandise with free demo shipping. Use quantity and remove buttons and inspect the state action calls.
-4. Inspect Application > Local Storage for `roseveil-shopping-bag-v1`, refresh the actual browser and compare quantities, code and totals. Repeat with the theme preference. Try rapid pointer clicks on the theme toggle and confirm that the last selection survives reload.
-5. Navigate search, category/sort popups, product dialogs and cart with Tab/Enter/Escape. Test registration empty, invalid email and a made-up password shorter than eight characters. Confirm native validation blocks submission. Do not use a real password.
-6. Check 360px, 768px and 1280px, light/dark themes, long text, landscape and an actual phone with its keyboard open. Check horizontal overflow and visible focus. Run Lighthouse Accessibility if required by the course; no score is claimed here.
-7. Obtain the missing instructor kit. For each genuine planted bug, reproduce it, classify it, record the exception/values/state, identify the root cause, fix it, and record your actual AI assistance. Keep that lab's six-bug exercise separate from the production findings above.
-
-## Automated verification summary
-
-Final suite: **25 passing tests**. Lint, formatting and production-build results, audit warnings, file changes and submission conditions are recorded in [docs/day2-completion-report.md](docs/day2-completion-report.md). Browser access reported `The browser access host is unavailable`; no browser, physical-device or Lighthouse verification is claimed.
+After the last fix, Codex reported that typecheck, lint, formatting, build, and all 72 automated tests passed. I also checked the search behavior myself in the browser.

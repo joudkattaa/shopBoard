@@ -243,8 +243,8 @@
             />
             <span class="hero-product-layer hero-layer-tube"
               ><img
-                src="/roseveil/hero-layer-classic-tube.png"
-                srcset="/roseveil/hero-layer-classic-tube.png 265w"
+                src="/roseveil/hero-layer-classic-tube.webp"
+                srcset="/roseveil/hero-layer-classic-tube.webp 265w"
                 sizes="(min-width: 800px) 160px, 110px"
                 width="265"
                 height="650"
@@ -254,8 +254,8 @@
             /></span>
             <span class="hero-product-layer hero-layer-pump"
               ><img
-                src="/roseveil/hero-layer-classic-pump.png"
-                srcset="/roseveil/hero-layer-classic-pump.png 227w"
+                src="/roseveil/hero-layer-classic-pump.webp"
+                srcset="/roseveil/hero-layer-classic-pump.webp 227w"
                 sizes="(min-width: 800px) 160px, 110px"
                 width="227"
                 height="650"
@@ -265,8 +265,8 @@
             /></span>
             <span class="hero-product-layer hero-layer-serum"
               ><img
-                src="/roseveil/hero-layer-classic-serum.png"
-                srcset="/roseveil/hero-layer-classic-serum.png 248w"
+                src="/roseveil/hero-layer-classic-serum.webp"
+                srcset="/roseveil/hero-layer-classic-serum.webp 248w"
                 sizes="(min-width: 800px) 160px, 110px"
                 width="248"
                 height="650"
@@ -276,8 +276,8 @@
             /></span>
             <span class="hero-product-layer hero-layer-jar"
               ><img
-                src="/roseveil/hero-layer-classic-jar.png"
-                srcset="/roseveil/hero-layer-classic-jar.png 450w"
+                src="/roseveil/hero-layer-classic-jar.webp"
+                srcset="/roseveil/hero-layer-classic-jar.webp 450w"
                 sizes="(min-width: 800px) 160px, 110px"
                 width="450"
                 height="362"
@@ -558,11 +558,11 @@
             role="search"
             aria-label="Filter the collection"
           >
-            <details class="catalog-tool">
+            <details class="catalog-tool catalog-search-tool">
               <summary aria-label="Search products" title="Search products">
                 <svg class="icon" aria-hidden="true"><use href="#i-search" /></svg>
               </summary>
-              <div class="catalog-popup">
+              <div class="catalog-popup catalog-search-popup">
                 <label for="catalog-search">Search products</label
                 ><input
                   id="catalog-search"
@@ -608,7 +608,11 @@
           <button id="clear-filters" class="text-button">Clear filters ×</button>
         </div>
         <p id="filter-status" class="product-results" role="status" aria-atomic="true"></p>
-        <div id="product-grid" class="product-grid"></div>
+        <p id="catalog-status" role="status" aria-live="polite" aria-atomic="true">
+          Loading ROSEVEIL products?
+        </p>
+        <button id="catalog-retry" class="button" type="button" hidden>Try again</button>
+        <div id="product-grid" class="product-grid" aria-busy="true"></div>
         <div id="empty-state" class="empty-state" hidden>
           <h3>A little change of search?</h3>
           <p>We couldn’t find a match. Try “serum”, “rose”, or explore the full collection.</p>

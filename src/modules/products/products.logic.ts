@@ -1,21 +1,31 @@
 import type { Product, Category, SortOrder } from './products.types.ts'
-import { products } from '../../data.ts'
 
 const featuredIds = new Set(['body-cream', 'shampoo', 'serum', 'perfume', 'makeup'])
 
-export const productById = (id: string | undefined): Product | undefined =>
-  products.find((product) => product.id === id)
+export const productById = (
+  id: string | undefined,
+  catalog: readonly Product[] = [],
+): Product | undefined => catalog.find((product) => product.id === id)
 
-export const productCategories = [...new Set(products.map((product) => product.category))]
+export const productCategories: readonly Category[] = [
+  'Body Care',
+  'Hair Care',
+  'Skin Care',
+  'Fragrance',
+  'Makeup',
+  'Face Masks',
+  'Gift Sets',
+]
 
 export function findProducts(
   category: Category | 'All' = 'All',
   query = '',
   featuredOnly = false,
   sort: SortOrder = 'default',
+  catalog: readonly Product[] = [],
 ) {
   const term = query.trim().toLocaleLowerCase('en-US')
-  const filteredProducts = products.filter(
+  const filteredProducts = catalog.filter(
     (product) =>
       (!featuredOnly || featuredIds.has(product.id)) &&
       (category === 'All' || product.category === category) &&
@@ -27,7 +37,7 @@ export function findProducts(
       : sort === 'price-desc'
         ? (a: Product, b: Product) => b.price - a.price
         : () => 0
-  return [...filteredProducts].sort(compare)
+  return filteredProducts.sort(compare)
 }
 
 export function isCategory(value: unknown): value is Category | 'All' {

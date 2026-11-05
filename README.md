@@ -28,7 +28,7 @@ Open the local address printed by Vite. Installation also runs the Husky prepare
 | `npm run format:check` | Check formatting without rewriting files                                      |
 | `npm test`             | Run `node --test tests/*.test.js`                                             |
 
-ESLint checks all 13 current TypeScript source files through `src/**/*.ts` using `@typescript-eslint/parser` and `@typescript-eslint/eslint-plugin`. The lint command runs `eslint .` followed by `npm run typecheck`; typecheck runs `tsc --noEmit` for strict compiler checks.
+ESLint checks frontend TypeScript, the server catalog and the Vercel function through `src/**/*.ts`, `server/**/*.ts` and `api/**/*.ts` using `@typescript-eslint/parser` and `@typescript-eslint/eslint-plugin`. The lint command runs `eslint .` followed by `npm run typecheck`; typecheck runs `tsc --noEmit` for strict compiler checks.
 
 The pre-commit hook runs the configured lint-staged tasks. Formatting and staged-file tasks may rewrite files; typecheck does not.
 
@@ -44,11 +44,11 @@ The pre-commit hook runs the configured lint-staged tasks. Formatting and staged
 
 ## Demonstration scope
 
-Catalog data comes from `src/data.ts`. **No product API, payment processor, authentication, email delivery or fulfillment service is connected.**
+The cosmetics catalog is fetched from the REST endpoint `GET /api/products`, backed directly by `server/catalog.ts`. Vite middleware serves the endpoint in local development and preview; a Vercel Function serves it in production. The endpoint returns the exact 30 ROSEVEIL products with unchanged IDs, prices, categories and image references. The existing grid shows loading, error/retry, empty and success states. Cart validation uses the fetched catalog; saved IDs and quantities survive pending, failed and empty requests. Prices and checkout become available once product data has loaded. No external instructor API, payment processor, authentication, email delivery or fulfillment service is connected.
 
 Checkout, registration, contact and newsletter forms provide local demonstrations with native validation. Newsletter signup validates a required email address and displays a local confirmation; it sends and saves no address. Demo checkout clears the bag but places no order. Registration keeps only a name in memory until refresh; its password is not read, saved or transmitted by application code. Use a made-up password.
 
-Only bag selections, the promo code and theme preference are persisted by the application. Google Fonts makes external font-loading requests. The empty API client and shared toast files under `src/shared/` are reserved for upcoming Day 3 work and are not completed integrations.
+Only bag selections, the promo code and theme preference are persisted. Google Fonts makes external font-loading requests. `src/shared/api/client.ts` handles HTTP/network errors and validated JSON; `products.api.ts` validates the catalog response. The shared toast file remains an empty placeholder. See [local API setup and test URLs](docs/local-api.md) for development simulations and preview, and [Vercel deployment preparation](docs/vercel-deployment.md) for exact settings and manual deployment checks. Vercel's `api/products.ts` imports the same catalog without development simulations. ROSEVEIL is deployed on Vercel at [roseveil-cosmetics.vercel.app](https://roseveil-cosmetics.vercel.app).
 
 ## Project structure
 
@@ -56,38 +56,44 @@ Only bag selections, the promo code and theme preference are persisted by the ap
 index.html                         Semantic page markup and entry point
 src/
   main.ts                          Imports styles, creates state, initializes UI
-  data.ts                          Local product catalog
-  logic.ts                         Public pure-logic exports and currency formatting
-  state.ts                         Cart actions, persistence, theme and session profile
-  ui.ts                            DOM rendering, events, dialogs, forms and hero observer
+  state.ts                         Catalog coordination, state.bag, theme and session profile
+  ui.ts                            Shared UI helpers, dialogs, general forms, theme and hero
   style.css                        Base visual styles
   theme.css                        Theme presentation
   responsive.css                   Responsive layouts, hero and footer refinements
   modules/
+    products/products.ui.ts        Catalog states, cards, details, search/filter/sort
+    products/products.api.ts       Catalog API fetch and response validation
     products/products.logic.ts     Product lookup, search, filtering and sorting
     products/products.types.ts     Product, category and sort contracts
+    cart/cart.ui.ts                Bag, quantities, promo forms and demo checkout
+    cart/cart.state.ts             Bag actions, promo, persistence and legacy migration
     cart/cart.logic.ts             Cart validation and totals
     cart/cart.types.ts             Cart and totals contracts
     state/state.types.ts           State, profile, theme and storage contracts
-  shared/                          Reserved API/toast placeholders
-  counter.ts                       Legacy compatibility export exercised by tests
+  shared/                          Typed API client, UI helper types and reserved toast
+server/catalog.ts                  Sole server-owned product catalog
+server/products-api.js             Local REST middleware using server/catalog.ts
+api/products.ts                    Production Vercel Function using the shared catalog
+vite.config.js                     Development/preview API registration
+vercel.json                        Vercel framework configuration
 public/                            Static images and brand assets
 tests/                             Behavior, architecture, asset and hero regression tests
 docs/                              Architecture, design details and coursework evidence
 ```
 
-DOM work belongs to `ui.ts`; browser storage belongs to `state.ts`. Product/cart logic stays pure and is exposed through `logic.ts`. See the architecture document for import boundaries.
+DOM work belongs to `ui.ts`, `products.ui.ts` and `cart.ui.ts`. Shared formatting, escaping, responsive media and DOM helpers are implemented once in `ui.ts` and injected into feature initializers through the type-only `shared/ui/ui.types.ts` contract. One document click router and Escape coordinator stay in `ui.ts`; products UI owns the single catalog subscription. `state.ts` coordinates the catalog, theme and session profile; its `state.bag` references the cart module directly with live getters. `cart.state.ts` owns bag persistence, promo codes and actions, reads the current catalog through a callback, and never imports application state. Product/cart logic stays pure and is imported directly. See [architecture](docs/architecture.md).
 
 ## Design and documentation
 
-Product imagery and hero layers were generated/edited using OpenAI ImageGen for this concept store. Product cards use responsive WebP images; the hero combines JPEG backgrounds/fallbacks with transparent PNG layers. The 31 original catalog/hero PNGs required by asset tests are retained.
+Product imagery and hero layers were generated/edited using OpenAI ImageGen for this concept store. Product cards use responsive lossless WebP images; the hero combines JPEG backgrounds/fallbacks with transparent lossless WebP layers. Unused original PNGs and the retired flattened hero were removed after decoded-pixel verification. See [the shipped asset manifest](docs/asset-manifest.json).
 
 - [Design rationale and process](DESIGN.md)
 - [Architecture and module ownership](docs/architecture.md)
 - [Palette and image attribution](docs/rose-dusk-palette.md)
 - [TypeScript migration](docs/typescript-migration.md)
-- [Responsive review](docs/ui-responsive-review.md), [keyboard audit](docs/keyboard-accessibility-audit.md) and [performance report](docs/performance-optimization.md)
-- [Day 2 task record](docs/task-2.md), [historical completion report](docs/day2-completion-report.md) and [debugging log](debugging-log.md)
+- [Historical performance report](docs/performance-optimization.md)
+- [Debugging log](debugging-log.md)
 
 Historical coursework reports retain their original file names and results; they are not current verification reports. The separate instructor debugging lab remains documented as incomplete because its files were unavailable.
 
